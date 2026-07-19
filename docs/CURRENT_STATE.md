@@ -4,7 +4,7 @@
 
 ## Phase
 
-Product definition and interaction design — **complete**.
+Cross-environment skill and adapter design — **architecture approved**.
 
 ## Completed
 
@@ -38,33 +38,39 @@ Product definition and interaction design — **complete**.
 - Defined platform-neutral, cross-task-type, and adapter-specific behavioural
   scenarios with critical failure cases and decision traceability.
 - Closed the product-definition and interaction-design phase.
+- Approved the cross-environment package architecture.
+- Selected one canonical Agent Skills-compatible core with deterministically
+  generated Codex, Claude Code, and OpenCode adapters.
+- Defined self-contained, committed publication packages for Git-hosted
+  marketplaces and untracked temporary build output.
+- Defined shared SemVer, structural validation, semantic-integrity checks, and
+  transcript-based cross-environment fixtures.
 
 ## Current implementation
 
-There is no installable plugin or production skill yet. This is intentional:
-the completed behavioural contract now provides the basis for selecting and
-validating the package structure in the next phase.
+There is no installable plugin, production skill, adapter, marketplace entry,
+or assembly tooling yet. The accepted architecture is documented in
+`docs/ARCHITECTURE.md`; implementation has not started.
 
 ## Recommended next milestone
 
-Design the repository and package architecture for:
+Propose a bounded implementation milestone that scaffolds:
 
-1. One shared Agent Skills-compatible behavioural core.
-2. A Codex adapter and plugin package.
-3. A Claude Code adapter and plugin package.
-4. An OpenCode command and skill distribution bundle.
-5. Shared scenario fixtures and environment-specific validation.
+1. The canonical `core/deliberation/SKILL.md`.
+2. Host adapter templates without marketplace publication.
+3. The standard-library assembler and semantic-integrity check.
+4. The validation fixture skeleton.
 
-The architecture must be proposed and explicitly approved before production
-scaffolding begins.
+The implementation scope and exact generated files require a separate
+checkpoint before scaffolding begins.
 
 ## Open questions
 
-No unresolved product-contract questions are currently known.
+No unresolved product-contract or architecture questions are currently known.
 
-The next phase must decide package layout, how adapters consume the shared core,
-versioning, installation workflows, and how transcript-based scenarios become
-repeatable environment-specific validation.
+Public marketplace names, publisher metadata, release automation, and final
+distribution entries remain later decisions. They are intentionally outside
+the approved architecture milestone.
 
 ## Repository hygiene
 

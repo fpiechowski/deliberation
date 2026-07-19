@@ -25,12 +25,14 @@ the quality of the completed work.
 
 ## Project status
 
-Product definition and interaction design are complete. No installable plugin,
-adapter, or production skill has been scaffolded yet.
+Product definition, interaction design, and the cross-environment package
+architecture are complete. No installable plugin, adapter, marketplace entry,
+or production skill has been scaffolded yet.
 
-The next milestone is to design the shared skill and adapter package
-architecture. Production scaffolding begins only after that architecture is
-explicitly approved.
+The next milestone is a bounded implementation proposal for the canonical skill
+core, adapter templates, deterministic assembly, and validation-fixture
+skeleton. Production scaffolding begins only after that milestone is explicitly
+approved.
 
 ## Repository guide
 
@@ -43,5 +45,7 @@ explicitly approved.
 - [`docs/DECISIONS.md`](docs/DECISIONS.md) — durable decision log.
 - [`docs/BEHAVIORAL_SCENARIOS.md`](docs/BEHAVIORAL_SCENARIOS.md) — observable
   acceptance scenarios and critical failure cases.
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — accepted shared-core,
+  adapter, distribution, versioning, and validation architecture.
 - [`docs/CURRENT_STATE.md`](docs/CURRENT_STATE.md) — current phase, open
   questions, and the recommended next milestone.

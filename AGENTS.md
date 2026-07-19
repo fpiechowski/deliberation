@@ -60,15 +60,15 @@ tradeoffs, and evidence sufficient for an informed user decision.
 
 ## Current scope
 
-Product definition and interaction design are complete. The project is entering
-cross-environment skill and adapter design. Do not treat the present
-documentation layout as the final package structure.
+Product definition, interaction design, and the cross-environment package
+architecture are complete. The accepted architecture is documented in
+`docs/ARCHITECTURE.md`.
 
-The next milestone is an explicit architecture proposal for the shared core,
-Codex adapter, Claude Code adapter, OpenCode adapter, distribution layout, and
-validation fixtures. Do not create an installable plugin, marketplace entry,
-environment adapter, production skill, or new dependency until that
-architecture has been approved.
+The next milestone is a bounded implementation proposal for the canonical
+core, adapter templates, deterministic assembly, semantic-integrity checks, and
+validation-fixture skeleton. Do not create an installable plugin, marketplace
+entry, environment adapter, production skill, or new dependency until that
+implementation milestone has been explicitly approved.
 
 The intended first implementation is one shared Agent Skills-compatible core
 that activates Deliberation across specification, implementation, debugging,

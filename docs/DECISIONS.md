@@ -486,3 +486,75 @@ critical failure.
 The next phase is cross-environment skill and adapter design. It requires a
 separate approved architecture milestone before scaffolding production
 packages.
+
+## D-015 — Generate three adapters from one canonical skill core
+
+- **Date:** 2026-07-19
+- **Status:** Accepted
+
+### Context
+
+Codex, Claude Code, and OpenCode all support Agent Skills-compatible
+instructions, but their explicit invocation and distribution contracts differ.
+Codex uses companion `agents/openai.yaml` policy, Claude Code uses skill
+frontmatter and namespaced plugins, and OpenCode exposes discovered skills to
+the model without an equivalent per-skill implicit-invocation switch.
+
+Git-hosted marketplaces also require installable plugin contents to exist in
+the cloned repository. Installed plugins are copied into host caches and cannot
+reliably reference a shared source file outside their package.
+
+Maintaining three hand-edited behavioural copies would make semantic drift
+likely. Symlinks would be fragile across plugin caches and Windows.
+
+### Decision
+
+Maintain one Agent Skills-compatible canonical core at
+`core/deliberation/SKILL.md`.
+
+Generate thin host variants and self-contained publication packages:
+
+1. Codex adds `agents/openai.yaml` with implicit invocation disabled and is
+   packaged under `plugins/deliberation/`.
+2. Claude Code adds `disable-model-invocation: true`, produces standalone and
+   namespaced plugin variants, and is packaged under
+   `claude-plugins/deliberation/`.
+3. OpenCode generates an explicit `/deliberation` command with the normalized
+   core behaviour embedded. The canonical skill is bundled outside OpenCode
+   skill discovery paths.
+
+Commit generated publication packages so Git-hosted marketplaces can install
+them directly. Keep temporary build output untracked. Use deterministic
+integrity checks to prove that adapter payloads match the canonical core after
+removing declared host metadata and wrapper syntax.
+
+Use one product SemVer from a top-level `VERSION` file across the core,
+adapters, packages, and release validation evidence.
+
+Use a repository-local Python 3 standard-library assembler. Add no end-user
+runtime dependency, third-party build dependency, hook, MCP server, connector,
+or OpenCode npm plugin in the first version.
+
+Use structural validation, semantic-integrity checks, and shared
+transcript-based fixtures with environment-specific adapter cases. Do not add
+an LLM-as-judge or test-framework dependency in the first version.
+
+The detailed accepted topology and adapter contracts are recorded in
+`docs/ARCHITECTURE.md`.
+
+### Consequences
+
+The shared behaviour has one hand-authored source of truth while each
+environment receives a native, self-contained package.
+
+Generated marketplace packages are version-controlled artifacts, not
+independent sources. Validation must fail when regeneration produces a diff or
+when a host adapter changes normalized product semantics.
+
+The repository may eventually contain both Codex and Claude Code marketplace
+catalogs. Their public marketplace names, publisher metadata, and actual
+entries require later distribution approval.
+
+The next milestone may scaffold the canonical core, adapter templates,
+assembler, and validation skeleton, but production scaffolding begins only
+after a separate checkpoint approves that bounded implementation.
