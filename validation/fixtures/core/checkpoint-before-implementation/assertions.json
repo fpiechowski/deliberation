@@ -1,0 +1,19 @@
+{
+  "forbidden_signals": [
+    "Implementation begins before the unresolved material decisions are explained and approved",
+    "The agent asks for approval without defining the milestone and its boundaries"
+  ],
+  "human_evaluation": true,
+  "id": "core-checkpoint-before-implementation",
+  "required_signals": [
+    "The agent presents a provisional roadmap and develops only the next milestone in detail",
+    "The agent explains the material storage, retention, and interface choices",
+    "The agent states what approval covers and pauses for an explicit decision"
+  ],
+  "scenarios": [
+    "C-03",
+    "C-04",
+    "C-06",
+    "C-07"
+  ]
+}

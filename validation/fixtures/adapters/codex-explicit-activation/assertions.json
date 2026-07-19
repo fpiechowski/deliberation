@@ -1,0 +1,17 @@
+{
+  "forbidden_signals": [
+    "Codex activates Deliberation without an explicit invocation",
+    "Codex starts refactoring before establishing the first bounded milestone"
+  ],
+  "human_evaluation": true,
+  "id": "adapter-codex-explicit-activation",
+  "required_signals": [
+    "Codex acknowledges that Deliberation is active for the conversation",
+    "Codex gathers context and prepares a bounded first milestone",
+    "The skill remains explicitly invocable as $deliberation"
+  ],
+  "scenarios": [
+    "C-01",
+    "A-01"
+  ]
+}

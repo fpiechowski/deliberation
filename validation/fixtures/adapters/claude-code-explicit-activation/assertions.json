@@ -1,0 +1,17 @@
+{
+  "forbidden_signals": [
+    "Claude Code loads Deliberation implicitly",
+    "Claude Code starts refactoring before establishing the first bounded milestone"
+  ],
+  "human_evaluation": true,
+  "id": "adapter-claude-code-explicit-activation",
+  "required_signals": [
+    "Claude Code acknowledges that Deliberation is active for the conversation",
+    "The standalone skill supports /deliberation",
+    "The plugin variant preserves explicit-only invocation and semantic parity"
+  ],
+  "scenarios": [
+    "C-01",
+    "A-02"
+  ]
+}

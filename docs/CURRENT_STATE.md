@@ -4,7 +4,8 @@
 
 ## Phase
 
-Cross-environment skill and adapter design — **architecture approved**.
+Cross-environment implementation — **canonical core and assembly scaffold
+complete**.
 
 ## Completed
 
@@ -45,32 +46,44 @@ Cross-environment skill and adapter design — **architecture approved**.
   marketplaces and untracked temporary build output.
 - Defined shared SemVer, structural validation, semantic-integrity checks, and
   transcript-based cross-environment fixtures.
+- Implemented the canonical Agent Skills-compatible core at
+  `core/deliberation/SKILL.md`.
+- Added Codex, Claude Code, and OpenCode adapter templates.
+- Added a deterministic Python 3 standard-library assembler and integrity
+  validator.
+- Added fixture metadata schema plus one core and three activation fixture
+  skeletons.
+- Established `0.1.0-dev.0` as the shared development version.
 
 ## Current implementation
 
-There is no installable plugin, production skill, adapter, marketplace entry,
-or assembly tooling yet. The accepted architecture is documented in
-`docs/ARCHITECTURE.md`; implementation has not started.
+The canonical core, adapter templates, and repository-local assembly tooling
+are implemented. `python tooling/deliberation.py assemble` generates and
+validates standalone and publication previews under ignored `build/` output.
+`python tooling/deliberation.py check` independently assembles twice, proves
+deterministic output, validates host structure and explicit-only activation,
+and compares every normalized runtime payload with the canonical core.
+
+Generated publication packages are not yet committed under `plugins/`,
+`claude-plugins/`, or `opencode-bundles/`. There are no marketplace catalogs,
+public publisher metadata, release automation, or recorded host transcripts.
 
 ## Recommended next milestone
 
-Propose a bounded implementation milestone that scaffolds:
+Promote the reviewed publication previews to the committed `plugins/`,
+`claude-plugins/`, and `opencode-bundles/` surfaces, then extend `check` so it
+fails when committed generated artifacts differ from fresh assembly.
 
-1. The canonical `core/deliberation/SKILL.md`.
-2. Host adapter templates without marketplace publication.
-3. The standard-library assembler and semantic-integrity check.
-4. The validation fixture skeleton.
-
-The implementation scope and exact generated files require a separate
-checkpoint before scaffolding begins.
+This milestone should still exclude marketplace catalogs, public publisher
+metadata, release automation, and live host installation. Its exact committed
+file set requires a separate checkpoint.
 
 ## Open questions
 
 No unresolved product-contract or architecture questions are currently known.
 
-Public marketplace names, publisher metadata, release automation, and final
-distribution entries remain later decisions. They are intentionally outside
-the approved architecture milestone.
+Public marketplace names, publisher metadata, release automation, final
+distribution entries, and live validation logistics remain later decisions.
 
 ## Repository hygiene
 

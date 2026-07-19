@@ -1,6 +1,6 @@
 # Deliberation
 
-Deliberation is a planned cross-environment coding-agent work mode that turns
+Deliberation is a cross-environment coding-agent work mode that turns
 an autonomous workflow into an incremental, consultative collaboration.
 
 Instead of completing a large task in one opaque run, the agent decomposes it
@@ -26,13 +26,29 @@ the quality of the completed work.
 ## Project status
 
 Product definition, interaction design, and the cross-environment package
-architecture are complete. No installable plugin, adapter, marketplace entry,
-or production skill has been scaffolded yet.
+architecture are complete. The canonical skill core, host adapter templates,
+deterministic standard-library assembler, semantic-integrity checks, and
+validation-fixture skeleton are implemented.
 
-The next milestone is a bounded implementation proposal for the canonical skill
-core, adapter templates, deterministic assembly, and validation-fixture
-skeleton. Production scaffolding begins only after that milestone is explicitly
-approved.
+The assembler currently writes complete local previews under ignored `build/`
+output. No generated publication package, marketplace entry, or public release
+metadata is committed yet.
+
+Run the implementation checks with:
+
+```text
+python tooling/deliberation.py check
+```
+
+Generate and validate local host artifacts with:
+
+```text
+python tooling/deliberation.py assemble
+```
+
+The next milestone is to promote the reviewed generated packages to the
+committed publication surfaces and add a stale-generation check. It requires a
+separate checkpoint.
 
 ## Repository guide
 
@@ -49,3 +65,7 @@ approved.
   adapter, distribution, versioning, and validation architecture.
 - [`docs/CURRENT_STATE.md`](docs/CURRENT_STATE.md) — current phase, open
   questions, and the recommended next milestone.
+- [`core/deliberation/SKILL.md`](core/deliberation/SKILL.md) — canonical
+  behavioural source for all environments.
+- [`tooling/deliberation.py`](tooling/deliberation.py) — deterministic
+  assembler and integrity validator.

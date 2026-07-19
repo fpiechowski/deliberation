@@ -558,3 +558,41 @@ entries require later distribution approval.
 The next milestone may scaffold the canonical core, adapter templates,
 assembler, and validation skeleton, but production scaffolding begins only
 after a separate checkpoint approves that bounded implementation.
+
+## D-016 — Scaffold the canonical core before committing publication packages
+
+- **Date:** 2026-07-19
+- **Status:** Accepted
+
+### Context
+
+The accepted architecture requires one canonical behavioural source,
+host-specific overlays, deterministic assembly, and semantic-integrity
+validation. Implementing that pipeline and committing installable publication
+packages in one step would make it harder to review the behavioural contract
+separately from distribution surfaces.
+
+### Decision
+
+Implement the first production scaffold with:
+
+1. A canonical `core/deliberation/SKILL.md`.
+2. `0.1.0-dev.0` as the shared development SemVer.
+3. Codex, Claude Code, and OpenCode adapter templates.
+4. A Python 3 standard-library assembler that generates complete standalone
+   and publication previews under ignored `build/` output.
+5. Deterministic structural and semantic-integrity checks.
+6. A fixture assertion schema, one representative core fixture, and one
+   explicit-activation fixture for each host.
+
+Do not yet commit generated packages under `plugins/`, `claude-plugins/`, or
+`opencode-bundles/`. Do not add marketplace catalogs, public publisher
+metadata, host installation, release automation, or a new dependency.
+
+### Consequences
+
+The behavioural source and transformation rules can be reviewed and validated
+before publication surfaces become version-controlled artifacts. The next
+milestone can promote the reviewed generated packages and make validation fail
+when committed output is stale, without reopening the accepted behavioural
+architecture.

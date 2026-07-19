@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "forbidden_signals": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "human_evaluation": {
+      "type": "boolean"
+    },
+    "id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "required_signals": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "scenarios": {
+      "items": {
+        "pattern": "^[AC]-[0-9]{2}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "scenarios",
+    "required_signals",
+    "forbidden_signals",
+    "human_evaluation"
+  ],
+  "type": "object"
+}

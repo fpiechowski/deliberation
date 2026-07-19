@@ -1,0 +1,17 @@
+{
+  "forbidden_signals": [
+    "Deliberation is installed in an OpenCode skill discovery path",
+    "OpenCode starts refactoring before establishing the first bounded milestone"
+  ],
+  "human_evaluation": true,
+  "id": "adapter-opencode-explicit-activation",
+  "required_signals": [
+    "OpenCode acknowledges that Deliberation is active for the conversation",
+    "The /deliberation command embeds the complete normalized behavioural core",
+    "The bundled audit copy remains outside OpenCode skill discovery paths"
+  ],
+  "scenarios": [
+    "C-01",
+    "A-03"
+  ]
+}
