@@ -83,6 +83,11 @@ a routine execution detail.
 
 ## What the original conversation did not settle
 
+The list below records the historical gap at the end of the original
+conversation. It is not the current open-question list. Subsequent resolutions
+are authoritative in `docs/DECISIONS.md` and summarized in
+`docs/CURRENT_STATE.md`.
+
 - The exact name and invocation phrase of the activating skill.
 - Whether the work mode persists for a whole session, one task, or until an
   explicit exit command.
@@ -93,4 +98,3 @@ a routine execution detail.
 - How the skill should interact with stronger system or repository
   instructions.
 - The concrete Codex plugin layout, packaging, tests, and distribution method.
-

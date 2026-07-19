@@ -1,7 +1,7 @@
 # Deliberation
 
-Deliberation is a planned Codex plugin that turns an autonomous agent workflow
-into an incremental, consultative collaboration.
+Deliberation is a planned cross-environment coding-agent work mode that turns
+an autonomous workflow into an incremental, consultative collaboration.
 
 Instead of completing a large task in one opaque run, the agent decomposes it
 into meaningful steps. At each consequential checkpoint it proposes a
@@ -16,16 +16,21 @@ The mode is intended to work across:
 - Debugging.
 - Code and pull-request review.
 
+The first version targets Codex, Claude Code, and OpenCode through one shared
+Agent Skills-compatible behavioural core and thin environment-specific
+adapters.
+
 Knowledge transfer and shared understanding are first-class outcomes alongside
 the quality of the completed work.
 
 ## Project status
 
-The project is currently in product-definition and design. No installable
-plugin or skill has been scaffolded yet.
+Product definition and interaction design are complete. No installable plugin,
+adapter, or production skill has been scaffolded yet.
 
-The next design milestone is to define the exact behavioural contract of the
-single skill that activates and maintains Deliberation mode.
+The next milestone is to design the shared skill and adapter package
+architecture. Production scaffolding begins only after that architecture is
+explicitly approved.
 
 ## Repository guide
 
@@ -36,6 +41,7 @@ single skill that activates and maintains Deliberation mode.
 - [`docs/PROJECT_CONTEXT.md`](docs/PROJECT_CONTEXT.md) — the reasoning and
   background that led to the current direction.
 - [`docs/DECISIONS.md`](docs/DECISIONS.md) — durable decision log.
+- [`docs/BEHAVIORAL_SCENARIOS.md`](docs/BEHAVIORAL_SCENARIOS.md) — observable
+  acceptance scenarios and critical failure cases.
 - [`docs/CURRENT_STATE.md`](docs/CURRENT_STATE.md) — current phase, open
   questions, and the recommended next milestone.
-

@@ -1,8 +1,8 @@
 # Deliberation — Codex Working Agreement
 
-This repository develops **Deliberation**, a Codex plugin that changes how an
-agent collaborates with a user. It is a work mode, not a task-specific coding
-capability.
+This repository develops **Deliberation**, a cross-environment coding-agent
+work mode that changes how an agent collaborates with a user. It is not a
+task-specific coding capability.
 
 ## Start every session here
 
@@ -60,14 +60,20 @@ tradeoffs, and evidence sufficient for an informed user decision.
 
 ## Current scope
 
-The project is in product-definition and design. Do not treat the present
-documentation layout as the final plugin structure. Do not create an
-installable plugin, marketplace entry, or production skill until its behaviour
-contract and naming have been approved.
+Product definition and interaction design are complete. The project is entering
+cross-environment skill and adapter design. Do not treat the present
+documentation layout as the final package structure.
 
-The intended first implementation is one cross-cutting skill that activates the
-Deliberation work mode across specification, implementation, debugging,
-refactoring, and review.
+The next milestone is an explicit architecture proposal for the shared core,
+Codex adapter, Claude Code adapter, OpenCode adapter, distribution layout, and
+validation fixtures. Do not create an installable plugin, marketplace entry,
+environment adapter, production skill, or new dependency until that
+architecture has been approved.
+
+The intended first implementation is one shared Agent Skills-compatible core
+that activates Deliberation across specification, implementation, debugging,
+refactoring, and review, with thin adapters for Codex, Claude Code, and
+OpenCode.
 
 ## Keeping context durable
 
@@ -92,4 +98,3 @@ the full manifest in other files.
 - Optimize for shared understanding and user agency as well as task quality.
 - Make behaviour concrete enough to test with scenarios.
 - Validate changed artifacts in proportion to their risk.
-
