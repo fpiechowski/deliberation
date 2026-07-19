@@ -26,6 +26,11 @@ OPEN_CODE_PREFIX = (
     "Activate Deliberation for the current conversation. Acknowledge activation,\n"
     "then follow this behavioural contract:\n\n"
 )
+PUBLICATION_SURFACES = (
+    Path("plugins/deliberation"),
+    Path("claude-plugins/deliberation"),
+    Path("opencode-bundles/deliberation"),
+)
 
 
 class ValidationError(RuntimeError):
@@ -386,6 +391,46 @@ def tree_snapshot(root: Path) -> dict[str, bytes]:
     }
 
 
+def publication_differences(output: Path) -> list[str]:
+    differences: list[str] = []
+    publication_root = output / "publication"
+    for relative in PUBLICATION_SURFACES:
+        expected = tree_snapshot(publication_root / relative)
+        committed = tree_snapshot(ROOT / relative)
+        expected_paths = set(expected)
+        committed_paths = set(committed)
+        for path in sorted(expected_paths - committed_paths):
+            differences.append(f"missing: {(relative / path).as_posix()}")
+        for path in sorted(committed_paths - expected_paths):
+            differences.append(f"extra: {(relative / path).as_posix()}")
+        for path in sorted(expected_paths & committed_paths):
+            if expected[path] != committed[path]:
+                differences.append(f"changed: {(relative / path).as_posix()}")
+    return differences
+
+
+def validate_committed_publication(output: Path) -> None:
+    differences = publication_differences(output)
+    if differences:
+        details = "\n".join(f"  - {difference}" for difference in differences)
+        raise ValidationError(
+            "committed publication surfaces are stale:\n"
+            f"{details}\n"
+            "run `python tooling/deliberation.py sync-publication`"
+        )
+
+
+def sync_publication(output: Path) -> None:
+    publication_root = output / "publication"
+    for relative in PUBLICATION_SURFACES:
+        source = publication_root / relative
+        destination = ROOT / relative
+        if destination.exists():
+            shutil.rmtree(destination)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(source, destination)
+
+
 def checked_output(raw_path: str) -> Path:
     output = (ROOT / raw_path).resolve()
     try:
@@ -415,7 +460,21 @@ def command_check(_: argparse.Namespace) -> None:
             validate_assembly(second_path)
             if tree_snapshot(first_path) != tree_snapshot(second_path):
                 raise ValidationError("assembly is not deterministic")
-    print("Deliberation source, adapters, fixtures, and assembly are valid")
+            validate_committed_publication(first_path)
+    print(
+        "Deliberation source, adapters, fixtures, assembly, and committed "
+        "publication surfaces are valid"
+    )
+
+
+def command_sync_publication(_: argparse.Namespace) -> None:
+    with tempfile.TemporaryDirectory(prefix="deliberation-publication-") as temporary:
+        output = Path(temporary)
+        assemble(output)
+        validate_assembly(output)
+        sync_publication(output)
+        validate_committed_publication(output)
+    print("Synchronized and validated committed publication surfaces")
 
 
 def parser() -> argparse.ArgumentParser:
@@ -435,9 +494,16 @@ def parser() -> argparse.ArgumentParser:
     assemble_parser.set_defaults(handler=command_assemble)
 
     check_parser = subcommands.add_parser(
-        "check", help="validate sources and deterministic assembly"
+        "check",
+        help="validate sources, deterministic assembly, and committed publication",
     )
     check_parser.set_defaults(handler=command_check)
+
+    sync_parser = subcommands.add_parser(
+        "sync-publication",
+        help="regenerate committed publication surfaces",
+    )
+    sync_parser.set_defaults(handler=command_sync_publication)
     return result
 
 

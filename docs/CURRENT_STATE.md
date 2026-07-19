@@ -4,8 +4,8 @@
 
 ## Phase
 
-Cross-environment implementation — **canonical core and assembly scaffold
-complete**.
+Cross-environment implementation — **committed publication surfaces and
+stale-generation control complete**.
 
 ## Completed
 
@@ -54,29 +54,35 @@ complete**.
 - Added fixture metadata schema plus one core and three activation fixture
   skeletons.
 - Established `0.1.0-dev.0` as the shared development version.
+- Promoted the generated Codex, Claude Code, and OpenCode packages to the
+  repository publication surfaces.
+- Added explicit publication synchronization and exact stale-generation
+  validation for missing, extra, and changed generated files.
 
 ## Current implementation
 
-The canonical core, adapter templates, and repository-local assembly tooling
-are implemented. `python tooling/deliberation.py assemble` generates and
-validates standalone and publication previews under ignored `build/` output.
+The canonical core, adapter templates, repository-local assembly tooling, and
+three generated publication packages are implemented.
+`python tooling/deliberation.py assemble` generates and validates standalone
+and publication previews under ignored `build/` output.
+`python tooling/deliberation.py sync-publication` replaces the three
+repository publication packages with freshly validated assembly.
 `python tooling/deliberation.py check` independently assembles twice, proves
 deterministic output, validates host structure and explicit-only activation,
-and compares every normalized runtime payload with the canonical core.
+compares every normalized runtime payload with the canonical core, and fails
+when any committed generated file is missing, extra, or changed.
 
-Generated publication packages are not yet committed under `plugins/`,
-`claude-plugins/`, or `opencode-bundles/`. There are no marketplace catalogs,
-public publisher metadata, release automation, or recorded host transcripts.
+There are no marketplace catalogs, public publisher metadata, release
+automation, live host installations, or recorded host transcripts.
 
 ## Recommended next milestone
 
-Promote the reviewed publication previews to the committed `plugins/`,
-`claude-plugins/`, and `opencode-bundles/` surfaces, then extend `check` so it
-fails when committed generated artifacts differ from fresh assembly.
+Define and approve the first live-host validation slice, beginning with the
+standalone Codex skill in the desktop app and recording evidence against the
+existing explicit-activation fixture.
 
-This milestone should still exclude marketplace catalogs, public publisher
-metadata, release automation, and live host installation. Its exact committed
-file set requires a separate checkpoint.
+The exact installation boundary, evidence format, and cleanup expectations
+require a separate checkpoint before changing host state.
 
 ## Open questions
 

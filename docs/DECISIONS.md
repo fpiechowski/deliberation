@@ -596,3 +596,48 @@ before publication surfaces become version-controlled artifacts. The next
 milestone can promote the reviewed generated packages and make validation fail
 when committed output is stale, without reopening the accepted behavioural
 architecture.
+
+## D-017 — Commit generated publication surfaces and reject stale output
+
+- **Date:** 2026-07-19
+- **Status:** Accepted
+
+### Context
+
+The canonical core, adapter templates, and deterministic assembler already
+produced reviewed publication previews under ignored `build/` output. The
+accepted architecture requires self-contained generated packages to be stored
+in the repository, but generated files must not become independent,
+hand-maintained sources or silently drift from fresh assembly.
+
+### Decision
+
+Promote exactly these generated package trees to repository publication
+surfaces:
+
+1. Three Codex files under `plugins/deliberation/`.
+2. Two Claude Code files under `claude-plugins/deliberation/`.
+3. Three OpenCode files under `opencode-bundles/deliberation/`.
+
+Treat each package tree as fully generated. Add
+`python tooling/deliberation.py sync-publication` as the explicit contributor
+operation that assembles and validates temporary output before replacing the
+three repository packages.
+
+Extend `python tooling/deliberation.py check` to compare fresh deterministic
+assembly with the complete committed package trees. Fail with actionable
+diagnostics when a generated file is missing, extra, or changed. The check
+must not modify repository publication surfaces.
+
+Do not add marketplace catalogs, publisher metadata, release automation, live
+host installation, or a new dependency in this milestone.
+
+### Consequences
+
+Git-hosted distribution can consume self-contained package contents directly
+from the repository while the canonical core remains the only hand-authored
+source of product semantics.
+
+Contributors explicitly synchronize generated packages after changing the
+core, adapter templates, or `VERSION`. Routine validation detects both stale
+content and orphaned generated files before release or review.

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Deliberation"
+  short_description: "Collaborative engineering with shared decisions"
+  default_prompt: "Use $deliberation to work through this engineering task collaboratively."
+policy:
+  allow_implicit_invocation: false

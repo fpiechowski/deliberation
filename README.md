@@ -28,11 +28,13 @@ the quality of the completed work.
 Product definition, interaction design, and the cross-environment package
 architecture are complete. The canonical skill core, host adapter templates,
 deterministic standard-library assembler, semantic-integrity checks, and
-validation-fixture skeleton are implemented.
+validation-fixture skeleton are implemented. Generated publication packages
+are present under `plugins/`, `claude-plugins/`, and `opencode-bundles/`.
 
-The assembler currently writes complete local previews under ignored `build/`
-output. No generated publication package, marketplace entry, or public release
-metadata is committed yet.
+The assembler writes complete local previews under ignored `build/` output.
+Repository publication surfaces are synchronized explicitly and validated
+against fresh deterministic assembly. Marketplace entries and public release
+metadata are not present yet.
 
 Run the implementation checks with:
 
@@ -46,9 +48,15 @@ Generate and validate local host artifacts with:
 python tooling/deliberation.py assemble
 ```
 
-The next milestone is to promote the reviewed generated packages to the
-committed publication surfaces and add a stale-generation check. It requires a
-separate checkpoint.
+Regenerate the repository publication surfaces after changing the canonical
+core, an adapter template, or `VERSION` with:
+
+```text
+python tooling/deliberation.py sync-publication
+```
+
+The next milestone is to define and approve the first live-host validation
+slice, beginning with the standalone Codex skill in the desktop app.
 
 ## Repository guide
 
@@ -68,4 +76,4 @@ separate checkpoint.
 - [`core/deliberation/SKILL.md`](core/deliberation/SKILL.md) — canonical
   behavioural source for all environments.
 - [`tooling/deliberation.py`](tooling/deliberation.py) — deterministic
-  assembler and integrity validator.
+  assembler, publication synchronizer, and integrity validator.
