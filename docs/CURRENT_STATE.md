@@ -4,7 +4,8 @@
 
 ## Phase
 
-Live-host validation — **standalone Codex desktop activation fixture passes**.
+Live-host validation — **standalone Codex desktop activation and checkpoint
+fixtures pass**.
 
 ## Completed
 
@@ -66,6 +67,12 @@ Live-host validation — **standalone Codex desktop activation fixture passes**.
   `0.1.0-dev.0` run.
 - Reran the standalone Codex desktop activation fixture successfully against
   C-01 and A-01.
+- Executed the core checkpoint fixture successfully in standalone Codex
+  desktop against C-03, C-04, C-06, and C-07.
+- Added and passed a two-conversation Codex Desktop fixture for
+  conversation-wide lifetime and explicit exit against C-02 and C-15.
+- Added and passed a multi-turn Codex Desktop fixture for response intent and
+  bounded broad approval against C-10 and C-11.
 
 ## Current implementation
 
@@ -87,14 +94,31 @@ suppression of implicit activation, explicit `$deliberation` invocation,
 conversation-wide lifetime through explicit exit, bounded milestones, and a
 pre-edit checkpoint.
 
+The standalone desktop checkpoint run also proves provisional roadmap
+presentation, next-milestone detail, material Choice and Consequence handling,
+explicit approval scope, and a pause before implementation.
+
+The standalone desktop lifetime-and-exit run proves continuity across different
+tasks without reinvocation, inactive state in a fresh conversation,
+natural-language exit acknowledgement, and removal of the checkpoint contract
+from the following response.
+
+The standalone desktop response-intent run proves question, revision,
+ambiguity, rejection, and approval handling against one evolving checkpoint.
+It also proves bounded batch authorization without repeated approval or leakage
+into a later task.
+
+Current live-host scope is limited to the Codex Desktop app. CLI, IDE, Claude
+Code, OpenCode, and other clients remain part of the accepted architecture but
+are explicitly deferred until the user reopens that scope.
+
 There are no marketplace catalogs, public publisher metadata, release
 automation, or retained live host installations.
 
 ## Recommended next milestone
 
-Define and approve the next standalone Codex desktop validation slice using the
-existing `core-checkpoint-before-implementation` fixture to test C-03, C-04,
-C-06, and C-07 in the live host.
+Define and approve the next Codex Desktop validation slice, recommended as
+Drift handling and routine execution boundaries covering C-08 and C-09.
 
 ## Open questions
 

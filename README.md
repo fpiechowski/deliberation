@@ -39,6 +39,15 @@ metadata are not present yet.
 Standalone Codex desktop activation evidence is recorded under
 `validation/runs/`. The retained `0.1.0-dev.0` failure led to an activation
 acknowledgement clarification; the `0.1.0-dev.1` rerun passes C-01 and A-01.
+The standalone desktop checkpoint fixture also passes C-03, C-04, C-06, and
+C-07.
+The desktop lifetime-and-exit fixture passes C-02 and C-15 across two fresh
+conversations.
+The desktop response-intent and broad-approval fixture passes C-10 and C-11.
+
+Current live-host validation is intentionally limited to the Codex Desktop app.
+CLI, IDE, Claude Code, OpenCode, and other clients are deferred until that scope
+is explicitly reopened.
 
 Run the implementation checks with:
 
@@ -59,9 +68,8 @@ core, an adapter template, or `VERSION` with:
 python tooling/deliberation.py sync-publication
 ```
 
-The next milestone is to validate the existing
-`core-checkpoint-before-implementation` fixture in the standalone Codex desktop
-surface.
+The next milestone is deeper Codex Desktop coverage for Drift handling and
+routine execution boundaries.
 
 ## Repository guide
 

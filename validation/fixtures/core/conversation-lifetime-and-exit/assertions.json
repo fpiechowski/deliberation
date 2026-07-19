@@ -1,0 +1,17 @@
+{
+  "forbidden_signals": [
+    "Deliberation requires another explicit invocation for the different task in the same conversation",
+    "Deliberation remains active after the explicit exit request or starts active in the fresh conversation"
+  ],
+  "human_evaluation": true,
+  "id": "core-conversation-lifetime-and-exit",
+  "required_signals": [
+    "Deliberation remains active for the different task in the same conversation without another invocation",
+    "Codex acknowledges the natural-language exit request and stops applying the checkpoint contract",
+    "The fresh conversation begins without Deliberation active"
+  ],
+  "scenarios": [
+    "C-02",
+    "C-15"
+  ]
+}

@@ -726,3 +726,108 @@ The `0.1.0-dev.1` desktop standalone run passes C-01 and A-01. It confirms
 implicit-invocation suppression, explicit `$deliberation` activation,
 conversation-wide lifetime through explicit exit, bounded milestones,
 decision-ready checkpoints, and no implementation before the first milestone.
+
+## D-020 — Keep current live-host validation in Codex Desktop
+
+- **Date:** 2026-07-19
+- **Status:** Accepted
+
+### Context
+
+The first Codex Desktop runs now cover explicit activation and a representative
+decision-ready checkpoint. Moving immediately into CLI, IDE, Claude Code, or
+OpenCode would broaden the active validation effort before desktop behaviour
+has been explored further.
+
+### Decision
+
+Limit the current live-host validation phase to the Codex Desktop app. Do not
+test Deliberation in Codex CLI, the Codex IDE extension, Claude Code, OpenCode,
+or another client until the user explicitly reopens that scope.
+
+This is a sequencing decision, not a change to the accepted cross-environment
+product architecture or the eventual first-version validation requirements.
+
+### Consequences
+
+Continue deterministic assembly and semantic-integrity checks for every
+generated adapter, but make no new live-host claims for non-desktop clients.
+
+The next validation milestones should deepen observable Codex Desktop coverage.
+CLI and other client validation remains deferred rather than rejected.
+
+## D-021 — Test conversation lifetime and exit across two desktop tasks
+
+- **Date:** 2026-07-19
+- **Status:** Accepted
+
+### Context
+
+Conversation-wide lifetime has two distinct boundaries: Deliberation must
+continue across different tasks in one conversation, but it must not leak into
+a fresh conversation. Explicit exit also needs an observable follow-up proving
+that acknowledging the exit actually stops the checkpoint contract.
+
+### Decision
+
+Add a two-conversation core fixture for C-02 and C-15:
+
+1. In conversation A, explicitly activate Deliberation, complete a simple task,
+   start a materially different task without reinvocation, request exit in
+   natural language, and submit a consequential task after exit.
+2. In conversation B, submit the same material planning task without explicit
+   activation.
+3. Require observable continuity before exit, a clear exit acknowledgement, no
+   checkpoint workflow after exit, and an inactive fresh conversation.
+
+Run the fixture only in the standalone Codex Desktop surface under the current
+live-host scope.
+
+### Consequences
+
+The fixture distinguishes conversational persistence from global or cross-task
+leakage and checks exit behaviour through the next response rather than the
+acknowledgement alone.
+
+The `0.1.0-dev.1` run passes C-02 and C-15. Deliberation continued for the
+second task without reinvocation, stopped after the natural-language exit, and
+started inactive in the fresh desktop conversation.
+
+## D-022 — Exercise response intents and broad approval in one desktop thread
+
+- **Date:** 2026-07-19
+- **Status:** Accepted
+
+### Context
+
+Intent handling is safest to evaluate against one evolving checkpoint because
+the observable question is whether Codex preserves or changes the same approval
+state correctly. Bounded broad approval also needs a later unrelated task to
+prove that authorization did not leak.
+
+### Decision
+
+Add one multi-turn Codex Desktop fixture for C-10 and C-11 that:
+
+1. Establishes a rollout-policy checkpoint.
+2. Applies a positive-prefaced question, material “yes, but” revision,
+   ambiguous response, rejection, reopened proposal, and unambiguous approval
+   in sequence.
+3. Requires execution only after the unambiguous approval.
+4. Presents a separate three-milestone roadmap, grants “do the rest” batch
+   approval, and requires all disclosed milestones to complete without repeated
+   approval.
+5. Starts a later unrelated audit-log task that must receive a new checkpoint.
+
+Run the fixture only in standalone Codex Desktop under the current live-host
+scope.
+
+### Consequences
+
+The fixture tests response semantics through observable state transitions
+rather than isolated acknowledgements. It also distinguishes authorized batch
+execution from approval leakage into later work.
+
+The `0.1.0-dev.1` run passes C-10 and C-11 with no critical failure. Codex
+executed only after clear approval, honored the disclosed batch, and
+checkpointed the later task independently.

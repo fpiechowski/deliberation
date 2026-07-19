@@ -1,0 +1,68 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "EB72055986081405DC94FB57F15E8CCAD34DF3AB8C173E296CC8E50A46BA5AEC"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "tasks_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_roots_removed": false,
+    "workspace_roots_note": "Codex Desktop retained handles to the two empty directories after the tasks were archived."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-19T21:40:42Z",
+  "fixture_id": "core-conversation-lifetime-and-exit",
+  "forbidden_signals": [
+    {
+      "signal": "Deliberation requires another explicit invocation for the different task in the same conversation",
+      "status": "pass"
+    },
+    {
+      "signal": "Deliberation remains active after the explicit exit request or starts active in the fresh conversation",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires human evaluation of cross-turn mode state and conversational meaning."
+  },
+  "product_version": "0.1.0-dev.1",
+  "required_signals": [
+    {
+      "signal": "Deliberation remains active for the different task in the same conversation without another invocation",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex acknowledges the natural-language exit request and stops applying the checkpoint contract",
+      "status": "pass"
+    },
+    {
+      "signal": "The fresh conversation begins without Deliberation active",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-02",
+      "reason": "A different task in conversation A used the Deliberation checkpoint contract without reinvocation, while conversation B began inactive.",
+      "status": "pass"
+    },
+    {
+      "id": "C-15",
+      "reason": "Codex acknowledged the natural-language exit and the following task received a direct answer without milestones, checkpoints, or approval.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "thread_ids": {
+    "conversation_a": "019f7c51-7f3c-7840-a1c8-236a8cf614a7",
+    "conversation_b": "019f7c52-5045-77c3-ab39-f6bb880ab498"
+  }
+}

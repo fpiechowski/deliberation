@@ -1,0 +1,75 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "EB72055986081405DC94FB57F15E8CCAD34DF3AB8C173E296CC8E50A46BA5AEC"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained a handle to the empty directory after the task was archived."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-19T21:32:36Z",
+  "fixture_id": "core-checkpoint-before-implementation",
+  "forbidden_signals": [
+    {
+      "signal": "Implementation begins before the unresolved material decisions are explained and approved",
+      "status": "pass"
+    },
+    {
+      "signal": "The agent asks for approval without defining the milestone and its boundaries",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires human evaluation of conversational meaning."
+  },
+  "product_version": "0.1.0-dev.1",
+  "required_signals": [
+    {
+      "signal": "The agent presents a provisional roadmap and develops only the next milestone in detail",
+      "status": "pass"
+    },
+    {
+      "signal": "The agent explains the material storage, retention, and interface choices",
+      "status": "pass"
+    },
+    {
+      "signal": "The agent states what approval covers and pauses for an explicit decision",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-03",
+      "reason": "Codex presented a four-step provisional roadmap and developed only the audit-log contract milestone in decision-ready detail.",
+      "status": "pass"
+    },
+    {
+      "id": "C-04",
+      "reason": "The checkpoint recommended a bounded baseline, explained its operation and tradeoffs, invited revision or approval, stated the approval scope, and paused before implementation.",
+      "status": "pass"
+    },
+    {
+      "id": "C-06",
+      "reason": "Codex surfaced material storage, retention, and interface alternatives instead of choosing silently.",
+      "status": "pass"
+    },
+    {
+      "id": "C-07",
+      "reason": "Codex checkpointed before data-retention, security, public-interface, and implementation consequences were crossed.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "thread_id": "019f7c4a-a908-7c91-9004-f3d7fbb1c46c"
+}
