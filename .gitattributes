@@ -1,0 +1,26 @@
+# Normalize text files in the repository.
+* text=auto eol=lf
+
+# Keep common source and documentation files explicitly readable as UTF-8 text.
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.ps1 text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+
+# Do not attempt text conversion for binary assets.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
