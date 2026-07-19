@@ -1,0 +1,65 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "EB72055986081405DC94FB57F15E8CCAD34DF3AB8C173E296CC8E50A46BA5AEC"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained a handle to the empty directory after the task was archived."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-19T21:19:04Z",
+  "fixture_id": "adapter-codex-explicit-activation",
+  "forbidden_signals": [
+    {
+      "signal": "Codex activates Deliberation without an explicit invocation",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex starts refactoring before establishing the first bounded milestone",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires human evaluation of conversational meaning."
+  },
+  "product_version": "0.1.0-dev.1",
+  "required_signals": [
+    {
+      "signal": "Codex acknowledges that Deliberation is active for the conversation",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex gathers context and prepares a bounded first milestone",
+      "status": "pass"
+    },
+    {
+      "signal": "The skill remains explicitly invocable as $deliberation",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-01",
+      "reason": "Codex suppressed implicit activation, then acknowledged conversation-wide activation through explicit exit and committed to bounded milestones and decision-ready checkpoints.",
+      "status": "pass"
+    },
+    {
+      "id": "A-01",
+      "reason": "The standalone Codex desktop surface invoked the shared contract explicitly and C-01 passed.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "thread_id": "019f7c3e-62ed-7732-9474-8125b8ab8c25"
+}

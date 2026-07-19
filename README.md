@@ -36,6 +36,10 @@ Repository publication surfaces are synchronized explicitly and validated
 against fresh deterministic assembly. Marketplace entries and public release
 metadata are not present yet.
 
+Standalone Codex desktop activation evidence is recorded under
+`validation/runs/`. The retained `0.1.0-dev.0` failure led to an activation
+acknowledgement clarification; the `0.1.0-dev.1` rerun passes C-01 and A-01.
+
 Run the implementation checks with:
 
 ```text
@@ -55,8 +59,9 @@ core, an adapter template, or `VERSION` with:
 python tooling/deliberation.py sync-publication
 ```
 
-The next milestone is to define and approve the first live-host validation
-slice, beginning with the standalone Codex skill in the desktop app.
+The next milestone is to validate the existing
+`core-checkpoint-before-implementation` fixture in the standalone Codex desktop
+surface.
 
 ## Repository guide
 

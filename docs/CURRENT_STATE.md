@@ -4,8 +4,7 @@
 
 ## Phase
 
-Cross-environment implementation — **committed publication surfaces and
-stale-generation control complete**.
+Live-host validation — **standalone Codex desktop activation fixture passes**.
 
 ## Completed
 
@@ -58,6 +57,15 @@ stale-generation control complete**.
   repository publication surfaces.
 - Added explicit publication synchronization and exact stale-generation
   validation for missing, extra, and changed generated files.
+- Defined a temporary user-scope installation, transcript evidence, structured
+  verdict, and cleanup boundary for standalone Codex desktop validation.
+- Executed the Codex explicit-activation fixture in the desktop app and recorded
+  the first live-host transcript and result.
+- Clarified the canonical activation acknowledgement, incremented the shared
+  version to `0.1.0-dev.1`, regenerated every adapter, and preserved the failed
+  `0.1.0-dev.0` run.
+- Reran the standalone Codex desktop activation fixture successfully against
+  C-01 and A-01.
 
 ## Current implementation
 
@@ -72,17 +80,21 @@ deterministic output, validates host structure and explicit-only activation,
 compares every normalized runtime payload with the canonical core, and fails
 when any committed generated file is missing, extra, or changed.
 
+Retained live-host evidence under `validation/runs/` includes the
+`0.1.0-dev.0` failure and the corrective `0.1.0-dev.1` pass for the standalone
+Codex desktop activation fixture. The passing run proves standalone discovery,
+suppression of implicit activation, explicit `$deliberation` invocation,
+conversation-wide lifetime through explicit exit, bounded milestones, and a
+pre-edit checkpoint.
+
 There are no marketplace catalogs, public publisher metadata, release
-automation, live host installations, or recorded host transcripts.
+automation, or retained live host installations.
 
 ## Recommended next milestone
 
-Define and approve the first live-host validation slice, beginning with the
-standalone Codex skill in the desktop app and recording evidence against the
-existing explicit-activation fixture.
-
-The exact installation boundary, evidence format, and cleanup expectations
-require a separate checkpoint before changing host state.
+Define and approve the next standalone Codex desktop validation slice using the
+existing `core-checkpoint-before-implementation` fixture to test C-03, C-04,
+C-06, and C-07 in the live host.
 
 ## Open questions
 

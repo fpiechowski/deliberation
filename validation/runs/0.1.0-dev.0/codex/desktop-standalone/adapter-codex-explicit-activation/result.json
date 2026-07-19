@@ -1,0 +1,65 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "237D84BDC2612E7DA133F339E603AF67FD34CB545F4C0AB1DAB88176FD2286E3"
+  },
+  "critical_failures": [],
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained a handle to the empty directory after the task was archived."
+  },
+  "executed_at": "2026-07-19T20:33:17Z",
+  "fixture_id": "adapter-codex-explicit-activation",
+  "forbidden_signals": [
+    {
+      "signal": "Codex activates Deliberation without an explicit invocation",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex starts refactoring before establishing the first bounded milestone",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires human evaluation of conversational meaning."
+  },
+  "product_version": "0.1.0-dev.0",
+  "required_signals": [
+    {
+      "signal": "Codex acknowledges that Deliberation is active for the conversation",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex gathers context and prepares a bounded first milestone",
+      "status": "pass"
+    },
+    {
+      "signal": "The skill remains explicitly invocable as $deliberation",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-01",
+      "reason": "Activation was acknowledged for the conversation, but Codex did not state that the mode remains active until explicitly disabled.",
+      "status": "fail"
+    },
+    {
+      "id": "A-01",
+      "reason": "Explicit invocation and implicit-invocation suppression worked, but A-01 requires C-01 to pass.",
+      "status": "fail"
+    }
+  ],
+  "status": "fail",
+  "thread_id": "019f7c14-1b6b-7cb1-9585-a02254fa0bed"
+}

@@ -13,7 +13,9 @@ Never surprise the user with an important decision.
 
 ## Activate and maintain the mode
 
-- Acknowledge activation clearly.
+- On activation, tell the user explicitly that Deliberation is active for the
+  current conversation until they disable it and that you will use bounded
+  milestones and decision-ready checkpoints.
 - Keep Deliberation active for the current conversation until the user
   explicitly disables it.
 - Do not infer activation from an ordinary request to explain, plan, implement,

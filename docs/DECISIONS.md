@@ -641,3 +641,88 @@ source of product semantics.
 Contributors explicitly synchronize generated packages after changing the
 core, adapter templates, or `VERSION`. Routine validation detects both stale
 content and orphaned generated files before release or review.
+
+## D-018 — Validate the standalone Codex skill with temporary host state
+
+- **Date:** 2026-07-19
+- **Status:** Accepted
+
+### Context
+
+The first live-host run needs to test the actual Codex desktop skill discovery
+and activation path without allowing project instructions, an existing skill
+installation, or retained host state to distort the result. The run also needs
+durable evidence that distinguishes packaging success from behavioural
+conformance.
+
+### Decision
+
+Validate the standalone Codex artifact first in the desktop app by:
+
+1. Copying the freshly checked artifact temporarily to the user skill scope at
+   `$HOME/.agents/skills/deliberation`.
+2. Using a fresh, isolated projectless task.
+3. Sending an ordinary engineering request before the explicit fixture prompt
+   to test suppression of implicit activation.
+4. Sending the existing `$deliberation` activation fixture in the same
+   conversation.
+5. Recording the exact prompts, commentary, final responses, artifact hashes,
+   host metadata, per-signal evaluation, scenario verdict, and critical
+   failures under
+   `validation/runs/<version>/codex/desktop-standalone/<fixture>/`.
+6. Removing the temporary user skill and workspace and archiving the test task
+   after capturing evidence.
+
+Use `Pass`, `Fail`, or `Blocked` as the run verdict. Record a truthful failure
+without changing product behaviour as part of the validation milestone.
+
+### Consequences
+
+Live-host validation leaves no active standalone installation or disposable
+workspace contents behind, while the repository retains reviewable evidence
+tied to the exact generated artifact. A host-held empty workspace root may
+remain until Codex releases its filesystem handle; record that cleanup state
+truthfully in the run result.
+
+The first run is a failure against C-01 and therefore A-01: installation,
+explicit invocation, implicit-invocation suppression, bounded discovery, and
+the pre-edit checkpoint worked, but the activation acknowledgement did not say
+that Deliberation remains active until explicitly disabled. Correcting that
+runtime instruction and rerunning the same fixture require a separate
+milestone.
+
+## D-019 — Make the activation acknowledgement state lifetime and method
+
+- **Date:** 2026-07-19
+- **Status:** Accepted
+
+### Context
+
+The `0.1.0-dev.0` live-host run showed that the canonical core instructed Codex
+to acknowledge activation and separately maintain conversation-wide lifetime,
+but did not require the acknowledgement itself to communicate the lifetime and
+working method. Codex therefore satisfied the local runtime instructions while
+missing part of C-01.
+
+### Decision
+
+Require the activation acknowledgement to tell the user explicitly that:
+
+1. Deliberation is active for the current conversation until explicitly
+   disabled.
+2. Work will proceed through bounded milestones and decision-ready checkpoints.
+
+Increment the shared development version to `0.1.0-dev.1`, regenerate every
+adapter and publication package, and rerun the same standalone Codex desktop
+activation fixture. Preserve the `0.1.0-dev.0` failure as historical evidence.
+
+### Consequences
+
+The operational core now expresses the already accepted activation contract
+directly instead of relying on Codex to combine separate instructions in its
+user-facing acknowledgement.
+
+The `0.1.0-dev.1` desktop standalone run passes C-01 and A-01. It confirms
+implicit-invocation suppression, explicit `$deliberation` activation,
+conversation-wide lifetime through explicit exit, bounded milestones,
+decision-ready checkpoints, and no implementation before the first milestone.
