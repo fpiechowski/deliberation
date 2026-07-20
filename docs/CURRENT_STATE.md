@@ -5,8 +5,8 @@
 ## Phase
 
 Live-host validation — **the baseline standalone Codex Desktop matrix is
-complete, while an additional Polish single-message fixture exposes a
-C-01/C-04 robustness gap**.
+complete, and the focused `0.1.0-dev.2` correction closes the C-01/C-04
+robustness gap exposed by the Polish single-message fixture**.
 
 ## Completed
 
@@ -107,6 +107,10 @@ C-01/C-04 robustness gap**.
 - Prioritized and added a generated root Claude Code marketplace catalog that
   references the committed Claude Code plugin and is checked for freshness,
   structure, version, and source integrity.
+- Approved the focused Codex Desktop correction for the Polish combined
+  invocation-and-task fixture.
+- Passed the rerun of the Polish combined invocation-and-task fixture against
+  C-01, C-03, C-04, and A-01 with `0.1.0-dev.2`.
 
 ## Current implementation
 
@@ -196,39 +200,37 @@ evidence. Together with direct C-01–C-16 coverage and passing A-01 and A-04,
 this completes the currently approved desktop-only live-host slice.
 
 The later `core-polish-single-message-specification` run intentionally adds a
-stricter natural-use shape beyond those baseline fixtures. Codex correctly
-accepted a combined invocation and task in the first message, stayed in Polish,
-derived a three-milestone roadmap without prompting, paused before execution,
-and completed only the approved first milestone. It nevertheless fails the
-existing C-01 and C-04 contracts for omissions in the activation
-acknowledgement and checkpoint. The failure is retained without changing
-product behavior or version.
+stricter natural-use shape beyond those baseline fixtures. The retained
+`0.1.0-dev.1` run fails C-01 and C-04 for omissions in the activation
+acknowledgement and checkpoint. The focused `0.1.0-dev.2` clarification makes
+both obligations explicit for a combined first message; its rerun passes C-01,
+C-03, C-04, and A-01 in Polish, pauses before execution, and completes only
+the approved first milestone.
 
-Current live-host scope is limited to the Codex Desktop app. Claude Code
-marketplace publication has been prioritized and is now implemented, but its
-live-host installation and behavior validation remain deferred. CLI, IDE,
-Claude Code, OpenCode, and other clients remain part of the accepted
-architecture but are explicitly deferred until the user reopens that scope.
+Codex Desktop is the sole live-host-validated and supported environment. Claude
+Code and OpenCode remain experimental distribution adapters: they are generated
+from the same canonical core and may be published, but do not require live-host
+validation or determine release completion. Codex CLI, the IDE extension, and
+other clients are outside the current support scope.
 
 The repository now contains a generated root Claude Code marketplace catalog
 that exposes the generated `claude-plugins/deliberation` package. It uses the
 marketplace and plugin name `deliberation` and the owner name Filip Piechowski.
-There is no Codex marketplace catalog, release automation, or retained Claude
-Code live-host installation.
+There is no Codex marketplace catalog or release automation. The Claude Code
+marketplace has been confirmed working externally, but no retained live-host
+transcript is required under the experimental-adapter policy.
 
 ## Recommended next milestone
 
-Run the Claude Code marketplace installation fixture against the generated
-GitHub marketplace, then record the result. This requires reopening the
-currently deferred Claude Code live-host-validation scope. The Polish Codex
-correction remains an independent later decision.
+No additional live-host validation milestone is scheduled. The next
+consequential decision, if needed, is whether to add Codex marketplace
+publication or release automation.
 
 ## Open questions
 
 No unresolved product-contract or architecture questions are currently known.
 
-Codex marketplace naming, release automation, and Claude Code live-validation
-logistics remain later decisions.
+Codex marketplace naming and release automation remain later decisions.
 
 ## Repository hygiene
 

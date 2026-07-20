@@ -1,6 +1,6 @@
 # Deliberation
 
-Deliberation is a cross-environment coding-agent work mode that turns
+Deliberation is a coding-agent work mode, validated in Codex Desktop, that turns
 an autonomous workflow into an incremental, consultative collaboration.
 
 Instead of completing a large task in one opaque run, the agent decomposes it
@@ -16,9 +16,9 @@ The mode is intended to work across:
 - Debugging.
 - Code and pull-request review.
 
-The first version targets Codex, Claude Code, and OpenCode through one shared
-Agent Skills-compatible behavioural core and thin environment-specific
-adapters.
+The first version uses one shared Agent Skills-compatible behavioural core and
+thin environment-specific adapters. Codex Desktop is supported and live-host
+validated; Claude Code and OpenCode are experimental adapters.
 
 Knowledge transfer and shared understanding are first-class outcomes alongside
 the quality of the completed work.
@@ -70,9 +70,9 @@ bounded execution behavior, but is retained as a failure against C-01 and C-04:
 the acknowledgement omits the explicit exit boundary and the compact
 checkpoint omits response alternatives and a complete approval boundary.
 
-Current live-host validation is intentionally limited to the Codex Desktop app.
-CLI, IDE, Claude Code, OpenCode, and other clients are deferred until that scope
-is explicitly reopened.
+Codex Desktop is the only live-host-validated and supported environment. CLI,
+IDE, and other Codex clients are out of scope. Claude Code and OpenCode are
+experimental adapters and are not release-gating.
 
 Run the implementation checks with:
 
@@ -93,10 +93,13 @@ core, an adapter template, or `VERSION` with:
 python tooling/deliberation.py sync-publication
 ```
 
-The next decision is whether to correct and rerun the failed Polish
-single-message fixture. Live validation in Claude Code remains deferred.
+The corrected Polish single-message fixture now passes with `0.1.0-dev.2`.
+No additional live-host validation is currently scheduled.
 
-## Claude Code installation
+## Experimental Claude Code installation
+
+Claude Code is an experimental adapter and is not live-host validated or
+release-gating. The marketplace is available for early adopters.
 
 Add this GitHub repository as a marketplace, then install the plugin:
 

@@ -245,17 +245,17 @@ scenario results, commits the generated artifacts, and tags the repository.
 
 ## Installation paths
 
-The first implementation validates installation in this order:
+Codex Desktop is the release-gating installation and behaviour-validation
+surface. The following paths remain available for experimental-adapter work and
+are not release-gating:
 
-1. Codex standalone skill in the desktop app, then the same skill in CLI and
-   IDE.
+1. Codex CLI and IDE.
 2. Codex plugin through a local repository marketplace.
-3. Claude Code standalone skill.
-4. Claude Code plugin through a local marketplace, then through the Git-hosted
-   repository marketplace.
-5. OpenCode project command and global command bundle.
+3. Claude Code standalone skill and plugin through a local or Git-hosted
+   marketplace.
+4. OpenCode project command and global command bundle.
 
-Public distribution follows successful local and Git-source validation.
+Experimental public distribution does not make a live-host support claim.
 
 ## Validation architecture
 
@@ -345,7 +345,8 @@ adding silent repository state or weakening the product contract.
 - An OpenCode npm plugin.
 - Automatic persistent state files in user repositories.
 - A third-party build or test framework.
-- Publication before cross-environment scenario validation.
+- Publishing experimental adapters before their cross-environment scenario
+  validation, provided their experimental status is stated plainly.
 
 ## Architecture acceptance criteria
 
@@ -357,7 +358,9 @@ The architecture is implemented correctly when:
    generated packages.
 4. OpenCode activates only through its explicit command.
 5. Integrity validation detects any semantic adapter drift.
-6. Shared fixtures can be executed and compared across all three environments.
+6. Shared fixtures are available for execution and comparison across all three
+   environments; only Codex Desktop evidence is required for release
+   completion.
 
 ## Current platform references
 

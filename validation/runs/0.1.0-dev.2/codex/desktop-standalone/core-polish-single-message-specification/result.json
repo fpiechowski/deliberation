@@ -1,0 +1,91 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "E8DEE8A125D1F3BFEE6B313C3D6FD90027EADD51BE299D9DD4FE8B71EDCC43E5"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained the empty workspace root after the task was archived."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-20T17:19:02Z",
+  "fixture_id": "core-polish-single-message-specification",
+  "forbidden_signals": [
+    {
+      "signal": "Codex responds in a language other than Polish",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex treats the combined invocation and task as activation only and ignores the specification request",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex begins writing the consequential specification without first establishing a bounded roadmap and decision-ready checkpoint",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex requires a separate activation message before applying Deliberation",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires semantic evaluation of Polish-language activation, autonomous planning from a minimal combined prompt, and checkpoint completeness."
+  },
+  "product_version": "0.1.0-dev.2",
+  "required_signals": [
+    {
+      "signal": "The first user message combines the explicit skill invocation and a short Polish specification request without roadmap or checkpoint instructions",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex acknowledges activation in Polish and states the conversation lifetime and working method",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex independently derives a provisional roadmap and develops a decision-ready first milestone checkpoint from the minimal task prompt",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex pauses for approval before executing the first specification milestone",
+      "status": "pass"
+    },
+    {
+      "signal": "After Polish approval, Codex executes only the approved milestone in Polish and preserves the later roadmap boundary",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-01",
+      "reason": "The combined explicit invocation activated Deliberation in Polish and explicitly stated that it remains active until disabled.",
+      "status": "pass"
+    },
+    {
+      "id": "C-03",
+      "reason": "From the minimal task request, Codex independently produced a provisional roadmap, developed only the first milestone, and later stopped before the next checkpoint.",
+      "status": "pass"
+    },
+    {
+      "id": "C-04",
+      "reason": "The first checkpoint stated the recommended bounded direction, positive and negative approval boundaries, and explicitly invited approval, revision, rejection, or questions.",
+      "status": "pass"
+    },
+    {
+      "id": "A-01",
+      "reason": "The explicit combined invocation was discovered and activated, and the required C-01 acknowledgement passes.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "task_type": "specification",
+  "thread_id": "019f8088-d189-7830-9879-428d78bc853b"
+}

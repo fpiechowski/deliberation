@@ -1240,3 +1240,78 @@ changed, or stale catalog alongside the other publication surfaces.
 
 Claude Code installation and behavioural evidence remain pending. Codex
 marketplace publication and release automation remain separate decisions.
+
+## D-032 — Correct combined invocation-and-task robustness in Codex Desktop
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+The retained Polish `core-polish-single-message-specification` run exposes a
+gap that the baseline activation and checkpoint fixtures did not: when an
+explicit `$deliberation` invocation and a minimal task occur in one first
+message, Codex omits parts of the already accepted activation and checkpoint
+contract.
+
+### Decision
+
+Strengthen the canonical core only for this combined-message shape. Require
+the first response to acknowledge both activation and the task, state that
+Deliberation remains active until explicitly disabled, state the bounded
+milestone and checkpoint method, and, where a checkpoint is required, include
+the full response alternatives and positive and negative approval boundaries.
+
+Increment the shared development version to `0.1.0-dev.2`, regenerate every
+publication package, run deterministic integrity checks, and rerun only the
+failed Polish standalone Codex Desktop fixture. Preserve the failed
+`0.1.0-dev.1` run as historical evidence.
+
+### Consequences
+
+This is an operational clarification of the accepted C-01 and C-04 contract;
+it does not change activation semantics, checkpoint semantics, scope, or the
+deferred non-desktop validation boundary. Record the new live-host result
+truthfully before selecting another milestone.
+
+The `0.1.0-dev.2` rerun passes C-01, C-03, C-04, and A-01 with no critical
+failure. The first Polish response states the until-disabled lifetime and
+working method, supplies a complete checkpoint including positive and negative
+approval boundaries and response alternatives, and then executes only the
+approved first milestone.
+
+## D-033 — Validate and support Codex only; retain other adapters as experimental
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+This machine provides Codex, not Claude Code or OpenCode. The completed Codex
+Desktop matrix supplies direct live-host evidence for the canonical behavioural
+contract, while the generated Claude Code and OpenCode adapters have no
+equivalent host evidence.
+
+### Decision
+
+Treat Codex Desktop as the sole live-host-validated and supported environment
+for the first version. Retain Claude Code and OpenCode as experimental adapters
+generated from the shared canonical core. They may be distributed for early
+adopters, but they do not require live-host validation and do not gate release
+completion. Do not make live-host support claims for either adapter without a
+separately approved validation effort in its host.
+
+The working Claude Code marketplace confirms distribution plumbing only; it is
+not treated as behavioural validation evidence.
+
+### Consequences
+
+The previously proposed Claude Code marketplace-installation fixture is no
+longer a required milestone. Codex Desktop evidence remains the release-gating
+acceptance basis. The shared core and deterministic generation checks continue
+to protect experimental adapters against structural and semantic drift.
+
+This decision supersedes the three-environment release-completion requirements
+in D-013 and D-014, and the corresponding release-gating validation language
+in `DELIBERATION_MANIFEST.md` and `docs/ARCHITECTURE.md`. It retains their
+one-core, three-adapter architecture.

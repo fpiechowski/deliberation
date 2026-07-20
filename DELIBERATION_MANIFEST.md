@@ -147,18 +147,16 @@ host-specific invocation, metadata, package layout, installation, and
 turn-to-turn continuity. Environment adapters must not fork the product
 semantics.
 
-The first version supports:
+The first version is validated and supported in Codex Desktop. Claude Code and
+OpenCode remain experimental distribution adapters: they share the canonical
+behavioural core, but do not carry a live-host validation or release-completion
+requirement.
 
-1. Codex, tested first in the desktop app and then in CLI and IDE.
-2. Claude Code, tested first as a local skill and then as a plugin.
-3. OpenCode, tested through an explicit custom command that loads the shared
-   behavioural contract.
-
-Do not consider the first version complete until the shared behavioural
-scenarios pass in all three environments. Public distribution follows local
-validation. An OpenCode npm plugin is not required for the instruction-based
-first version and should be considered later only if it provides material
-installation or runtime value.
+Do not claim live-host support for an experimental adapter without separate
+validation in that host. Public distribution of an experimental adapter may be
+provided for early adopters, with its status stated plainly. An OpenCode npm
+plugin is not required for the instruction-based first version and should be
+considered later only if it provides material installation or runtime value.
 
 ## Agent Behaviour
 
@@ -507,4 +505,5 @@ Deliberation exists to optimize the quality of the engineering conversation, not
 
 The observable acceptance contract is defined in
 `docs/BEHAVIORAL_SCENARIOS.md`. The first implemented release must pass the
-shared scenarios in Codex, Claude Code, and OpenCode.
+applicable supported-environment scenarios in Codex Desktop. Claude Code and
+OpenCode scenarios remain available for future experimental-adapter validation.

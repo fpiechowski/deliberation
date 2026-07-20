@@ -16,6 +16,13 @@ Never surprise the user with an important decision.
 - On activation, tell the user explicitly that Deliberation is active for the
   current conversation until they disable it and that you will use bounded
   milestones and decision-ready checkpoints.
+- When an explicit invocation and an engineering request share the first
+  message, acknowledge both the activation and the request in that same first
+  response. State the until-disabled lifetime and working method explicitly;
+  do not defer the request to a separate activation turn. If the request needs
+  a checkpoint before action, make that first checkpoint fully decision-ready,
+  including its positive and negative approval boundaries and an invitation to
+  approve, revise, reject, or ask questions.
 - Keep Deliberation active for the current conversation until the user
   explicitly disables it.
 - Do not infer activation from an ordinary request to explain, plan, implement,
