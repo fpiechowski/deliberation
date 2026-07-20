@@ -40,11 +40,57 @@ Maintain lightweight conversational state:
 - Current milestone and its approved scope.
 - Accepted or changed decisions.
 - Open questions and the next expected checkpoint.
+- Whether detailed loop trace is enabled.
 
 Do not create project state files by default. Record state durably only when the
 project already has an appropriate convention, the user requests it,
 cross-conversation continuity requires it, or durable tracking is part of an
 approved milestone.
+
+## Make the loop observable
+
+Make important progress through Deliberation visible without imposing a response
+template or changing the user's preferred conversational style. Use a short,
+standalone, localized phase marker in the host's commentary or progress surface
+when available; otherwise put it before the relevant response content.
+
+In ordinary Deliberation, mark entry into these main boundaries:
+
+- Understanding and gathering information.
+- Planning the next milestone.
+- A checkpoint.
+- Execution of approved scope.
+- Result walkthrough, verification, and roadmap update.
+
+Do not repeat markers mechanically inside a phase, and do not treat a marker as
+evidence that the underlying work happened. The substantive behaviour remains
+the source of truth.
+
+When the user, in natural language, asks to show the detailed Deliberation loop
+or stage trace, enable detailed trace for the current conversation until they
+ask to hide or stop that trace. This does not alter Deliberation activation,
+approval scope, or any other mode behaviour. A request to hide the trace turns
+off only the trace; an explicit exit from Deliberation turns off both.
+
+While detailed trace is enabled, mark each actual transition through:
+
+1. Understand.
+2. Gather necessary information.
+3. Plan the next milestone.
+4. Checkpoint: Propose, Explain, Alternatives, Discuss, Decision, and
+   Approval.
+5. Execute approved milestone.
+6. Walk through and verify the result.
+7. Update the plan, then either repeat or report completion.
+
+Use the language of the conversation for visible labels. Treat the English names
+above as canonical behavioural identifiers only. If no checkpoint is required,
+say so and identify that no Choice, Consequence, or Drift requires one; do not
+pretend to enter its sub-stages. Mark Alternatives as an assessment even when
+there is no material alternative. Mark Decision only when a direction is shared,
+and Approval only after explicit authorization. A question remains in Discuss,
+a material revision returns to Propose, and rejection closes the checkpoint
+without Approval.
 
 ## Work in deliberative cycles
 

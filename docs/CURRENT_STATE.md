@@ -4,9 +4,9 @@
 
 ## Phase
 
-Live-host validation — **the baseline standalone Codex Desktop matrix is
-complete, and the focused `0.1.0-dev.2` correction closes the C-01/C-04
-robustness gap exposed by the Polish single-message fixture**.
+Behavioural-contract expansion — **`0.1.0-dev.4` adds observable loop
+boundaries and an optional detailed trace; deterministic validation passes and
+the focused Codex Desktop live-host evidence run is next**.
 
 ## Completed
 
@@ -111,6 +111,12 @@ robustness gap exposed by the Polish single-message fixture**.
   invocation-and-task fixture.
 - Passed the rerun of the Polish combined invocation-and-task fixture against
   C-01, C-03, C-04, and A-01 with `0.1.0-dev.2`.
+- Added localized main-phase visibility and a natural-language, conversation
+  scoped detailed-loop trace to the canonical contract.
+- Added transcript fixture skeletons for normal loop visibility and detailed
+  trace transitions, including trace-only exit and checkpoint response intent.
+- Regenerated every publication package at `0.1.0-dev.4` and passed the
+  deterministic assembly, semantic-integrity, fixture, and stale-output check.
 - Added a generated Codex Git marketplace and public PowerShell and POSIX
   installers with `0.1.0-dev.3`.
 - Passed the live PowerShell Git-marketplace installation and repeated-run
@@ -229,11 +235,18 @@ Release automation is not included. The Claude Code marketplace has been
 confirmed working externally, but no retained live-host transcript is required
 under the experimental-adapter policy.
 
+The shared core now also has an observable-loop contract. Ordinary
+Deliberation signals main phase boundaries without constraining response
+format. A user can request a detailed trace for the conversation, which makes
+actual transitions through the loop visible while preserving the distinction
+between a label and evidence of behaviour. The trace is disabled separately
+from Deliberation and is preserved when the same conversation resumes.
+
 ## Recommended next milestone
 
-No additional live-host validation milestone is scheduled. The next
-consequential decision, if needed, is whether to add release automation or a
-stable tag-based installation channel.
+Run the new ordinary-visibility and detailed-trace fixtures in standalone
+Codex Desktop against `0.1.0-dev.4`, then record the transcript evidence and
+result. This does not reopen validation for experimental adapters.
 
 ## Open questions
 

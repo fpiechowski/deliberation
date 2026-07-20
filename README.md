@@ -23,6 +23,10 @@ validated; Claude Code and OpenCode are experimental adapters.
 Knowledge transfer and shared understanding are first-class outcomes alongside
 the quality of the completed work.
 
+Deliberation also makes its main loop boundaries visible. A user can ask in
+natural language to show a detailed stage trace for the current conversation;
+this aids review and validation without imposing a fixed response template.
+
 ## Project status
 
 Product definition, interaction design, and the cross-environment package
@@ -68,6 +72,10 @@ live-host validation scope is complete.
 The additional Polish natural-use fixture now passes with `0.1.0-dev.2` after
 the combined invocation-and-task acknowledgement and checkpoint contract was
 made explicit.
+
+Version `0.1.0-dev.4` adds localized main-phase signals and an optional
+detailed loop trace. Its Codex Desktop live-host validation is the next pending
+evidence step.
 
 Codex Desktop is the only live-host-validated and supported environment. CLI,
 IDE, and other Codex clients are out of scope. Claude Code and OpenCode are

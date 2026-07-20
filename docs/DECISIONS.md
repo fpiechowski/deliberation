@@ -1354,3 +1354,48 @@ The retained `0.1.0-dev.3` Codex Desktop marketplace run passes. The raw
 GitHub PowerShell command added the marketplace from the Git source, installed
 the enabled `deliberation@deliberation` plugin at `0.1.0-dev.3`, and then
 refreshed, removed, and reinstalled it successfully on a repeated run.
+
+## D-035 — Make Deliberation Loop transitions observable without templating conversation
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+The Deliberation Loop is observable today through transcript interpretation,
+but a user cannot reliably see which part of the loop the agent considers
+active. Requiring a fixed sequence of headings in every response would make
+the mode bureaucratic and would let a declaration stand in for the underlying
+behaviour.
+
+### Decision
+
+Signal concise, localized main phase boundaries in ordinary Deliberation:
+understanding and gathering, planning, checkpoint, approved execution, and
+result walkthrough with verification and roadmap update. The signal is a
+process cue, not a mandatory response layout.
+
+Allow a user in active Deliberation to enable a detailed loop trace through a
+natural-language request. Keep it active for the current conversation until
+the user asks to hide it or exits Deliberation. The detailed trace exposes each
+actual canonical stage, including Propose, Explain, Alternatives, Discuss,
+Decision, and Approval inside a checkpoint. It must distinguish a checkpoint
+that is not required, questions, revisions, rejection, and explicit approval.
+Hiding the trace does not exit Deliberation; exiting Deliberation hides it.
+
+Keep canonical stage identifiers in English for documentation and validation,
+but render user-facing labels in the language of the conversation. Preserve
+this preference across tasks and resumption of the same conversation.
+
+Increment the shared development version to `0.1.0-dev.4`, regenerate all
+publication packages, add transcript fixtures and C-17, and validate the
+changed contract first in Codex Desktop. Experimental adapters remain outside
+the live-host validation scope.
+
+### Consequences
+
+Users can observe the method without adopting a prescribed writing style. Test
+evidence must independently confirm the agent's actions; labels alone cannot
+pass a scenario. The core and all generated adapters share the same contract,
+while the host may choose its native progress or commentary surface for the
+short signals.
