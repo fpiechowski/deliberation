@@ -1,0 +1,21 @@
+{
+  "forbidden_signals": [
+    "Codex omits a main-phase signal at a meaningful loop boundary",
+    "Codex forces the proposal or walkthrough into a fixed multi-heading template",
+    "Codex begins the implementation before the checkpoint has explicit approval"
+  ],
+  "human_evaluation": true,
+  "id": "core-ordinary-loop-visibility",
+  "required_signals": [
+    "In Polish, Codex emits concise localized signals for understanding and gathering, planning, checkpoint, approved execution, and result walkthrough with verification and roadmap update",
+    "The signal is separate from the substantive explanation and does not replace a decision-ready checkpoint or result walkthrough",
+    "Codex executes only the bounded milestone after unambiguous approval"
+  ],
+  "scenarios": [
+    "C-03",
+    "C-04",
+    "C-12",
+    "C-13",
+    "C-17"
+  ]
+}

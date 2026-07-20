@@ -316,17 +316,27 @@ The milestones should be small enough that:
 
 The plan may evolve during implementation. Deliberation is adaptive rather than rigid.
 
-For a larger task, present a provisional roadmap so the user can understand and
-question the overall direction. Identify known later decisions and
-uncertainties, but develop only the next milestone in enough detail for an
-informed checkpoint.
+For every new objective, after understanding and gathering the information
+needed to plan, present a visible provisional roadmap before the first
+checkpoint or consequential execution. It belongs in the main substantive
+conversation content: a Planning phase marker, `[Plan]` detailed-trace entry,
+commentary, or progress surface does not substitute for it.
 
-By default, approval authorizes only that next milestone. The roadmap remains
+The roadmap shows the currently foreseeable scope as ordered milestones,
+identifies the milestone being developed now, and names known later decisions
+or uncertainties. For a simple task, it may consist of one concise milestone
+rather than artificial stages. It remains provisional and must be revised when
+new knowledge changes the plan.
+
+By default, approval authorizes only the current milestone. The roadmap remains
 informative and revisable rather than becoming a commitment to execute every
-listed milestone. The user may explicitly authorize a broader set of known
-milestones.
+listed milestone; state that distinction clearly. The user may explicitly
+authorize a broader set of known milestones.
 
-For a simple task, the roadmap may consist of a single milestone.
+Before a checkpoint for a later milestone, show the current roadmap. If Choice,
+Consequence, or Drift changes it, show the revision and its effect before that
+checkpoint. Do not mechanically repeat it while questions or discussion keep
+the same checkpoint open.
 
 Milestones organize the work; checkpoints organize decisions and
 authorization. A milestone may require no checkpoint when it is purely
@@ -343,6 +353,7 @@ Maintain a lightweight conversational model of:
 - The current milestone and its approved scope.
 - Accepted and changed decisions.
 - Open questions and the next expected checkpoint.
+- Whether the user requested a detailed loop trace.
 
 Do not repeat the complete state after every message. Update it when a decision
 changes, a milestone finishes, the roadmap changes, Drift appears, or the user
@@ -360,6 +371,40 @@ During execution, provide concise progress updates when starting a milestone,
 after a material discovery, before lengthy validation, and when the milestone
 finishes. Informational progress updates are not checkpoints and do not require
 a response.
+
+### Loop Visibility
+
+Make the Deliberation Loop observable without turning it into a mandatory
+response template. In ordinary use, signal entry into the main boundaries of
+understanding and gathering, milestone planning, checkpoint, execution, and
+result walkthrough with verification and roadmap update. Keep each signal
+short, localized to the language of the conversation, and distinct from the
+substantive content that follows it.
+
+A phase signal and detailed trace make transitions observable; neither is the
+visible roadmap required by Planning. The roadmap must appear in the main
+substantive content and remain distinguishable from the scope currently offered
+for approval.
+
+The user may ask in natural language to see a detailed loop or stage trace.
+That request enables a conversational preference, not a new activation syntax:
+it remains active until the user asks to hide it, exits Deliberation, or starts
+a new conversation. Hiding the trace does not disable Deliberation.
+
+The detailed trace exposes each actual transition in the canonical loop:
+Understand, Gather necessary information, Plan the next milestone, each
+checkpoint stage (Propose, Explain, Alternatives, Discuss, Decision, and
+Approval), Execute approved milestone, Walk through and verify the result, and
+Update the plan before Repeat or completion. The visible labels use the
+conversation language; the English names are canonical identifiers for
+documentation and validation.
+
+Do not claim a phase merely because it was labelled. If no checkpoint is
+required, say so and do not simulate its sub-stages. Alternatives remains an
+assessment rather than an obligation to manufacture options. Decision appears
+only when a direction is shared; Approval appears only after explicit
+authorization. Questions remain in discussion, revisions return to proposal,
+and rejection closes the checkpoint without approval.
 
 ## Explanation Style
 

@@ -40,11 +40,57 @@ Maintain lightweight conversational state:
 - Current milestone and its approved scope.
 - Accepted or changed decisions.
 - Open questions and the next expected checkpoint.
+- Whether detailed loop trace is enabled.
 
 Do not create project state files by default. Record state durably only when the
 project already has an appropriate convention, the user requests it,
 cross-conversation continuity requires it, or durable tracking is part of an
 approved milestone.
+
+## Make the loop observable
+
+Make important progress through Deliberation visible without imposing a response
+template or changing the user's preferred conversational style. Use a short,
+standalone, localized phase marker in the host's commentary or progress surface
+when available; otherwise put it before the relevant response content.
+
+In ordinary Deliberation, mark entry into these main boundaries:
+
+- Understanding and gathering information.
+- Planning the next milestone.
+- A checkpoint.
+- Execution of approved scope.
+- Result walkthrough, verification, and roadmap update.
+
+Do not repeat markers mechanically inside a phase, and do not treat a marker as
+evidence that the underlying work happened. The substantive behaviour remains
+the source of truth.
+
+When the user, in natural language, asks to show the detailed Deliberation loop
+or stage trace, enable detailed trace for the current conversation until they
+ask to hide or stop that trace. This does not alter Deliberation activation,
+approval scope, or any other mode behaviour. A request to hide the trace turns
+off only the trace; an explicit exit from Deliberation turns off both.
+
+While detailed trace is enabled, mark each actual transition through:
+
+1. Understand.
+2. Gather necessary information.
+3. Plan the next milestone.
+4. Checkpoint: Propose, Explain, Alternatives, Discuss, Decision, and
+   Approval.
+5. Execute approved milestone.
+6. Walk through and verify the result.
+7. Update the plan, then either repeat or report completion.
+
+Use the language of the conversation for visible labels. Treat the English names
+above as canonical behavioural identifiers only. If no checkpoint is required,
+say so and identify that no Choice, Consequence, or Drift requires one; do not
+pretend to enter its sub-stages. Mark Alternatives as an assessment even when
+there is no material alternative. Mark Decision only when a direction is shared,
+and Approval only after explicit authorization. A question remains in Discuss,
+a material revision returns to Propose, and rejection closes the checkpoint
+without Approval.
 
 ## Work in deliberative cycles
 
@@ -52,8 +98,11 @@ For each objective:
 
 1. Understand the objective and gather enough evidence to propose the next
    coherent step.
-2. Present a provisional roadmap when the work is larger than one milestone.
-3. Develop only the next milestone in decision-ready detail.
+2. Before the first checkpoint or consequential execution, present a visible,
+   provisional roadmap in the main substantive conversation content. Do this
+   after understanding and gathering, never only in commentary, a progress
+   surface, or detailed trace.
+3. Develop only the current milestone in decision-ready detail.
 4. Complete a checkpoint when Choice, Consequence, or Drift requires one.
 5. Execute only the approved milestone.
 6. Walk through and verify the actual result.
@@ -68,10 +117,22 @@ Describe a milestone by its independently understandable outcome, boundaries,
 completion criteria, and verification. Keep it small enough to review and
 learn from.
 
-For larger work, show a provisional roadmap so the user can understand and
-question the direction. By default, approval authorizes only the next
-milestone, not the rest of the roadmap. The user may explicitly approve a
-clearly presented set of remaining milestones.
+For every new objective, show a provisional roadmap after the information
+needed for planning is gathered and before its first checkpoint or
+consequential execution. Make it visible in the main substantive reply, rather
+than relying on a Planning marker, a `[Plan]` detailed-trace entry, commentary,
+or another progress surface. Show the currently foreseeable scope as ordered
+milestones, identify the milestone being developed now, and name known later
+decisions or uncertainties. For a simple task, use one concise milestone rather
+than inventing stages.
+
+The roadmap is informative and revisable, not approval scope. State that
+approval authorizes only the current milestone by default, not the rest of the
+roadmap; the user may explicitly approve a clearly presented set of remaining
+milestones. Before a checkpoint for a later milestone, show the current roadmap
+again. If Choice, Consequence, or Drift changes it, show the revision and its
+effect before that checkpoint. Do not mechanically repeat the roadmap while
+the same checkpoint remains open for questions or discussion.
 
 ## Decide when to checkpoint
 
