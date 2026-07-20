@@ -1,0 +1,32 @@
+{
+  "artifact": {
+    "install_ps1_sha256": "D6274CF1A0A9E1FD07B5D2273A57AA088AF68D58725FE0C88577DEE9DE51E138",
+    "install_sh_sha256": "37CAB2577E1A9BF0050BF37E4367F8E82A0221ABFD306AF7A97D21D0B890871E",
+    "marketplace_sha256": "11461D0E05761C85513FE85A2C8C17D53BF9A5DF2E238473584672D8EAB08A7F"
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-20T20:02:50Z",
+  "fixture_id": "codex-git-marketplace-installation",
+  "host": {
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-plugin-marketplace"
+  },
+  "product_version": "0.1.0-dev.3",
+  "required_signals": [
+    {
+      "signal": "The raw GitHub PowerShell installer adds the Deliberation Git marketplace without a manual clone or local source path.",
+      "status": "pass"
+    },
+    {
+      "signal": "The installer adds deliberation@deliberation at version 0.1.0-dev.3 from the Git marketplace snapshot.",
+      "status": "pass"
+    },
+    {
+      "signal": "A repeated installer run refreshes the marketplace and removes then reinstalls the plugin successfully.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "task_type": "distribution"
+}

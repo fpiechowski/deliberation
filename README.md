@@ -115,6 +115,9 @@ scripts before running them if you do not want to trust mutable remote code.
 After installation or update, start a new Codex conversation or restart Codex
 Desktop, then activate the mode with `$deliberation`.
 
+The PowerShell path was verified against the GitHub marketplace with
+`0.1.0-dev.3`, including a repeated-run update.
+
 ## Experimental Claude Code installation
 
 Claude Code is an experimental adapter and is not live-host validated or

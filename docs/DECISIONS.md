@@ -1349,3 +1349,8 @@ maintains its own Git marketplace snapshot. The installer intentionally follows
 mutable `master`, so README must state that trust boundary and link to the
 scripts. It must never remove an installed plugin before marketplace refresh
 succeeds, and it must state recovery steps if reinstalling fails.
+
+The retained `0.1.0-dev.3` Codex Desktop marketplace run passes. The raw
+GitHub PowerShell command added the marketplace from the Git source, installed
+the enabled `deliberation@deliberation` plugin at `0.1.0-dev.3`, and then
+refreshed, removed, and reinstalled it successfully on a repeated run.

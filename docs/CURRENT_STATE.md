@@ -111,6 +111,10 @@ robustness gap exposed by the Polish single-message fixture**.
   invocation-and-task fixture.
 - Passed the rerun of the Polish combined invocation-and-task fixture against
   C-01, C-03, C-04, and A-01 with `0.1.0-dev.2`.
+- Added a generated Codex Git marketplace and public PowerShell and POSIX
+  installers with `0.1.0-dev.3`.
+- Passed the live PowerShell Git-marketplace installation and repeated-run
+  update fixture without a manual clone or local plugin source.
 
 ## Current implementation
 
@@ -218,21 +222,25 @@ that exposes the generated `claude-plugins/deliberation` package. It uses the
 marketplace and plugin name `deliberation` and the owner name Filip Piechowski.
 The repository now also contains a generated Codex marketplace catalog at
 `.agents/plugins/marketplace.json` and PowerShell and POSIX installation
-scripts. They add or refresh the GitHub marketplace and install or update the
-Codex plugin without a manual clone. Release automation is not included. The
-Claude Code marketplace has been confirmed working externally, but no retained
-live-host transcript is required under the experimental-adapter policy.
+scripts. The retained `0.1.0-dev.3` PowerShell run proves that the public raw
+GitHub installer adds the Git marketplace, installs the plugin without a manual
+clone or local source path, and updates it successfully on a repeated run.
+Release automation is not included. The Claude Code marketplace has been
+confirmed working externally, but no retained live-host transcript is required
+under the experimental-adapter policy.
 
 ## Recommended next milestone
 
-Publish the `0.1.0-dev.3` Codex marketplace and installer scripts to `master`,
-then run the PowerShell installer from its raw GitHub URL and record the result.
+No additional live-host validation milestone is scheduled. The next
+consequential decision, if needed, is whether to add release automation or a
+stable tag-based installation channel.
 
 ## Open questions
 
 No unresolved product-contract or architecture questions are currently known.
 
-Release automation remains a later decision.
+Release automation and a stable tag-based installation channel remain later
+decisions.
 
 ## Repository hygiene
 
