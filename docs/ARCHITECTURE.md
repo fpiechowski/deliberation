@@ -60,13 +60,13 @@ validation/
 tooling/
 
 .agents/plugins/marketplace.json      # eventual Codex marketplace catalog
-.claude-plugin/marketplace.json       # eventual Claude Code marketplace catalog
+.claude-plugin/marketplace.json       # generated Claude Code marketplace catalog
 VERSION
 ```
 
-This is the target topology, not scaffolding created by the architecture
-milestone. Marketplace catalogs and production packages are added only in
-later approved milestones.
+This is the target topology. The Claude Code marketplace catalog and production
+packages are committed generated publication surfaces. The Codex marketplace
+catalog remains deferred.
 
 The asymmetric publication paths are intentional. Codex's repository
 marketplace convention uses `plugins/<plugin-name>`, while a Claude Code
@@ -165,9 +165,10 @@ relative source:
 }
 ```
 
-The final marketplace name and publisher metadata remain distribution
-decisions. The example above shows the plugin entry shape, not an accepted
-marketplace identity.
+The marketplace catalog is named `deliberation`, identifies Filip Piechowski as
+its owner, uses the shared product version, and references the generated plugin
+with `./claude-plugins/deliberation`. It is generated from the Claude adapter
+template and validated with the rest of the publication surfaces.
 
 The generated Claude package is committed. This is required for users who add
 the repository itself as a Git marketplace because Claude Code resolves

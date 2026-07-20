@@ -104,6 +104,9 @@ C-01/C-04 robustness gap**.
   acknowledgement omits the explicit-until-disabled boundary and the initial
   checkpoint omits response alternatives and a complete negative approval
   boundary.
+- Prioritized and added a generated root Claude Code marketplace catalog that
+  references the committed Claude Code plugin and is checked for freshness,
+  structure, version, and source integrity.
 
 ## Current implementation
 
@@ -201,27 +204,31 @@ existing C-01 and C-04 contracts for omissions in the activation
 acknowledgement and checkpoint. The failure is retained without changing
 product behavior or version.
 
-Current live-host scope is limited to the Codex Desktop app. CLI, IDE, Claude
-Code, OpenCode, and other clients remain part of the accepted architecture but
-are explicitly deferred until the user reopens that scope.
+Current live-host scope is limited to the Codex Desktop app. Claude Code
+marketplace publication has been prioritized and is now implemented, but its
+live-host installation and behavior validation remain deferred. CLI, IDE,
+Claude Code, OpenCode, and other clients remain part of the accepted
+architecture but are explicitly deferred until the user reopens that scope.
 
-There are no marketplace catalogs, public publisher metadata, release
-automation, or retained live host installations.
+The repository now contains a generated root Claude Code marketplace catalog
+that exposes the generated `claude-plugins/deliberation` package. It uses the
+marketplace and plugin name `deliberation` and the owner name Filip Piechowski.
+There is no Codex marketplace catalog, release automation, or retained Claude
+Code live-host installation.
 
 ## Recommended next milestone
 
-Decide whether to open a corrective Codex Desktop milestone that strengthens
-the canonical instructions for minimal combined invocation-and-task prompts,
-increments the development version, regenerates adapters, and reruns only the
-failed Polish fixture. Do not make that behavior change without explicit
-approval.
+Run the Claude Code marketplace installation fixture against the generated
+GitHub marketplace, then record the result. This requires reopening the
+currently deferred Claude Code live-host-validation scope. The Polish Codex
+correction remains an independent later decision.
 
 ## Open questions
 
 No unresolved product-contract or architecture questions are currently known.
 
-Public marketplace names, publisher metadata, release automation, final
-distribution entries, and live validation logistics remain later decisions.
+Codex marketplace naming, release automation, and Claude Code live-validation
+logistics remain later decisions.
 
 ## Repository hygiene
 

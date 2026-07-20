@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "deliberation",
+  "version": "0.1.0-dev.1",
+  "description": "Deliberation plugin marketplace for Claude Code.",
+  "owner": {
+    "name": "Filip Piechowski"
+  },
+  "plugins": [
+    {
+      "name": "deliberation",
+      "description": "Collaborative engineering through shared decisions and bounded milestones.",
+      "source": "./claude-plugins/deliberation"
+    }
+  ]
+}

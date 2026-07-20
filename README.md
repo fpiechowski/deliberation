@@ -33,8 +33,9 @@ are present under `plugins/`, `claude-plugins/`, and `opencode-bundles/`.
 
 The assembler writes complete local previews under ignored `build/` output.
 Repository publication surfaces are synchronized explicitly and validated
-against fresh deterministic assembly. Marketplace entries and public release
-metadata are not present yet.
+against fresh deterministic assembly. A generated Claude Code marketplace
+catalog is present at `.claude-plugin/marketplace.json`; Codex marketplace
+entries and release automation are not present yet.
 
 Standalone Codex desktop activation evidence is recorded under
 `validation/runs/`. The retained `0.1.0-dev.0` failure led to an activation
@@ -93,8 +94,22 @@ python tooling/deliberation.py sync-publication
 ```
 
 The next decision is whether to correct and rerun the failed Polish
-single-message fixture. Other clients and distribution work remain deferred
-pending a new explicit decision.
+single-message fixture. Live validation in Claude Code remains deferred.
+
+## Claude Code installation
+
+Add this GitHub repository as a marketplace, then install the plugin:
+
+```text
+/plugin marketplace add fpiechowski/deliberation
+/plugin install deliberation@deliberation
+```
+
+After installation, activate the mode with:
+
+```text
+/deliberation:deliberation
+```
 
 ## Repository guide
 

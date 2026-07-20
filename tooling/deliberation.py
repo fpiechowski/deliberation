@@ -27,6 +27,7 @@ OPEN_CODE_PREFIX = (
     "then follow this behavioural contract:\n\n"
 )
 PUBLICATION_SURFACES = (
+    Path(".claude-plugin"),
     Path("plugins/deliberation"),
     Path("claude-plugins/deliberation"),
     Path("opencode-bundles/deliberation"),
@@ -147,11 +148,19 @@ def assemble(output: Path) -> None:
     claude_manifest = render_template(
         "adapters/claude-code/plugin.json.tmpl", VERSION=version
     )
+    claude_marketplace = render_template(
+        "adapters/claude-code/marketplace.json.tmpl", VERSION=version
+    )
     opencode_command = render_template(
         "adapters/opencode/deliberation.md.tmpl", CORE_BODY=core_body
     )
 
     prepare_output(output)
+
+    write_text(
+        output / "publication/.claude-plugin/marketplace.json",
+        claude_marketplace,
+    )
 
     write_text(
         output / "standalone/codex/deliberation/SKILL.md", canonical_skill
@@ -327,6 +336,30 @@ def validate_assembly(output: Path) -> None:
             raise ValidationError(f"{path}: version differs from VERSION")
         if manifest_type == "codex" and manifest.get("skills") != "./skills/":
             raise ValidationError(f"{path}: invalid Codex skills path")
+
+    marketplace_path = output / "publication/.claude-plugin/marketplace.json"
+    marketplace = require_json(marketplace_path)
+    expected_marketplace = {
+        "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+        "name": "deliberation",
+        "version": version,
+        "description": "Deliberation plugin marketplace for Claude Code.",
+        "owner": {"name": "Filip Piechowski"},
+        "plugins": [
+            {
+                "name": "deliberation",
+                "description": (
+                    "Collaborative engineering through shared decisions and "
+                    "bounded milestones."
+                ),
+                "source": "./claude-plugins/deliberation",
+            }
+        ],
+    }
+    if marketplace != expected_marketplace:
+        raise ValidationError(
+            f"{marketplace_path}: does not match the Deliberation marketplace contract"
+        )
 
     opencode_path = (
         output
