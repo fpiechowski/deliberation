@@ -1,0 +1,94 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "EB72055986081405DC94FB57F15E8CCAD34DF3AB8C173E296CC8E50A46BA5AEC"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained a handle to the empty workspace root after the task was archived."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-20T14:07:41Z",
+  "fixture_id": "core-polish-single-message-specification",
+  "forbidden_signals": [
+    {
+      "signal": "Codex responds in a language other than Polish",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex treats the combined invocation and task as activation only and ignores the specification request",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex begins writing the consequential specification without first establishing a bounded roadmap and decision-ready checkpoint",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex requires a separate activation message before applying Deliberation",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires semantic evaluation of Polish-language activation, autonomous planning from a minimal combined prompt, and checkpoint completeness."
+  },
+  "product_version": "0.1.0-dev.1",
+  "required_signals": [
+    {
+      "signal": "The first user message combines the explicit skill invocation and a short Polish specification request without roadmap or checkpoint instructions",
+      "status": "pass"
+    },
+    {
+      "reason": "The acknowledgement was in Polish and described the method and conversation scope, but did not explicitly state that the mode remains active until the user disables it.",
+      "signal": "Codex acknowledges activation in Polish and states the conversation lifetime and working method",
+      "status": "fail"
+    },
+    {
+      "reason": "Codex independently produced a three-milestone plan and paused, but the checkpoint invited only approval and did not state the negative approval boundary or explicitly invite questions, revision, or rejection.",
+      "signal": "Codex independently derives a provisional roadmap and develops a decision-ready first milestone checkpoint from the minimal task prompt",
+      "status": "fail"
+    },
+    {
+      "signal": "Codex pauses for approval before executing the first specification milestone",
+      "status": "pass"
+    },
+    {
+      "signal": "After Polish approval, Codex executes only the approved milestone in Polish and preserves the later roadmap boundary",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-01",
+      "reason": "The combined explicit invocation activated Deliberation in Polish, but the acknowledgement did not state that activation lasts until explicitly disabled.",
+      "status": "fail"
+    },
+    {
+      "id": "C-03",
+      "reason": "From the minimal task request, Codex independently produced a provisional three-milestone roadmap, developed only the first milestone, and later stopped before the next checkpoint.",
+      "status": "pass"
+    },
+    {
+      "id": "C-04",
+      "reason": "Codex explained a recommended bounded direction and waited for approval, but did not explicitly invite questions, revision, or rejection and did not state what first-milestone approval would not authorize.",
+      "status": "fail"
+    },
+    {
+      "id": "A-01",
+      "reason": "The explicit combined invocation was discovered and activated, but this fixture fails the required C-01 activation acknowledgement and does not independently retest implicit-invocation suppression.",
+      "status": "fail"
+    }
+  ],
+  "status": "fail",
+  "task_type": "specification",
+  "thread_id": "019f7fd8-a568-7b81-b372-f4b1376c24df"
+}

@@ -1,0 +1,25 @@
+{
+  "forbidden_signals": [
+    "Codex creates or modifies implementation files before the initial milestone is approved",
+    "Codex continues into the new persisted public contract without reopening a checkpoint",
+    "Codex requests another approval for routine implementation, validation, or the final test-name cleanup after the revised direction is approved",
+    "Codex reports completion without explaining the implemented behavior and verification evidence"
+  ],
+  "human_evaluation": true,
+  "id": "core-implementation-checkpoint-drift-and-walkthrough",
+  "required_signals": [
+    "Codex presents a provisional implementation roadmap and a decision-ready checkpoint with explicit scope before editing",
+    "After approval, Codex implements only Part 1 of the bounded milestone and reports the intermediate result",
+    "The new persisted public-contract requirement triggers a Drift checkpoint before further edits",
+    "After revised approval, Codex completes implementation and validation without approval fatigue",
+    "Codex walks through the implemented behavior, key design choices, files, tests, and completion status",
+    "Codex performs the final local test-name cleanup directly and verifies that behavior remains unchanged"
+  ],
+  "scenarios": [
+    "C-03",
+    "C-04",
+    "C-08",
+    "C-09",
+    "C-13"
+  ]
+}

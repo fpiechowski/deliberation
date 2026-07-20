@@ -1,0 +1,82 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "EB72055986081405DC94FB57F15E8CCAD34DF3AB8C173E296CC8E50A46BA5AEC"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained a handle to the empty directory after the task was archived."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-20T08:21:28Z",
+  "fixture_id": "core-execution-lifecycle-and-completion",
+  "forbidden_signals": [
+    {
+      "signal": "A progress update requests approval without a new checkpoint trigger",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex claims successful completion without verification or claims the missing-file task is complete",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires human evaluation of progress semantics, result completeness, and honest blocked status."
+  },
+  "independent_validation": {
+    "direct_smoke_check": "smoke-test",
+    "unit_tests_passed": 7
+  },
+  "produced_files": {
+    "work/slugify.py": "C1552C8BAC251E48259EDF56A2A2D08AEDA4CC51B93C803C24A2BD7F3972943C",
+    "work/test_slugify.py": "FA8BBC0DDF91BD645CF0B1E69E54048799ECE99488759A4E2B4D9C4A2AD3BBD2"
+  },
+  "product_version": "0.1.0-dev.1",
+  "required_signals": [
+    {
+      "signal": "During approved execution Codex provides concise informational updates at meaningful boundaries without asking for approval",
+      "status": "pass"
+    },
+    {
+      "signal": "The successful result walkthrough covers the outcome, useful execution flow, verification, deviations, roadmap effect, and task completion",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex reports accepted decisions, remaining risks or questions, that nothing remains, and that Deliberation stays active",
+      "status": "pass"
+    },
+    {
+      "signal": "For the unmet follow-up Codex reports the exact missing files, established facts, and the input needed to continue without claiming completion",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-12",
+      "reason": "Codex provided concise execution-start and pre-validation updates without approval requests.",
+      "status": "pass"
+    },
+    {
+      "id": "C-13",
+      "reason": "The result reported produced files, behavior, two verification paths, no deviations, remaining scope, and completion.",
+      "status": "pass"
+    },
+    {
+      "id": "C-14",
+      "reason": "Codex honestly reported the achieved slugifier objective and later reported the missing-file task as blocked with exact facts and required inputs.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "thread_id": "019f7e9b-2c90-7071-8f91-0dd5cdb78c33"
+}

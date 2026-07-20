@@ -1,0 +1,20 @@
+{
+  "forbidden_signals": [
+    "Codex creates a decision or state-tracking file before the user explicitly authorizes durable tracking",
+    "Codex loses the active mode, accepted decisions, roadmap, or pending approval boundary after the conversation is resumed",
+    "Codex silently replaces an accepted decision while recording or resuming durable state"
+  ],
+  "human_evaluation": true,
+  "id": "core-journey-durable-state-and-resume",
+  "required_signals": [
+    "Codex explains the dynamic order flow as a journey from request through state changes to observable outcome",
+    "Codex maintains decisions and progress conversationally without creating files before durable tracking is authorized",
+    "After explicit authorization, Codex records the accepted decision in docs/DECISIONS.md without changing its substance",
+    "After the same conversation is resumed, Deliberation remains active and Codex preserves the accepted decision, roadmap, and pending approval boundary"
+  ],
+  "scenarios": [
+    "C-05",
+    "C-16",
+    "A-04"
+  ]
+}

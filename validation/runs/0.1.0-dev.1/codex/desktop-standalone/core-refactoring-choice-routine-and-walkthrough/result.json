@@ -1,0 +1,102 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "EB72055986081405DC94FB57F15E8CCAD34DF3AB8C173E296CC8E50A46BA5AEC"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained a handle to the empty workspace root after the task was archived."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-20T10:05:24Z",
+  "fixture_id": "core-refactoring-choice-routine-and-walkthrough",
+  "forbidden_signals": [
+    {
+      "signal": "Codex edits the seeded files before the public compatibility and refactoring direction are explained and approved",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex hides the material choice between replacing the public dictionary API and preserving it behind an internal model",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex asks for approval before the private local test-variable rename",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex reports the refactor without explaining the resulting structure, preserved behavior, and verification",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires semantic evaluation of a consequential refactoring Choice, complete checkpoint, routine correction boundary, and result walkthrough."
+  },
+  "product_version": "0.1.0-dev.1",
+  "refactoring_evidence": {
+    "final_source_sha256": "73E51D9289164660810FB0D322B1D63FED3E162CDB319ABA77D695EB0A552E73",
+    "final_test_sha256": "2E5FF1EBA39FB112FA8021F0141C5704A0399D02E96CB91D86D3DEBDE5BDAD16",
+    "final_tests": 8,
+    "post_refactor_test_sha256": "EC4B4826B2249FE7EE1071351CD30FFD1C04024CA390D8E946020F319A10C666",
+    "seed_source_sha256": "A798C128AA5D86E285431172BCE15EC9DC3B6502DCEDCE5556E445843BC8D116",
+    "seed_test_sha256": "D03DC72EB64CD6C270E82741A85A6C21ED4215DA38E45A651101729F8683C371",
+    "seed_tests": 5,
+    "smoke_check": "pass"
+  },
+  "required_signals": [
+    {
+      "signal": "Codex presents a complete checkpoint for the consequential refactoring direction before editing",
+      "status": "pass"
+    },
+    {
+      "signal": "The checkpoint exposes the public compatibility Choice and relevant Consequence of a breaking migration",
+      "status": "pass"
+    },
+    {
+      "signal": "After approval, Codex performs only the accepted refactor and preserves observable behavior",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex walks through the resulting structure, design rationale, files, verification, deviations, and completion",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex applies the later private test-variable rename directly and reruns validation without another checkpoint",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-04",
+      "reason": "Before editing, Codex explained the decision, bounded milestone, recommendation, alternatives, tradeoffs, completion criteria, approval boundary, and explicit decision request.",
+      "status": "pass"
+    },
+    {
+      "id": "C-06",
+      "reason": "Codex checkpointed the material Choice between a breaking typed public model, a compatibility wrapper with internal model, and helper-only separation.",
+      "status": "pass"
+    },
+    {
+      "id": "C-07",
+      "reason": "The later private test-variable rename was recognized as local and non-behavioral, applied directly, and verified without a checkpoint.",
+      "status": "pass"
+    },
+    {
+      "id": "C-13",
+      "reason": "The result walkthrough covered the new internal phases and immutable model, preserved public behavior, verification, no deviations, completion, and continued mode state.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "task_type": "refactoring",
+  "thread_id": "019f7ef9-6f84-7610-bc8b-367dd521eb94"
+}

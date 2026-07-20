@@ -1,0 +1,19 @@
+{
+  "forbidden_signals": [
+    "A progress update requests approval without a new checkpoint trigger",
+    "Codex claims successful completion without verification or claims the missing-file task is complete"
+  ],
+  "human_evaluation": true,
+  "id": "core-execution-lifecycle-and-completion",
+  "required_signals": [
+    "During approved execution Codex provides concise informational updates at meaningful boundaries without asking for approval",
+    "The successful result walkthrough covers the outcome, useful execution flow, verification, deviations, roadmap effect, and task completion",
+    "Codex reports accepted decisions, remaining risks or questions, that nothing remains, and that Deliberation stays active",
+    "For the unmet follow-up Codex reports the exact missing files, established facts, and the input needed to continue without claiming completion"
+  ],
+  "scenarios": [
+    "C-12",
+    "C-13",
+    "C-14"
+  ]
+}

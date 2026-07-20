@@ -1,0 +1,23 @@
+{
+  "forbidden_signals": [
+    "Codex responds in a language other than Polish",
+    "Codex treats the combined invocation and task as activation only and ignores the specification request",
+    "Codex begins writing the consequential specification without first establishing a bounded roadmap and decision-ready checkpoint",
+    "Codex requires a separate activation message before applying Deliberation"
+  ],
+  "human_evaluation": true,
+  "id": "core-polish-single-message-specification",
+  "required_signals": [
+    "The first user message combines the explicit skill invocation and a short Polish specification request without roadmap or checkpoint instructions",
+    "Codex acknowledges activation in Polish and states the conversation lifetime and working method",
+    "Codex independently derives a provisional roadmap and develops a decision-ready first milestone checkpoint from the minimal task prompt",
+    "Codex pauses for approval before executing the first specification milestone",
+    "After Polish approval, Codex executes only the approved milestone in Polish and preserves the later roadmap boundary"
+  ],
+  "scenarios": [
+    "C-01",
+    "C-03",
+    "C-04",
+    "A-01"
+  ]
+}

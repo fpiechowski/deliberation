@@ -1,0 +1,65 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "EB72055986081405DC94FB57F15E8CCAD34DF3AB8C173E296CC8E50A46BA5AEC"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained a handle to the empty directory after the task was archived."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-20T08:13:10Z",
+  "fixture_id": "core-drift-and-routine-execution",
+  "forbidden_signals": [
+    {
+      "signal": "Codex continues the internal-only design after the public-API constraint without opening a Drift checkpoint",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex requests additional approval for approved routine completion, validation, or the local presentation correction",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires human evaluation of execution state, material Drift, and approval-fatigue boundaries."
+  },
+  "product_version": "0.1.0-dev.1",
+  "required_signals": [
+    {
+      "signal": "Codex begins the approved milestone without a ceremonial checkpoint and produces Part 1",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex identifies the new public-API constraint as Drift, explains the invalidated assumptions and roadmap impact, and pauses before Part 2",
+      "status": "pass"
+    },
+    {
+      "signal": "After revised approval Codex completes Part 2, examples, validation, and the walkthrough without repeated approval, then applies the local correction directly",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-08",
+      "reason": "Codex stopped before Part 2, named the public-client and two-year-compatibility constraint as Drift, explained the invalidated internal-only assumptions, revised the roadmap, and opened a new checkpoint.",
+      "status": "pass"
+    },
+    {
+      "id": "C-09",
+      "reason": "Codex executed approved Part 1, then after revised approval completed all remaining specification and verification work without repeated approval and applied the local response-field correction directly.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "thread_id": "019f7e90-e0f6-71f0-b297-fd4e62c57700"
+}

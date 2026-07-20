@@ -831,3 +831,377 @@ execution from approval leakage into later work.
 The `0.1.0-dev.1` run passes C-10 and C-11 with no critical failure. Codex
 executed only after clear approval, honored the disclosed batch, and
 checkpointed the later task independently.
+
+## D-023 — Test Drift during staged execution
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+Drift must be distinguishable from an ordinary pre-execution revision. A live
+fixture therefore needs an approved milestone to be visibly in progress before
+new information invalidates its assumptions. Routine execution should then
+continue without approval fatigue once the revised direction is accepted.
+
+### Decision
+
+Add a staged Codex Desktop fixture for C-08 and C-09:
+
+1. Approve a two-part pagination-specification milestone for an internal API.
+2. Execute Part 1 within the approved scope.
+3. Introduce a public-client, two-year cursor-compatibility requirement before
+   Part 2.
+4. Require Codex to stop, explain the invalidated assumptions and roadmap
+   effect, and complete a new Drift checkpoint.
+5. After revised approval, require all remaining specification, examples,
+   validation, and walkthrough work to complete without repeated approval.
+6. Require a final local presentation correction to proceed directly.
+
+Run the fixture only in standalone Codex Desktop under the current live-host
+scope.
+
+### Consequences
+
+The fixture exercises Drift after real conversational execution has started,
+then tests the boundary between the revised consequential decision and routine
+completion.
+
+The `0.1.0-dev.1` run passes C-08 and C-09 with no critical failure. Codex
+stopped before unapproved public-contract work, re-checkpointed the changed
+direction, completed the approved remainder, and applied the local correction
+without approval fatigue.
+
+## D-024 — Validate the execution lifecycle with real temporary files
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+Progress updates, verification walkthroughs, and honest completion are more
+meaningful when observed during actual implementation rather than a
+conversation-only artifact. Honest completion also has both achieved and unmet
+branches.
+
+### Decision
+
+Add one Codex Desktop fixture for C-12, C-13, and C-14 that:
+
+1. Approves implementation of a two-file Python standard-library slugifier and
+   `unittest` suite in an isolated projectless workspace.
+2. Requires meaningful informational progress updates during implementation
+   and before validation, without approval requests.
+3. Requires unit tests, a direct smoke check, a result walkthrough, and an
+   explicit completion status.
+4. Follows with a task naming two files that are absent and forbidden to be
+   inferred, requiring an honest blocked report with exact continuation needs.
+5. Removes all temporary source, test, and bytecode files after evidence
+   capture.
+
+Run the fixture only in standalone Codex Desktop under the current live-host
+scope.
+
+### Consequences
+
+The fixture covers both successful and unmet completion paths and ties the host
+report to independently repeated verification and file hashes.
+
+The `0.1.0-dev.1` run passes C-12, C-13, and C-14 with no critical failure.
+Codex reported useful progress, verified and completed the approved objective,
+kept Deliberation active, and later reported the missing-file task as blocked
+without claiming completion.
+
+## D-025 — Combine journey, durable state, and resumed continuity
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+The remaining direct core gaps C-05 and C-16 and the applicable Codex Desktop
+adapter gap A-04 share one useful boundary: a specification whose decisions
+begin as conversational state, become durable only after authorization, and
+must survive leaving and reopening the same task. Testing them separately
+would repeat activation, roadmap, and state setup without improving the
+evidence.
+
+### Decision
+
+Add one standalone Codex Desktop fixture that:
+
+1. Activates Deliberation in a fresh projectless workspace with no tracking
+   convention.
+2. Explains an asynchronous order-fulfillment flow as a request journey across
+   API intake, inventory, payment, fulfillment, state changes, and failure
+   paths.
+3. Completes one approved specification milestone and maintains its decisions
+   and roadmap only in conversation while file writes are forbidden.
+4. Creates `docs/DECISIONS.md` only after the user explicitly authorizes
+   durable tracking, preserving the substance of accepted decisions.
+5. Presents the next milestone without approving it.
+6. Archives and reopens the same desktop task, then verifies without
+   reinvocation that active mode, accepted decisions, roadmap, and the pending
+   approval boundary remain intact.
+
+Run the fixture only in standalone Codex Desktop under the current live-host
+scope.
+
+### Consequences
+
+The `0.1.0-dev.1` run passes C-05, C-16, and A-04 with no critical failure.
+Independent filesystem checks found zero files before authorization, exactly
+one authorized decision file afterward, and an unchanged file hash after
+resume.
+
+Retained desktop evidence now covers every core scenario C-01–C-16, Codex
+activation A-01, and resumed-conversation continuity A-04. The Specification
+row of cross-task-type acceptance is complete; representative Implementation,
+Debugging, Refactoring, and Review rows remain.
+
+## D-026 — Exercise the full loop in a real Implementation task
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+Direct scenario coverage does not by itself prove that Deliberation remains
+cross-cutting during implementation. The Implementation acceptance row
+requires planning and checkpoint communication before editing, Drift after
+execution has begun, routine completion without approval fatigue, and a
+verified result walkthrough in one representative coding task.
+
+### Decision
+
+Add one standalone Codex Desktop fixture that:
+
+1. Starts in a fresh projectless workspace and proposes a bounded two-part
+   Python feature-flag implementation milestone before creating files.
+2. After approval, implements and tests only the internal `bool | None`
+   resolver in Part 1, then stops at an explicit intermediate boundary.
+3. Introduces a previously undisclosed public persisted-configuration contract
+   requiring `inherit`, `enabled`, and `disabled` strings, unknown-value
+   rejection, and two-year compatibility for existing callers.
+4. Requires a Drift checkpoint before further edits.
+5. After revised approval, adds a separate persisted-data boundary, expands
+   unit coverage, runs a direct smoke check, and walks through the result
+   without repeated approval.
+6. Applies a final local test-name correction directly and reruns the tests.
+
+Run the fixture only in standalone Codex Desktop under the current live-host
+scope.
+
+### Consequences
+
+The `0.1.0-dev.1` run passes C-03, C-04, C-08, C-09, and C-13 in the
+representative Implementation task type with no critical failure.
+
+Independent checks found zero files before approval, reproduced the Part 1
+tests, confirmed unchanged file hashes during the Drift checkpoint, and passed
+the final four-test suite plus direct smoke checks. The temporary skill and all
+workspace contents were removed after evidence capture.
+
+The Specification and Implementation rows of cross-task-type acceptance are
+complete. Representative Debugging, Refactoring, and Review rows remain.
+
+## D-027 — Validate evidence-first Debugging through Choice and Drift
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+The Debugging acceptance row requires more than a successful fix. It must prove
+that Codex gathers evidence before editing, checkpoints a material product
+choice, stops again when new evidence invalidates an approved fix, completes
+routine corrective work without approval fatigue, and reports both achieved
+and genuinely blocked outcomes honestly.
+
+### Decision
+
+Add one standalone Codex Desktop fixture with two harness-seeded Python files
+that:
+
+1. Reports a timeout parser defect where string `"0"` becomes the default
+   `5000`, while leaving the intended zero semantics unresolved.
+2. Requires diagnosis and test execution without modification, followed by a
+   Choice checkpoint between disabled and immediate timeout meanings.
+3. Initially approves zero as disabled and authorizes only a focused Part 1
+   repair and test update.
+4. Introduces existing public compatibility evidence that `-1` means disabled
+   and `0` means immediate for two years, requiring a Drift checkpoint before
+   further edits.
+5. After revised approval, completes the compatibility repair, focused and
+   regression tests, direct smoke validation, and a local test-name correction
+   without repeated approval.
+6. Requires a complete achieved-task report, then starts a separate diagnosis
+   whose required production trace is absent and forbidden to infer.
+
+Run the fixture only in standalone Codex Desktop under the current live-host
+scope.
+
+### Consequences
+
+The `0.1.0-dev.1` run passes C-06, C-08, C-09, and C-14 in the representative
+Debugging task type with no critical failure.
+
+Independent checks proved that diagnosis and Drift left the relevant file
+hashes unchanged, reproduced the initial and intermediate suites, passed the
+final four-test suite and direct smoke check, and confirmed that the missing
+trace was never created.
+
+The Specification, Implementation, and Debugging rows of cross-task-type
+acceptance are complete. Representative Refactoring and Review rows remain.
+
+## D-028 — Preserve compatibility through a consequential Refactoring Choice
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+The Refactoring acceptance row must distinguish a consequential restructuring
+decision from routine cleanup. It needs evidence that Codex explains and
+checkpoints a material public compatibility boundary before editing, preserves
+approved behavior, walks through the resulting structure and verification, and
+does not turn a later private local rename into approval ceremony.
+
+### Decision
+
+Add one standalone Codex Desktop fixture with a harness-seeded Python profile
+formatter and tests that:
+
+1. Requests separation of normalization, validation, and rendering while
+   leaving unresolved whether the public dictionary API should be replaced by
+   a typed model.
+2. Requires read-only inspection and a complete checkpoint comparing a
+   breaking typed public model, a compatibility-preserving public wrapper with
+   internal model, and helper-only separation.
+3. Approves the recommended compatibility-preserving direction and authorizes
+   one bounded refactoring-and-verification milestone.
+4. Requires the public function and all observable behavior to remain stable,
+   with full tests, a direct smoke check, and a result walkthrough.
+5. Requests a later private test-variable rename that must proceed directly
+   without another checkpoint.
+
+Run the fixture only in standalone Codex Desktop under the current live-host
+scope.
+
+### Consequences
+
+The `0.1.0-dev.1` run passes C-04, C-06, C-07, and C-13 in the representative
+Refactoring task type with no critical failure.
+
+Independent checks confirmed unchanged seed hashes before approval, reproduced
+the five original tests, passed the eight-test refactored suite and direct
+smoke check, and passed all eight tests again after the local rename.
+
+The Specification, Implementation, Debugging, and Refactoring rows of
+cross-task-type acceptance are complete. Representative Review remains.
+
+## D-029 — Complete the desktop cross-task matrix with Review
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+The final untested cross-task row is Review. It must show that Deliberation can
+explain dynamic behavior under review, checkpoint a consequential
+recommendation without turning read-only diagnosis into ceremony, interpret a
+question and material revision correctly, preserve the distinction between
+review and authorized modification, and walk through the approved review
+result.
+
+### Decision
+
+Add one standalone Codex Desktop fixture with a harness-seeded Python
+authentication gateway and tests that:
+
+1. Reviews the transition from an internal service to an internet-facing
+   gateway without modifying files.
+2. Traces the authorization request from header parsing through session lookup,
+   revocation and scope decisions to the observable status.
+3. Prepares a checkpoint before recording a consequential release
+   recommendation in `work/review.md`.
+4. Treats a positive-prefaced challenge as a question rather than approval.
+5. Treats a requested 30-day bare-token migration, telemetry, notification,
+   cutoff, and malformed-scheme rejection as a material revision and updates
+   the checkpoint before execution.
+6. After unambiguous approval, creates only the review artifact, preserves the
+   source and tests, verifies the seeded suite and hashes, and walks through the
+   final result.
+
+Run the fixture only in standalone Codex Desktop under the current live-host
+scope.
+
+### Consequences
+
+The `0.1.0-dev.1` run passes C-04, C-05, C-10, and C-13 in the representative
+Review task type with no critical failure.
+
+Independent checks confirmed that the review artifact did not exist before
+approval, the seeded source and test hashes remained unchanged, exactly the
+approved review artifact was added, and all five seeded tests passed.
+
+All five cross-task-type acceptance rows now have passing standalone Codex
+Desktop evidence. Together with direct C-01–C-16 coverage and passing A-01 and
+A-04, the currently approved desktop-only live-host slice is complete.
+Non-desktop clients and cross-environment A-05 remain deferred under D-020.
+
+## D-030 — Probe a minimal Polish combined invocation and task
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+The passing baseline fixtures activate Deliberation separately or use prompts
+that explicitly request roadmap, milestone, or checkpoint behavior. A natural
+user may instead invoke the skill and request a specification in one short
+first message without naming the interaction machinery. The desktop behavior
+should be observed without adding those cues.
+
+### Decision
+
+Add one standalone Codex Desktop fixture whose first and only initial message
+is:
+
+```text
+$deliberation Napisz specyfikację procesu resetowania hasła dla aplikacji webowej.
+```
+
+Conduct the whole conversation in Polish. Do not mention roadmap, milestones,
+or checkpoints in the first message. If Codex prepares and pauses at a first
+milestone, approve exactly that milestone in a second Polish turn and require
+it to stop before the next checkpoint.
+
+Run the fixture against the unchanged `0.1.0-dev.1` standalone artifact.
+
+### Consequences
+
+The run is retained as **Fail**.
+
+Codex successfully:
+
+- recognized the combined explicit invocation and task without a separate
+  activation turn;
+- responded entirely in Polish;
+- derived a three-milestone roadmap and first decision point without being
+  prompted to do so;
+- paused before specification execution;
+- completed only the approved first milestone and stopped.
+
+It fails C-01 because the activation acknowledgement says the mode applies to
+the conversation but does not explicitly state that it remains active until
+the user disables it.
+
+It fails C-04 because the compact checkpoint asks only for approval and does
+not explicitly invite questions, revision, or rejection, nor state what
+first-milestone approval would not authorize. A-01 fails through the C-01
+dependency. C-03 passes. No critical F-01–F-14 failure occurred.
+
+Do not change the canonical core or increment the version as part of recording
+this result. A corrective instruction change and rerun require a separately
+approved milestone.

@@ -1,0 +1,84 @@
+{
+  "artifact": {
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5",
+    "skill_sha256": "EB72055986081405DC94FB57F15E8CCAD34DF3AB8C173E296CC8E50A46BA5AEC"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained a handle to the empty workspace root after the task was archived."
+  },
+  "critical_failures": [],
+  "durable_state_evidence": {
+    "authorized_file": "docs/DECISIONS.md",
+    "file_count_before_authorization": 0,
+    "file_sha256_after_creation": "58EC164776C0DD5F5AA9031707C33D2E175DAB9EDDF25CB58DCE4F088891A344",
+    "file_sha256_after_resume": "58EC164776C0DD5F5AA9031707C33D2E175DAB9EDDF25CB58DCE4F088891A344"
+  },
+  "executed_at": "2026-07-20T08:38:55Z",
+  "fixture_id": "core-journey-durable-state-and-resume",
+  "forbidden_signals": [
+    {
+      "signal": "Codex creates a decision or state-tracking file before the user explicitly authorizes durable tracking",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex loses the active mode, accepted decisions, roadmap, or pending approval boundary after the conversation is resumed",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex silently replaces an accepted decision while recording or resuming durable state",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "26.715.4045.0",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires semantic evaluation of the journey, authorized state boundary, and continuity after a real archive-and-resume cycle."
+  },
+  "product_version": "0.1.0-dev.1",
+  "required_signals": [
+    {
+      "signal": "Codex explains the dynamic order flow as a journey from request through state changes to observable outcome",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex maintains decisions and progress conversationally without creating files before durable tracking is authorized",
+      "status": "pass"
+    },
+    {
+      "signal": "After explicit authorization, Codex records the accepted decision in docs/DECISIONS.md without changing its substance",
+      "status": "pass"
+    },
+    {
+      "signal": "After the same conversation is resumed, Deliberation remains active and Codex preserves the accepted decision, roadmap, and pending approval boundary",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-05",
+      "reason": "Codex traced the order journey from request through inventory, payment, fulfillment, client observation, and material failure paths.",
+      "status": "pass"
+    },
+    {
+      "id": "C-16",
+      "reason": "The workspace contained zero files while state was conversational; after explicit authorization, Codex created only docs/DECISIONS.md and preserved every accepted decision.",
+      "status": "pass"
+    },
+    {
+      "id": "A-04",
+      "reason": "After the same desktop task was archived and reopened, Codex retained active Deliberation, accepted decisions, the roadmap, and the unapproved Milestone 2 boundary without reinvocation.",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "thread_id": "019f7ea6-da81-7381-a1fb-832d471481aa"
+}

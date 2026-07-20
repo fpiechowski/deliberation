@@ -44,6 +44,30 @@ C-07.
 The desktop lifetime-and-exit fixture passes C-02 and C-15 across two fresh
 conversations.
 The desktop response-intent and broad-approval fixture passes C-10 and C-11.
+The staged desktop Drift and routine-execution fixture passes C-08 and C-09.
+The real-file desktop execution-lifecycle fixture passes C-12, C-13, and C-14.
+The desktop journey, durable-state, and resumed-conversation fixture passes
+C-05, C-16, and A-04. Together, the retained desktop runs cover every core
+scenario C-01–C-16 and complete the Specification row of cross-task-type
+acceptance.
+The real-file desktop Implementation fixture passes C-03, C-04, C-08, C-09,
+and C-13 in an implementation context.
+The seeded real-file desktop Debugging fixture passes C-06, C-08, C-09, and
+C-14 in a debugging context.
+The seeded real-file desktop Refactoring fixture passes C-04, C-06, C-07, and
+C-13 in a refactoring context.
+The seeded real-file desktop Review fixture passes C-04, C-05, C-10, and C-13
+in a review context.
+
+All five cross-task-type rows now pass in standalone Codex Desktop. Together
+with direct C-01–C-16, A-01, and A-04 evidence, the current desktop-only
+live-host validation scope is complete.
+
+An additional natural-use fixture combines `$deliberation` and a short Polish
+specification request in the first message. It passes autonomous roadmap and
+bounded execution behavior, but is retained as a failure against C-01 and C-04:
+the acknowledgement omits the explicit exit boundary and the compact
+checkpoint omits response alternatives and a complete approval boundary.
 
 Current live-host validation is intentionally limited to the Codex Desktop app.
 CLI, IDE, Claude Code, OpenCode, and other clients are deferred until that scope
@@ -68,8 +92,9 @@ core, an adapter template, or `VERSION` with:
 python tooling/deliberation.py sync-publication
 ```
 
-The next milestone is deeper Codex Desktop coverage for Drift handling and
-routine execution boundaries.
+The next decision is whether to correct and rerun the failed Polish
+single-message fixture. Other clients and distribution work remain deferred
+pending a new explicit decision.
 
 ## Repository guide
 

@@ -1,11 +1,12 @@
 # Current State
 
-**Last updated:** 2026-07-19
+**Last updated:** 2026-07-20
 
 ## Phase
 
-Live-host validation — **standalone Codex desktop activation and checkpoint
-fixtures pass**.
+Live-host validation — **the baseline standalone Codex Desktop matrix is
+complete, while an additional Polish single-message fixture exposes a
+C-01/C-04 robustness gap**.
 
 ## Completed
 
@@ -73,6 +74,36 @@ fixtures pass**.
   conversation-wide lifetime and explicit exit against C-02 and C-15.
 - Added and passed a multi-turn Codex Desktop fixture for response intent and
   bounded broad approval against C-10 and C-11.
+- Added and passed a staged Codex Desktop fixture for Drift during execution
+  and routine-work boundaries against C-08 and C-09.
+- Added and passed a real-file Codex Desktop execution fixture for progress
+  updates, result walkthrough, and achieved/unmet completion against C-12,
+  C-13, and C-14.
+- Added and passed a specification fixture for journey-based explanation,
+  conditional durable state, and real archive-and-resume continuity against
+  C-05, C-16, and A-04.
+- Added and passed a real-file Implementation fixture for pre-edit planning,
+  checkpoint communication, mid-execution Drift, routine completion, and
+  result walkthrough against C-03, C-04, C-08, C-09, and C-13.
+- Added and passed a seeded real-file Debugging fixture for diagnosis before
+  editing, a material Choice, incompatible-contract Drift, routine correction,
+  and honest achieved and blocked completion against C-06, C-08, C-09, and
+  C-14.
+- Added and passed a seeded real-file Refactoring fixture for a complete
+  pre-edit checkpoint, a public compatibility Choice and Consequence, preserved
+  behavior, result walkthrough, and a routine local correction against C-04,
+  C-06, C-07, and C-13.
+- Added and passed a seeded real-file Review fixture for a request journey,
+  consequential release-recommendation checkpoint, question and revision
+  intent handling, bounded artifact creation, and final walkthrough against
+  C-04, C-05, C-10, and C-13.
+- Executed an additional Polish-language specification fixture whose first
+  message combines `$deliberation` and a short task without roadmap or
+  checkpoint instructions. The run passes autonomous planning and bounded
+  execution in C-03, but fails C-01 and C-04 because the activation
+  acknowledgement omits the explicit-until-disabled boundary and the initial
+  checkpoint omits response alternatives and a complete negative approval
+  boundary.
 
 ## Current implementation
 
@@ -108,6 +139,68 @@ ambiguity, rejection, and approval handling against one evolving checkpoint.
 It also proves bounded batch authorization without repeated approval or leakage
 into a later task.
 
+The standalone desktop Drift run proves that new public-contract requirements
+stop an approved milestone already in progress, reopen a decision-ready
+checkpoint, and allow the revised routine remainder and local corrections to
+finish without approval fatigue.
+
+The standalone desktop execution-lifecycle run proves meaningful progress
+updates, independently repeated unit and smoke verification, a complete success
+report, continued mode state, and an exact blocked report for an impossible
+follow-up.
+
+The standalone desktop journey-and-state run proves a trigger-to-outcome
+explanation of dynamic behaviour, conversational state without unauthorized
+files, explicitly authorized durable tracking, and preservation of active mode,
+accepted decisions, roadmap, and approval scope after the same task is archived
+and reopened.
+
+Taken together, the retained standalone runs now provide direct passing
+evidence for every core scenario C-01–C-16, Codex activation A-01, and
+desktop resumed-conversation continuity A-04. The Specification row of the
+cross-task-type acceptance matrix is complete.
+
+The representative desktop Implementation run proves that the same behavioural
+loop applies during real code changes: no files appeared before approval, the
+approved first part completed and verified independently, a newly disclosed
+public persisted-data contract reopened a Drift checkpoint before further
+edits, and the revised implementation, smoke check, walkthrough, and final
+local test cleanup completed without approval fatigue.
+
+The representative desktop Debugging run proves that Codex can diagnose from
+evidence without prematurely editing, surface unresolved product semantics,
+implement only an approved focused fix, and stop again when compatibility
+evidence invalidates that fix. It then completes the revised repair and routine
+validation without approval fatigue, reports the achieved task completely, and
+honestly blocks a separate task when its required production trace is absent.
+
+The representative desktop Refactoring run proves that Codex checkpoints a
+material refactoring boundary before editing, recommends a compatibility-safe
+internal model over a breaking public migration, preserves the public function
+and observable behavior, explains and verifies the resulting structure, and
+applies a later private test cleanup without an artificial checkpoint.
+
+The representative desktop Review run proves that Codex can explain reviewed
+behavior as a request journey, distinguish observed behavior from a
+consequential release recommendation, keep a positive-prefaced question inside
+the checkpoint, revise the recommendation when the user adds a material
+migration condition, and create only the approved review artifact before
+walking through the result.
+
+All five cross-task-type acceptance rows — Specification, Implementation,
+Debugging, Refactoring, and Review — have passing standalone Codex Desktop
+evidence. Together with direct C-01–C-16 coverage and passing A-01 and A-04,
+this completes the currently approved desktop-only live-host slice.
+
+The later `core-polish-single-message-specification` run intentionally adds a
+stricter natural-use shape beyond those baseline fixtures. Codex correctly
+accepted a combined invocation and task in the first message, stayed in Polish,
+derived a three-milestone roadmap without prompting, paused before execution,
+and completed only the approved first milestone. It nevertheless fails the
+existing C-01 and C-04 contracts for omissions in the activation
+acknowledgement and checkpoint. The failure is retained without changing
+product behavior or version.
+
 Current live-host scope is limited to the Codex Desktop app. CLI, IDE, Claude
 Code, OpenCode, and other clients remain part of the accepted architecture but
 are explicitly deferred until the user reopens that scope.
@@ -117,8 +210,11 @@ automation, or retained live host installations.
 
 ## Recommended next milestone
 
-Define and approve the next Codex Desktop validation slice, recommended as
-Drift handling and routine execution boundaries covering C-08 and C-09.
+Decide whether to open a corrective Codex Desktop milestone that strengthens
+the canonical instructions for minimal combined invocation-and-task prompts,
+increments the development version, regenerates adapters, and reruns only the
+failed Polish fixture. Do not make that behavior change without explicit
+approval.
 
 ## Open questions
 
