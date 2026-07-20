@@ -34,8 +34,9 @@ are present under `plugins/`, `claude-plugins/`, and `opencode-bundles/`.
 The assembler writes complete local previews under ignored `build/` output.
 Repository publication surfaces are synchronized explicitly and validated
 against fresh deterministic assembly. A generated Claude Code marketplace
-catalog is present at `.claude-plugin/marketplace.json`; Codex marketplace
-entries and release automation are not present yet.
+catalog is present at `.claude-plugin/marketplace.json`; a generated Codex
+marketplace catalog is present at `.agents/plugins/marketplace.json`. Release
+automation is not present yet.
 
 Standalone Codex desktop activation evidence is recorded under
 `validation/runs/`. The retained `0.1.0-dev.0` failure led to an activation
@@ -64,11 +65,9 @@ All five cross-task-type rows now pass in standalone Codex Desktop. Together
 with direct C-01–C-16, A-01, and A-04 evidence, the current desktop-only
 live-host validation scope is complete.
 
-An additional natural-use fixture combines `$deliberation` and a short Polish
-specification request in the first message. It passes autonomous roadmap and
-bounded execution behavior, but is retained as a failure against C-01 and C-04:
-the acknowledgement omits the explicit exit boundary and the compact
-checkpoint omits response alternatives and a complete approval boundary.
+The additional Polish natural-use fixture now passes with `0.1.0-dev.2` after
+the combined invocation-and-task acknowledgement and checkpoint contract was
+made explicit.
 
 Codex Desktop is the only live-host-validated and supported environment. CLI,
 IDE, and other Codex clients are out of scope. Claude Code and OpenCode are
@@ -93,8 +92,28 @@ core, an adapter template, or `VERSION` with:
 python tooling/deliberation.py sync-publication
 ```
 
-The corrected Polish single-message fixture now passes with `0.1.0-dev.2`.
-No additional live-host validation is currently scheduled.
+## Codex installation
+
+The following commands add or refresh the Deliberation marketplace from the
+current `master` branch, then install or update the plugin. They do not require
+a manual clone or local plugin source; Codex stores its own marketplace snapshot.
+
+PowerShell (Windows):
+
+```powershell
+irm https://raw.githubusercontent.com/fpiechowski/deliberation/master/install.ps1 | iex
+```
+
+POSIX shell (macOS, Linux, Git Bash, or WSL):
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/master/install.sh)"
+```
+
+Both commands execute the current scripts from `master`. Review the linked
+scripts before running them if you do not want to trust mutable remote code.
+After installation or update, start a new Codex conversation or restart Codex
+Desktop, then activate the mode with `$deliberation`.
 
 ## Experimental Claude Code installation
 

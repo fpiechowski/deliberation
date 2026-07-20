@@ -216,21 +216,23 @@ other clients are outside the current support scope.
 The repository now contains a generated root Claude Code marketplace catalog
 that exposes the generated `claude-plugins/deliberation` package. It uses the
 marketplace and plugin name `deliberation` and the owner name Filip Piechowski.
-There is no Codex marketplace catalog or release automation. The Claude Code
-marketplace has been confirmed working externally, but no retained live-host
-transcript is required under the experimental-adapter policy.
+The repository now also contains a generated Codex marketplace catalog at
+`.agents/plugins/marketplace.json` and PowerShell and POSIX installation
+scripts. They add or refresh the GitHub marketplace and install or update the
+Codex plugin without a manual clone. Release automation is not included. The
+Claude Code marketplace has been confirmed working externally, but no retained
+live-host transcript is required under the experimental-adapter policy.
 
 ## Recommended next milestone
 
-No additional live-host validation milestone is scheduled. The next
-consequential decision, if needed, is whether to add Codex marketplace
-publication or release automation.
+Publish the `0.1.0-dev.3` Codex marketplace and installer scripts to `master`,
+then run the PowerShell installer from its raw GitHub URL and record the result.
 
 ## Open questions
 
 No unresolved product-contract or architecture questions are currently known.
 
-Codex marketplace naming and release automation remain later decisions.
+Release automation remains a later decision.
 
 ## Repository hygiene
 

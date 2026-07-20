@@ -27,6 +27,7 @@ OPEN_CODE_PREFIX = (
     "then follow this behavioural contract:\n\n"
 )
 PUBLICATION_SURFACES = (
+    Path(".agents"),
     Path(".claude-plugin"),
     Path("plugins/deliberation"),
     Path("claude-plugins/deliberation"),
@@ -144,6 +145,7 @@ def assemble(output: Path) -> None:
     codex_manifest = render_template(
         "adapters/codex/plugin.json.tmpl", VERSION=version
     )
+    codex_marketplace = render_template("adapters/codex/marketplace.json.tmpl")
     claude_variant = claude_skill(canonical_skill)
     claude_manifest = render_template(
         "adapters/claude-code/plugin.json.tmpl", VERSION=version
@@ -156,6 +158,11 @@ def assemble(output: Path) -> None:
     )
 
     prepare_output(output)
+
+    write_text(
+        output / "publication/.agents/plugins/marketplace.json",
+        codex_marketplace,
+    )
 
     write_text(
         output / "publication/.claude-plugin/marketplace.json",
@@ -337,6 +344,28 @@ def validate_assembly(output: Path) -> None:
         if manifest_type == "codex" and manifest.get("skills") != "./skills/":
             raise ValidationError(f"{path}: invalid Codex skills path")
 
+    codex_marketplace_path = output / "publication/.agents/plugins/marketplace.json"
+    codex_marketplace = require_json(codex_marketplace_path)
+    expected_codex_marketplace = {
+        "name": "deliberation",
+        "interface": {"displayName": "Deliberation"},
+        "plugins": [
+            {
+                "name": "deliberation",
+                "source": {"source": "local", "path": "./plugins/deliberation"},
+                "policy": {
+                    "installation": "AVAILABLE",
+                    "authentication": "ON_INSTALL",
+                },
+                "category": "Productivity",
+            }
+        ],
+    }
+    if codex_marketplace != expected_codex_marketplace:
+        raise ValidationError(
+            f"{codex_marketplace_path}: does not match the Deliberation Codex marketplace contract"
+        )
+
     marketplace_path = output / "publication/.claude-plugin/marketplace.json"
     marketplace = require_json(marketplace_path)
     expected_marketplace = {
@@ -414,6 +443,35 @@ def validate_assembly(output: Path) -> None:
         raise ValidationError("runtime payload digests are inconsistent")
 
     validate_fixtures()
+    validate_installers()
+
+
+def validate_installers() -> None:
+    required_fragments = {
+        ROOT / "install.ps1": (
+            "fpiechowski/deliberation",
+            '"master"',
+            '"plugin", "marketplace", "upgrade"',
+            '"plugin", "marketplace", "add"',
+            '"plugin", "remove"',
+            '"plugin", "add"',
+            "ConvertFrom-Json",
+        ),
+        ROOT / "install.sh": (
+            "#!/usr/bin/env sh",
+            "fpiechowski/deliberation",
+            'marketplace_ref="master"',
+            "plugin marketplace upgrade",
+            "plugin marketplace add",
+            "plugin remove",
+            "plugin add",
+        ),
+    }
+    for path, fragments in required_fragments.items():
+        content = read_text(path)
+        for fragment in fragments:
+            if fragment not in content:
+                raise ValidationError(f"{path}: missing installer contract {fragment!r}")
 
 
 def tree_snapshot(root: Path) -> dict[str, bytes]:

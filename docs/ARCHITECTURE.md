@@ -59,14 +59,13 @@ validation/
 
 tooling/
 
-.agents/plugins/marketplace.json      # eventual Codex marketplace catalog
+.agents/plugins/marketplace.json      # generated Codex marketplace catalog
 .claude-plugin/marketplace.json       # generated Claude Code marketplace catalog
 VERSION
 ```
 
-This is the target topology. The Claude Code marketplace catalog and production
-packages are committed generated publication surfaces. The Codex marketplace
-catalog remains deferred.
+This is the target topology. The Codex and Claude Code marketplace catalogs and
+production packages are committed generated publication surfaces.
 
 The asymmetric publication paths are intentional. Codex's repository
 marketplace convention uses `plugins/<plugin-name>`, while a Claude Code
@@ -122,9 +121,8 @@ plugins/deliberation/
             └── openai.yaml
 ```
 
-The package may later be listed by
-`.agents/plugins/marketplace.json`. It does not add hooks, apps, MCP servers, or
-connectors in the first version.
+The package is listed by `.agents/plugins/marketplace.json`. It does not add
+hooks, apps, MCP servers, or connectors in the first version.
 
 ### Claude Code
 

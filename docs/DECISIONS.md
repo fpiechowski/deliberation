@@ -1315,3 +1315,37 @@ This decision supersedes the three-environment release-completion requirements
 in D-013 and D-014, and the corresponding release-gating validation language
 in `DELIBERATION_MANIFEST.md` and `docs/ARCHITECTURE.md`. It retains their
 one-core, three-adapter architecture.
+
+## D-034 — Publish Codex through a self-updating Git marketplace installer
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+Codex Desktop is the supported environment, but the generated Codex plugin
+still requires users to clone the repository or configure its marketplace
+manually. Codex can add and refresh a Git marketplace by repository shorthand,
+while the CLI exposes marketplace refresh but no separate plugin-upgrade
+command.
+
+### Decision
+
+Generate a repository-root Codex marketplace at
+`.agents/plugins/marketplace.json` that lists `plugins/deliberation`. Add
+tracked `install.ps1` and `install.sh` entrypoints. Both install from
+`fpiechowski/deliberation` at `master`; a repeated run refreshes the marketplace
+and replaces the installed `deliberation@deliberation` plugin.
+
+Use PowerShell as the supported Windows/Codex Desktop entrypoint and provide
+the POSIX shell equivalent. Increment the shared development version to
+`0.1.0-dev.3`. Do not add release automation, a package registry, a new
+dependency, or a stable-tag channel in this milestone.
+
+### Consequences
+
+Users can install without a manual clone or local plugin source, although Codex
+maintains its own Git marketplace snapshot. The installer intentionally follows
+mutable `master`, so README must state that trust boundary and link to the
+scripts. It must never remove an installed plugin before marketplace refresh
+succeeds, and it must state recovery steps if reinstalling fails.
