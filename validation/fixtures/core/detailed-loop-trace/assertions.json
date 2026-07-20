@@ -1,0 +1,23 @@
+{
+  "forbidden_signals": [
+    "Codex treats the trace request as approval or as a new Deliberation activation",
+    "Codex marks Approval before unambiguous user authorization",
+    "Codex continues detailed trace after the user hides it",
+    "Codex exits Deliberation merely because the user hides the trace"
+  ],
+  "human_evaluation": true,
+  "id": "core-detailed-loop-trace",
+  "required_signals": [
+    "After a natural-language request, Codex enables a Polish detailed stage trace and marks actual Understand, Gather, Plan, Propose, Explain, Alternatives, Discuss, Decision, Approval, Execute, Walk through and verify, Update plan, and completion or repeat transitions",
+    "The question remains in Discuss, the material revision returns to Propose, and explicit approval precedes Execute",
+    "For a precisely specified routine follow-up, Codex identifies that no Choice, Consequence, or Drift requires a checkpoint rather than simulating checkpoint sub-stages",
+    "After the user hides the trace, Deliberation remains active and uses only ordinary main-phase signals"
+  ],
+  "scenarios": [
+    "C-09",
+    "C-10",
+    "C-12",
+    "C-13",
+    "C-17"
+  ]
+}

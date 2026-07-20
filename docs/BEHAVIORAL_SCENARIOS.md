@@ -63,17 +63,28 @@ mode is explicitly disabled.
 
 ### C-03 — Provisional roadmap and bounded approval
 
-**Given** the user provides a larger task with multiple coherent outcomes.
+**Given** Deliberation is active and the user provides a new objective.
 
-**When** the agent plans the work.
+**When** the agent has understood the objective and gathered the information
+needed to plan it.
 
-**Then** it presents a provisional roadmap, identifies known later decisions or
-uncertainties, and develops only the next milestone in decision-ready detail.
+**Then** before its first checkpoint or consequential execution, it presents a
+provisional roadmap in the main substantive conversation content. The roadmap
+shows the currently foreseeable scope as ordered milestones, identifies the
+milestone being developed now, identifies known later decisions or
+uncertainties, and develops only that current milestone in decision-ready
+detail.
 
-**And** it states that approval covers the next milestone rather than the full
-roadmap unless the user explicitly grants broader authorization.
+**And** it states that approval covers the current milestone rather than the
+full roadmap unless the user explicitly grants broader authorization.
 
-For a simple task, a one-milestone roadmap is acceptable.
+For a simple task, the roadmap is one concise milestone rather than artificial
+stages.
+
+Before a checkpoint for a later milestone, the agent shows the current roadmap.
+If Choice, Consequence, or Drift changes it, it shows the revision and its
+effect before that checkpoint. It does not mechanically repeat the roadmap
+while the same checkpoint remains open for discussion.
 
 ### C-04 — Complete checkpoint before execution
 
@@ -268,6 +279,41 @@ tracking belongs to an approved milestone.
 **Then** the agent records decisions using that approved convention and never
 silently replaces an accepted decision.
 
+### C-17 — Observable loop and detailed trace
+
+**Given** Deliberation is active for a task.
+
+**When** the agent enters a main boundary of understanding and gathering,
+planning, checkpoint, approved execution, or result walkthrough with
+verification and roadmap update.
+
+**Then** it provides a concise, localized phase signal without forcing the
+substantive response into a fixed template.
+
+**And** the Planning signal or a detailed-trace `[Plan]` entry does not replace
+the roadmap required by C-03; the roadmap remains visible in the main
+substantive content rather than only in trace, commentary, or another progress
+surface.
+
+**When** the user asks in natural language to show the detailed loop or stage
+trace.
+
+**Then** the agent preserves that preference for the conversation and exposes
+each actual canonical transition: Understand, Gather, Plan, the applicable
+Checkpoint stages, Execute, Walk through and verify, and Update plan before
+Repeat or completion.
+
+**And** the trace labels do not substitute for the associated behaviour.
+
+**And** a checkpoint that is not required is identified as such rather than
+simulated, while questions, revisions, rejections, and approvals show their
+actual checkpoint transitions.
+
+**When** the user asks to hide the trace.
+
+**Then** the detailed trace stops but Deliberation remains active. An explicit
+exit from Deliberation disables both.
+
 ## Cross-Task-Type Coverage
 
 The shared loop is cross-cutting. During acceptance, run at least the indicated
@@ -336,7 +382,7 @@ version.
 conversation is later resumed.
 
 **Then** the adapter preserves the active mode, accepted decisions, current
-roadmap, and approval scope.
+roadmap, approval scope, and any enabled detailed-loop-trace preference.
 
 If a host cannot preserve this reliably, record the scenario as **Blocked** and
 return to architecture deliberation rather than weakening D-006.
@@ -375,6 +421,7 @@ technically correct.
 | F-12 | An ordinary task activates the conversation-wide mode implicitly. |
 | F-13 | An adapter changes the shared product semantics. |
 | F-14 | Long execution proceeds without useful progress visibility. |
+| F-15 | The agent uses phase labels to falsely imply work or authorization, or forces every response into a process template. |
 
 ## Decision Traceability
 
@@ -394,6 +441,8 @@ technically correct.
 | D-012 — State and completion | C-12–C-16 |
 | D-013 — Three supported environments | A-01–A-05 |
 | D-014 — Scenario contract and phase closure | Phase Acceptance Criteria |
+| D-035 — Observable loop and detailed trace | C-17, A-04 |
+| D-036 — Visible roadmap before checkpoint | C-03, C-04, C-08, C-17 |
 
 ## Phase Acceptance Criteria
 

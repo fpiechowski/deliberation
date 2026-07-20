@@ -329,6 +329,7 @@ The behavioural contract maintains lightweight state in the conversation:
 - Current objective and provisional roadmap.
 - Approved milestone scope.
 - Accepted decisions and open questions.
+- Detailed-loop-trace preference, when the user enabled it.
 
 Resuming the same conversation must preserve this context through the host's
 normal conversation history. If an environment cannot satisfy the continuity
