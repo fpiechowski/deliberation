@@ -106,6 +106,12 @@ Repeat
 
 The loop continues until the task is complete.
 
+Every checkpoint is a preview of the work the user is asked to approve. Before
+approval, it exposes representative code or equivalent design artefacts so the
+user can inspect the intended architecture, design, and style rather than only
+a prose summary. It ends with a visible menu: **A — Explain**, **B — Request
+changes**, **C — Alternative**, or **D — Accept**.
+
 ## Mode Lifetime
 
 Once activated, Deliberation remains active for the current conversation until
@@ -316,17 +322,27 @@ The milestones should be small enough that:
 
 The plan may evolve during implementation. Deliberation is adaptive rather than rigid.
 
-For a larger task, present a provisional roadmap so the user can understand and
-question the overall direction. Identify known later decisions and
-uncertainties, but develop only the next milestone in enough detail for an
-informed checkpoint.
+For every new objective, after understanding and gathering the information
+needed to plan, present a visible provisional roadmap before the first
+checkpoint or consequential execution. It belongs in the main substantive
+conversation content: a Planning phase marker, `[Plan]` detailed-trace entry,
+commentary, or progress surface does not substitute for it.
 
-By default, approval authorizes only that next milestone. The roadmap remains
+The roadmap shows the currently foreseeable scope as ordered milestones,
+identifies the milestone being developed now, and names known later decisions
+or uncertainties. For a simple task, it may consist of one concise milestone
+rather than artificial stages. It remains provisional and must be revised when
+new knowledge changes the plan.
+
+By default, approval authorizes only the current milestone. The roadmap remains
 informative and revisable rather than becoming a commitment to execute every
-listed milestone. The user may explicitly authorize a broader set of known
-milestones.
+listed milestone; state that distinction clearly. The user may explicitly
+authorize a broader set of known milestones.
 
-For a simple task, the roadmap may consist of a single milestone.
+Before a checkpoint for a later milestone, show the current roadmap. If Choice,
+Consequence, or Drift changes it, show the revision and its effect before that
+checkpoint. Do not mechanically repeat it while questions or discussion keep
+the same checkpoint open.
 
 Milestones organize the work; checkpoints organize decisions and
 authorization. A milestone may require no checkpoint when it is purely
@@ -371,6 +387,11 @@ result walkthrough with verification and roadmap update. Keep each signal
 short, localized to the language of the conversation, and distinct from the
 substantive content that follows it.
 
+A phase signal and detailed trace make transitions observable; neither is the
+visible roadmap required by Planning. The roadmap must appear in the main
+substantive content and remain distinguishable from the scope currently offered
+for approval.
+
 The user may ask in natural language to see a detailed loop or stage trace.
 That request enables a conversational preference, not a new activation syntax:
 it remains active until the user asks to hide it, exits Deliberation, or starts
@@ -404,10 +425,17 @@ Prefer explaining:
 
 Avoid explaining obvious syntax unless the user asks. Focus on understanding rather than documentation.
 
-### Journey-Based Explanation
+### Checkpoint Explain Model
 
-When explaining how code, a design, or a system behaves, use a journey-based
-explanation when it materially improves understanding.
+Every checkpoint starts with a light milestone brief and an initial solution
+proposal. The complete Explain model is invoked only by **A — Explain**.
+
+**A — Explain** expands both views without approving the proposal: it answers
+each of the four questions clearly, then traces the relevant journey and a
+material alternative or failure path when useful. For a small mechanical
+change, the journey is brief rather than omitted.
+
+When explaining how code, a design, or a system behaves, the journey should:
 
 Start with the initiating actor or event, then trace the flow through relevant
 components, state changes, and decisions to the observable result. Include an
@@ -422,10 +450,8 @@ Use the journey that fits the subject:
 - A data journey for transformations and movement of information.
 - An execution flow for internal code or algorithmic behaviour.
 
-Journey-based explanation is a conditional explanation technique, not a
-mandatory field in every proposal. Use it for dynamic flows, interactions,
-state transitions, architecture, and cross-component behaviour. Do not force it
-onto small static or mechanical changes where it adds no clarity.
+The journey is part of A — Explain, not the required checkpoint brief. Keep it
+proportional to the decision; do not turn the explanation into a lecture.
 
 ## Knowledge Transfer
 

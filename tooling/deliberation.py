@@ -22,6 +22,7 @@ SEMVER = re.compile(
 )
 FRONTMATTER_LINE = re.compile(r"^([a-z][a-z0-9-]*):\s*(.+)$")
 SKILL_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+REFERENCE_LINK = re.compile(r"\]\((references/[a-z0-9-]+\.md)\)")
 OPEN_CODE_PREFIX = (
     "Activate Deliberation for the current conversation. Acknowledge activation,\n"
     "then follow this behavioural contract:\n\n"
@@ -78,7 +79,37 @@ def parse_frontmatter(content: str, source: Path) -> tuple[dict[str, str], str]:
     return metadata, body
 
 
-def canonical() -> tuple[str, dict[str, str], str]:
+def canonical_references(skill_body: str, skill_path: Path) -> dict[str, str]:
+    """Read the complete, explicitly linked canonical skill reference set."""
+    reference_root = skill_path.parent / "references"
+    linked_paths = set(REFERENCE_LINK.findall(skill_body))
+    if not linked_paths:
+        raise ValidationError(f"{skill_path}: must link at least one reference module")
+    if not reference_root.is_dir():
+        raise ValidationError(f"{skill_path}: references directory is missing")
+
+    actual_paths = {
+        path.relative_to(skill_path.parent).as_posix()
+        for path in reference_root.rglob("*.md")
+        if path.is_file()
+    }
+    if linked_paths != actual_paths:
+        missing = sorted(linked_paths - actual_paths)
+        unlinked = sorted(actual_paths - linked_paths)
+        details = []
+        if missing:
+            details.append(f"missing linked modules {missing}")
+        if unlinked:
+            details.append(f"unlinked modules {unlinked}")
+        raise ValidationError(f"{skill_path}: " + "; ".join(details))
+
+    return {
+        relative: read_text(skill_path.parent / relative).rstrip("\n") + "\n"
+        for relative in sorted(linked_paths)
+    }
+
+
+def canonical() -> tuple[str, dict[str, str], str, dict[str, str]]:
     skill_path = ROOT / "core" / "deliberation" / "SKILL.md"
     skill = read_text(skill_path)
     metadata, body = parse_frontmatter(skill, skill_path)
@@ -94,7 +125,39 @@ def canonical() -> tuple[str, dict[str, str], str]:
         raise ValidationError(f"{skill_path}: name must match its parent directory")
     if not 1 <= len(metadata["description"]) <= 1024:
         raise ValidationError(f"{skill_path}: description must be 1-1024 characters")
-    return skill.rstrip("\n") + "\n", metadata, body
+    references = canonical_references(body, skill_path)
+    return skill.rstrip("\n") + "\n", metadata, body, references
+
+
+def canonical_core_digest(canonical_skill: str, references: dict[str, str]) -> str:
+    payload = canonical_skill + "".join(
+        f"\0{relative}\0{content}" for relative, content in references.items()
+    )
+    return sha256(payload)
+
+
+def write_core(
+    destination: Path,
+    canonical_skill: str,
+    references: dict[str, str],
+    *,
+    claude: bool = False,
+) -> None:
+    write_text(
+        destination / "SKILL.md",
+        claude_skill(canonical_skill) if claude else canonical_skill,
+    )
+    for relative, content in references.items():
+        write_text(destination / relative, content)
+
+
+def opencode_contract(core_body: str, references: dict[str, str]) -> str:
+    """Inline canonical modules because an OpenCode command has no skill loader."""
+    modules = "\n\n".join(
+        f"## Loaded module: {relative}\n\n{content.rstrip()}"
+        for relative, content in references.items()
+    )
+    return f"{core_body.rstrip()}\n\n# Loaded Deliberation modules\n\n{modules}\n"
 
 
 def product_version() -> str:
@@ -140,13 +203,12 @@ def prepare_output(output: Path) -> None:
 
 def assemble(output: Path) -> None:
     version = product_version()
-    canonical_skill, _, core_body = canonical()
+    canonical_skill, _, core_body, references = canonical()
     codex_metadata = render_template("adapters/codex/openai.yaml.tmpl")
     codex_manifest = render_template(
         "adapters/codex/plugin.json.tmpl", VERSION=version
     )
     codex_marketplace = render_template("adapters/codex/marketplace.json.tmpl")
-    claude_variant = claude_skill(canonical_skill)
     claude_manifest = render_template(
         "adapters/claude-code/plugin.json.tmpl", VERSION=version
     )
@@ -154,7 +216,8 @@ def assemble(output: Path) -> None:
         "adapters/claude-code/marketplace.json.tmpl", VERSION=version
     )
     opencode_command = render_template(
-        "adapters/opencode/deliberation.md.tmpl", CORE_BODY=core_body
+        "adapters/opencode/deliberation.md.tmpl",
+        CORE_BODY=opencode_contract(core_body, references),
     )
 
     prepare_output(output)
@@ -169,23 +232,21 @@ def assemble(output: Path) -> None:
         claude_marketplace,
     )
 
-    write_text(
-        output / "standalone/codex/deliberation/SKILL.md", canonical_skill
-    )
+    write_core(output / "standalone/codex/deliberation", canonical_skill, references)
     write_text(
         output / "standalone/codex/deliberation/agents/openai.yaml",
         codex_metadata,
     )
-    write_text(
-        output / "standalone/claude-code/deliberation/SKILL.md",
-        claude_variant,
+    write_core(
+        output / "standalone/claude-code/deliberation",
+        canonical_skill,
+        references,
+        claude=True,
     )
 
     codex_plugin = output / "publication/plugins/deliberation"
     write_text(codex_plugin / ".codex-plugin/plugin.json", codex_manifest)
-    write_text(
-        codex_plugin / "skills/deliberation/SKILL.md", canonical_skill
-    )
+    write_core(codex_plugin / "skills/deliberation", canonical_skill, references)
     write_text(
         codex_plugin / "skills/deliberation/agents/openai.yaml",
         codex_metadata,
@@ -193,8 +254,11 @@ def assemble(output: Path) -> None:
 
     claude_plugin = output / "publication/claude-plugins/deliberation"
     write_text(claude_plugin / ".claude-plugin/plugin.json", claude_manifest)
-    write_text(
-        claude_plugin / "skills/deliberation/SKILL.md", claude_variant
+    write_core(
+        claude_plugin / "skills/deliberation",
+        canonical_skill,
+        references,
+        claude=True,
     )
 
     opencode_bundle = output / "publication/opencode-bundles/deliberation"
@@ -202,20 +266,18 @@ def assemble(output: Path) -> None:
         opencode_bundle / ".opencode/commands/deliberation.md",
         opencode_command,
     )
-    write_text(
-        opencode_bundle / "core/deliberation/SKILL.md", canonical_skill
-    )
+    write_core(opencode_bundle / "core/deliberation", canonical_skill, references)
     write_text(opencode_bundle / "VERSION", version)
 
     write_json(
         output / "integrity.json",
         {
-            "canonical_body_sha256": sha256(core_body),
+            "canonical_core_sha256": canonical_core_digest(canonical_skill, references),
             "product_version": version,
             "runtime_payloads": {
-                "claude-code": sha256(core_body),
-                "codex": sha256(core_body),
-                "opencode": sha256(core_body),
+                "claude-code": canonical_core_digest(canonical_skill, references),
+                "codex": canonical_core_digest(canonical_skill, references),
+                "opencode": canonical_core_digest(canonical_skill, references),
             },
         },
     )
@@ -251,6 +313,16 @@ def validate_skill(
         raise ValidationError(f"{path}: model invocation must be disabled")
     if body != expected_body:
         raise ValidationError(f"{path}: behavioural payload drifted from core")
+
+
+def validate_core_references(root: Path, expected: dict[str, str]) -> None:
+    actual = {
+        path.relative_to(root).as_posix(): read_text(path).rstrip("\n") + "\n"
+        for path in root.joinpath("references").rglob("*.md")
+        if path.is_file()
+    } if root.joinpath("references").is_dir() else {}
+    if actual != expected:
+        raise ValidationError(f"{root}: reference modules drifted from core")
 
 
 def validate_fixtures() -> None:
@@ -295,11 +367,20 @@ def validate_fixtures() -> None:
 
 def validate_assembly(output: Path) -> None:
     version = product_version()
-    canonical_skill, _, core_body = canonical()
+    canonical_skill, _, core_body, references = canonical()
 
     validate_skill(
         output / "standalone/codex/deliberation/SKILL.md", core_body
     )
+
+    for root in (
+        output / "standalone/codex/deliberation",
+        output / "publication/plugins/deliberation/skills/deliberation",
+        output / "standalone/claude-code/deliberation",
+        output / "publication/claude-plugins/deliberation/skills/deliberation",
+        output / "publication/opencode-bundles/deliberation/core/deliberation",
+    ):
+        validate_core_references(root, references)
     validate_skill(
         output
         / "publication/plugins/deliberation/skills/deliberation/SKILL.md",
@@ -401,7 +482,7 @@ def validate_assembly(output: Path) -> None:
         raise ValidationError(f"{opencode_path}: unexpected command metadata")
     if not command_body.startswith(OPEN_CODE_PREFIX):
         raise ValidationError(f"{opencode_path}: invalid command wrapper")
-    if command_body[len(OPEN_CODE_PREFIX) :] != core_body:
+    if command_body[len(OPEN_CODE_PREFIX) :] != opencode_contract(core_body, references):
         raise ValidationError(
             f"{opencode_path}: behavioural payload drifted from core"
         )
@@ -430,10 +511,10 @@ def validate_assembly(output: Path) -> None:
                 )
 
     integrity = require_json(output / "integrity.json")
-    expected_digest = sha256(core_body)
+    expected_digest = canonical_core_digest(canonical_skill, references)
     if integrity.get("product_version") != version:
         raise ValidationError("integrity metadata version differs from VERSION")
-    if integrity.get("canonical_body_sha256") != expected_digest:
+    if integrity.get("canonical_core_sha256") != expected_digest:
         raise ValidationError("integrity metadata has an invalid core digest")
     if integrity.get("runtime_payloads") != {
         "claude-code": expected_digest,

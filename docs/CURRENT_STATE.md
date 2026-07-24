@@ -1,12 +1,12 @@
 # Current State
 
-**Last updated:** 2026-07-20
+**Last updated:** 2026-07-24
 
 ## Phase
 
-Behavioural-contract expansion — **`0.1.0-dev.4` adds observable loop
-boundaries and an optional detailed trace; deterministic validation passes and
-the focused Codex Desktop live-host evidence run is next**.
+Behavioural-contract expansion — **`0.1.0-dev.7` introduces modular,
+explicitly loaded core instructions plus a checkpoint menu and inspectable
+pre-approval design previews; deterministic validation is pending**.
 
 ## Completed
 
@@ -117,10 +117,26 @@ the focused Codex Desktop live-host evidence run is next**.
   trace transitions, including trace-only exit and checkpoint response intent.
 - Regenerated every publication package at `0.1.0-dev.4` and passed the
   deterministic assembly, semantic-integrity, fixture, and stale-output check.
+- Strengthened the roadmap contract so every new objective shows a visible,
+  ordered provisional roadmap after Gather and before its first checkpoint or
+  consequential execution, distinct from the approval scope.
+- Strengthened the journey contract so every checkpoint visibly considers
+  journey-based explanation, offers it when omitted, and provides it before
+  approval when requested.
+- Added a core fixture skeleton for the explicit optional journey offer on a
+  small mechanical change.
+- Added Polish regression coverage that does not request a roadmap or detailed
+  trace and fails responses that move from inspection directly to a checkpoint
+  or reveal the roadmap only outside the substantive response.
+- Regenerated every publication package at `0.1.0-dev.5` and passed the
+  deterministic assembly, semantic-integrity, fixture, and stale-output check.
 - Added a generated Codex Git marketplace and public PowerShell and POSIX
   installers with `0.1.0-dev.3`.
 - Passed the live PowerShell Git-marketplace installation and repeated-run
   update fixture without a manual clone or local plugin source.
+- Implemented the approved modular core and `0.1.0-dev.7` checkpoint contract:
+  explicit reference modules, light brief and initial proposal, inspectable
+  pre-approval artefacts, A–D controls, and Explain-on-A validation fixtures.
 
 ## Current implementation
 
@@ -242,11 +258,31 @@ actual transitions through the loop visible while preserving the distinction
 between a label and evidence of behaviour. The trace is disabled separately
 from Deliberation and is preserved when the same conversation resumes.
 
+Every new objective now receives a visible, provisional roadmap in the main
+substantive response after planning information is gathered and before any
+checkpoint or consequential execution. It covers the foreseeable objective
+scope, current milestone, and known later uncertainty without turning the
+roadmap into approval; it is revised before a later checkpoint when material
+new information changes it. A phase marker or detailed trace cannot be the
+only roadmap.
+
+The canonical core is now organized as an Agent Skills-compatible `SKILL.md`
+entry point with explicitly linked modules for activation/state, the
+Deliberation Loop, checkpoints, Explain, and execution/results. Generated
+Codex and Claude packages retain the same reference tree; the self-contained
+OpenCode command embeds the entry point and all modules.
+
+At every checkpoint, Deliberation shows a light brief, initial proposal,
+representative code or equivalent design artefacts, and the visible A–D menu.
+A expands the four-question and journey Explain model; B revises; C offers a
+material alternative; and D alone authorizes the shown scope.
+
+
 ## Recommended next milestone
 
-Run the new ordinary-visibility and detailed-trace fixtures in standalone
-Codex Desktop against `0.1.0-dev.4`, then record the transcript evidence and
-result. This does not reopen validation for experimental adapters.
+Run the structured-checkpoint and Explain fixtures in standalone Codex Desktop
+against `0.1.0-dev.7`, then record transcript evidence and result. This does
+not reopen validation for experimental adapters.
 
 ## Open questions
 

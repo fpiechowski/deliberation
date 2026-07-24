@@ -1399,3 +1399,129 @@ evidence must independently confirm the agent's actions; labels alone cannot
 pass a scenario. The core and all generated adapters share the same contract,
 while the host may choose its native progress or commentary surface for the
 short signals.
+
+## D-036 — Require a visible roadmap before the first checkpoint
+
+- **Date:** 2026-07-20
+- **Status:** Accepted
+
+### Context
+
+Two manual Codex Desktop trials reached a checkpoint after inspection without a
+roadmap in the main response. In one shape the only plan-like signal was a
+detailed trace. This makes the objective's foreseeable scope and the boundary
+of the requested approval hard to observe, even though a Planning label may be
+present.
+
+### Decision
+
+For every new objective, after gathering the information needed to plan,
+Deliberation presents a visible provisional roadmap in the main substantive
+conversation content before the first checkpoint or consequential execution.
+The roadmap shows the currently foreseeable scope as ordered milestones,
+identifies the milestone developed now, and names known later decisions or
+uncertainties. A simple objective uses one concise milestone.
+
+The roadmap remains provisional and is distinct from approval scope: by
+default, approval covers only the current milestone. Before a later-milestone
+checkpoint, show the current roadmap. When Choice, Consequence, or Drift
+changes it, show the revision and its impact before that checkpoint. Do not
+repeat it mechanically during questions or discussion within the same open
+checkpoint.
+
+A Planning marker, `[Plan]` detailed-trace entry, commentary, or progress
+surface cannot be the sole roadmap. Preserve D-009 as the original roadmap and
+bounded-approval decision; this decision strengthens its required visibility
+and ordering.
+
+Increment the shared development version to `0.1.0-dev.5`, regenerate all
+publication surfaces, and add Polish regression coverage without detailed trace
+or user-authored roadmap wording. The next live-host evidence run covers
+ordinary visibility, detailed trace, and roadmap-before-checkpoint fixtures in
+Codex Desktop.
+
+### Consequences
+
+Users see the scope of the whole objective before being asked to authorize its
+current step. The contract does not impose a response template or multiply
+milestones, but it makes ordering, provisionality, and approval boundaries
+testable independently of trace rendering.
+
+## D-037 — Make journey consideration explicit at every checkpoint
+
+- **Date:** 2026-07-24
+- **Status:** Accepted
+
+### Context
+
+The existing journey-based explanation rule names several dynamic subjects, but
+does not make the agent's decision visible when a checkpoint does not need a
+journey. This can make a valid omission look like the technique was forgotten,
+and it gives the user no direct way to request the explanation when they prefer
+it.
+
+### Decision
+
+At every checkpoint, require the agent to consider whether a journey-based
+explanation would materially improve understanding of the decision or proposed
+milestone. Include the appropriate user, request, data, or execution journey
+when it would help. When it would not, briefly explain why it is being omitted
+and explicitly offer it as an optional explanation. If the user requests it,
+provide the journey before seeking approval. Do not force a journey when it adds
+no clarity.
+
+Increment the shared development version to `0.1.0-dev.6`, regenerate all
+publication surfaces, add a fixture for the explicit optional-offer case, and
+validate the changed contract in the supported Codex Desktop environment.
+
+### Consequences
+
+Journey use becomes more observable and user-controllable without turning it
+into a mandatory response template. Every checkpoint communicates whether the
+technique was considered; users can request it before approval even when the
+agent initially recommends omitting it. The journey remains conditional in
+content, so small mechanical changes do not acquire unnecessary ceremony.
+
+## D-038 — Make checkpoints inspectable and modularize the canonical core
+
+- **Date:** 2026-07-24
+- **Status:** Accepted
+
+### Context
+
+The checkpoint contract provided only compact prose and invited free-form
+approval, so a user could not reliably inspect the proposed code, architecture,
+or style before authorizing it. Its Explain stage was too short to transfer
+understanding consistently. The canonical core was also concentrated in one
+`SKILL.md`, making its distinct behavioural concerns difficult to inspect and
+maintain.
+
+### Decision
+
+Every checkpoint begins with a light milestone brief, an initial solution
+proposal, representative key code or equivalent design artefacts, and a visible
+menu: **A — Explain**, **B — Request changes**, **C — Alternative**, and
+**D — Accept**. B revises the proposal, C presents a material alternative, and
+only D authorizes the shown scope.
+
+The complete Explain model is invoked only by A. It always answers **What? Why
+at all? How? Why this way?** and follows with a proportionate user, request,
+data, or execution journey from trigger to observable result. It returns to the
+open checkpoint; even mechanical changes retain a short concrete journey.
+
+Make `core/deliberation/SKILL.md` a compact entry point that explicitly links
+the required runtime modules for activation/state, the loop, checkpoints,
+Explain, and execution/results. The deterministic assembler copies and checks
+the complete reference tree in Codex and Claude packages, and embeds it in the
+self-contained OpenCode command. Increment the shared version to
+`0.1.0-dev.7`; add fixture skeletons and semantic-integrity checks for the new
+contract.
+
+### Consequences
+
+The user can examine the substantive design before accepting it and has a
+consistent, low-friction control vocabulary at every checkpoint. The ordinary
+checkpoint remains concise, while an explicit Explain request reliably provides
+the full educational model. The runtime core gains separable source modules
+while preserving one cross-environment contract; generated artifacts become
+larger but remain deterministic and self-contained.

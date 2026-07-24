@@ -34,7 +34,8 @@ The intended source and publication layout is:
 ```text
 core/
 └── deliberation/
-    └── SKILL.md
+    ├── SKILL.md                   # entry point and explicit module links
+    └── references/                # hand-authored runtime modules
 
 adapters/
 ├── codex/
@@ -76,7 +77,11 @@ metadata from contaminating the other adapter.
 ## Shared behavioural core
 
 `core/deliberation/SKILL.md` is an Agent Skills-compatible skill named
-`deliberation`. It contains:
+`deliberation`. It is the canonical entry point and explicitly links every
+runtime module under `core/deliberation/references/`, instructing the skill to
+read the relevant module before acting in that phase. The modules divide
+activation/state, the Deliberation Loop, checkpoints, the Explain model, and
+execution/results. Together they contain:
 
 - Portable `name` and `description` frontmatter.
 - The complete operational behaviour required on every activation.
@@ -88,7 +93,8 @@ metadata from contaminating the other adapter.
 
 The core is concise and imperative. It does not duplicate the complete product
 history, decision log, or scenario suite. Behaviour needed on every turn stays
-in `SKILL.md`; validation details remain outside the runtime skill.
+in the entry point and its explicitly linked runtime modules; validation details
+remain outside the runtime skill.
 
 The first core is instruction-only. It has no scripts, assets, external tools,
 or runtime dependencies.
@@ -117,6 +123,7 @@ plugins/deliberation/
 └── skills/
     └── deliberation/
         ├── SKILL.md
+        ├── references/
         └── agents/
             └── openai.yaml
 ```
@@ -148,9 +155,10 @@ The published plugin contains:
 claude-plugins/deliberation/
 ├── .claude-plugin/
 │   └── plugin.json
-└── skills/
-    └── deliberation/
-        └── SKILL.md
+    └── skills/
+        └── deliberation/
+            ├── SKILL.md
+            └── references/
 ```
 
 The eventual root `.claude-plugin/marketplace.json` references it with a
@@ -187,8 +195,9 @@ command:
 .opencode/commands/deliberation.md
 ```
 
-The command embeds the normalized behavioural content of the canonical core.
-Invoking `/deliberation` injects that contract into the current conversation.
+The command embeds the normalized behavioural content of the canonical entry
+point and all linked modules. Invoking `/deliberation` injects that complete
+contract into the current conversation.
 Ordinary engineering prompts do not expose Deliberation as an automatically
 loadable OpenCode skill.
 
@@ -208,7 +217,8 @@ canonical core and adapter templates.
 
 The assembler:
 
-1. Reads `VERSION` and the canonical `SKILL.md`.
+1. Reads `VERSION`, the canonical `SKILL.md`, and every explicitly linked
+   reference module.
 2. Applies only the declared host overlay.
 3. Writes standalone validation artifacts and self-contained publication
    packages.
@@ -275,8 +285,8 @@ invariants.
 ### Semantic integrity
 
 Normalize each generated runtime payload by removing declared host metadata and
-wrapping syntax. Compare the remaining behavioural content with the canonical
-core.
+wrapping syntax. Compare the remaining behavioural content and complete
+reference-module tree with the canonical core.
 
 Validation fails when an adapter:
 
