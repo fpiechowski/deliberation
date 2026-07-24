@@ -1,6 +1,6 @@
 {
   "name": "deliberation",
-  "version": "0.1.0-dev.5",
+  "version": "0.1.0-dev.6",
   "description": "Collaborative engineering through shared decisions and bounded milestones.",
   "skills": "./skills/"
 }

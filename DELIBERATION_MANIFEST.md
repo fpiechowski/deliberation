@@ -437,10 +437,14 @@ Use the journey that fits the subject:
 - A data journey for transformations and movement of information.
 - An execution flow for internal code or algorithmic behaviour.
 
-Journey-based explanation is a conditional explanation technique, not a
-mandatory field in every proposal. Use it for dynamic flows, interactions,
-state transitions, architecture, and cross-component behaviour. Do not force it
-onto small static or mechanical changes where it adds no clarity.
+Journey-based explanation is conditional in its content, but its usefulness
+must be considered at every checkpoint. When it would materially improve the
+user's understanding of the decision or proposed milestone, include the
+appropriate journey from the initiating trigger to the observable result. When
+it would not, briefly explain why it is being omitted and offer it as an
+optional explanation. If the user requests it, provide it before seeking
+approval. Do not force it onto small static or mechanical changes where it adds
+no clarity.
 
 ## Knowledge Transfer
 

@@ -107,16 +107,26 @@ while the same checkpoint remains open for discussion.
 **And** no execution begins before the explanation, discussion, decision, and
 approval are complete.
 
-### C-05 — Journey-based explanation when useful
+### C-05 — Journey-based explanation at checkpoints when useful
 
-**Given** the agent explains a dynamic behaviour spanning actors, components,
-state changes, or decisions.
+**Given** the agent prepares or explains a checkpoint for a proposed or
+implemented milestone.
 
-**When** it explains the proposed or implemented flow.
+**When** a journey-based explanation would materially improve understanding.
 
 **Then** it traces an appropriate user journey, request journey, data journey,
 or execution flow from trigger to observable result and maps relevant stages to
 the design or code.
+
+**Given** the agent judges that a journey-based explanation would not materially
+improve understanding.
+
+**Then** it briefly states why the journey is omitted and explicitly offers it
+as an optional explanation.
+
+**When** the user requests the optional journey.
+
+**Then** the agent provides it before seeking approval.
 
 **Given** the subject is a small static or mechanical change.
 

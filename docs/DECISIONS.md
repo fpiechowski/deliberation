@@ -1446,3 +1446,38 @@ Users see the scope of the whole objective before being asked to authorize its
 current step. The contract does not impose a response template or multiply
 milestones, but it makes ordering, provisionality, and approval boundaries
 testable independently of trace rendering.
+
+## D-037 — Make journey consideration explicit at every checkpoint
+
+- **Date:** 2026-07-24
+- **Status:** Accepted
+
+### Context
+
+The existing journey-based explanation rule names several dynamic subjects, but
+does not make the agent's decision visible when a checkpoint does not need a
+journey. This can make a valid omission look like the technique was forgotten,
+and it gives the user no direct way to request the explanation when they prefer
+it.
+
+### Decision
+
+At every checkpoint, require the agent to consider whether a journey-based
+explanation would materially improve understanding of the decision or proposed
+milestone. Include the appropriate user, request, data, or execution journey
+when it would help. When it would not, briefly explain why it is being omitted
+and explicitly offer it as an optional explanation. If the user requests it,
+provide the journey before seeking approval. Do not force a journey when it adds
+no clarity.
+
+Increment the shared development version to `0.1.0-dev.6`, regenerate all
+publication surfaces, add a fixture for the explicit optional-offer case, and
+validate the changed contract in the supported Codex Desktop environment.
+
+### Consequences
+
+Journey use becomes more observable and user-controllable without turning it
+into a mandatory response template. Every checkpoint communicates whether the
+technique was considered; users can request it before approval even when the
+agent initially recommends omitting it. The journey remains conditional in
+content, so small mechanical changes do not acquire unnecessary ceremony.

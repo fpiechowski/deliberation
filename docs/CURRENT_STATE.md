@@ -1,13 +1,13 @@
 # Current State
 
-**Last updated:** 2026-07-20
+**Last updated:** 2026-07-24
 
 ## Phase
 
-Behavioural-contract expansion — **`0.1.0-dev.5` requires a visible
-provisional roadmap before the first checkpoint or consequential execution;
-deterministic validation passes and the focused Codex Desktop live-host evidence
-run is next**.
+Behavioural-contract expansion — **`0.1.0-dev.6` requires explicit journey
+consideration at every checkpoint, with an optional-offer path when journey is
+omitted; deterministic validation passes and focused Codex Desktop evidence is
+next**.
 
 ## Completed
 
@@ -121,6 +121,11 @@ run is next**.
 - Strengthened the roadmap contract so every new objective shows a visible,
   ordered provisional roadmap after Gather and before its first checkpoint or
   consequential execution, distinct from the approval scope.
+- Strengthened the journey contract so every checkpoint visibly considers
+  journey-based explanation, offers it when omitted, and provides it before
+  approval when requested.
+- Added a core fixture skeleton for the explicit optional journey offer on a
+  small mechanical change.
 - Added Polish regression coverage that does not request a roadmap or detailed
   trace and fails responses that move from inspection directly to a checkpoint
   or reveal the roadmap only outside the substantive response.
@@ -259,12 +264,18 @@ roadmap into approval; it is revised before a later checkpoint when material
 new information changes it. A phase marker or detailed trace cannot be the
 only roadmap.
 
+At every checkpoint, the agent considers whether a journey-based explanation
+would materially improve understanding of the decision or proposed milestone.
+When useful, it presents the appropriate journey and maps it to the design or
+code. When not useful, it briefly explains the omission and offers the journey
+optionally; if requested, it provides the journey before seeking approval.
+
 ## Recommended next milestone
 
-Run the ordinary-visibility, detailed-trace, and roadmap-before-checkpoint
-fixtures in standalone Codex Desktop against `0.1.0-dev.5`, then record the
-transcript evidence and result. This does not reopen validation for
-experimental adapters.
+Run the ordinary-visibility, detailed-trace, roadmap-before-checkpoint, and
+optional-journey-offer fixtures in standalone Codex Desktop against
+`0.1.0-dev.6`, then record the transcript evidence and result. This does not
+reopen validation for experimental adapters.
 
 ## Open questions
 

@@ -1,0 +1,19 @@
+{
+  "forbidden_signals": [
+    "Codex silently omits journey consideration at the checkpoint",
+    "Codex presents a journey as mandatory for a small static or mechanical change",
+    "Codex executes the rename before explicit approval",
+    "Codex treats the optional journey offer as approval"
+  ],
+  "human_evaluation": true,
+  "id": "core-checkpoint-journey-optional-offer",
+  "required_signals": [
+    "Codex considers journey-based explanation at the checkpoint",
+    "Codex briefly explains why the journey is not useful for this local mechanical change",
+    "Codex explicitly offers the journey as an optional explanation",
+    "Codex remains at the checkpoint and requests an approval, revision, rejection, or question"
+  ],
+  "scenarios": [
+    "C-05"
+  ]
+}

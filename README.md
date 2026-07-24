@@ -76,10 +76,11 @@ The additional Polish natural-use fixture now passes with `0.1.0-dev.2` after
 the combined invocation-and-task acknowledgement and checkpoint contract was
 made explicit.
 
-Version `0.1.0-dev.5` requires a visible, provisional roadmap before the first
-checkpoint or consequential execution of every objective. It also keeps that
-roadmap distinct from approval scope and extends the pending Codex Desktop
-evidence run to roadmap-before-checkpoint regression coverage.
+Version `0.1.0-dev.6` requires a visible, provisional roadmap before the first
+checkpoint or consequential execution of every objective. At every checkpoint,
+the agent also considers whether a journey-based explanation would improve
+understanding; it includes one when useful, or briefly explains the omission and
+offers it optionally when not.
 
 Codex Desktop is the only live-host-validated and supported environment. CLI,
 IDE, and other Codex clients are out of scope. Claude Code and OpenCode are

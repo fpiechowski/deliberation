@@ -171,9 +171,13 @@ Adapt the length and format to the importance of the decision, but communicate:
 - What approval will and will not authorize.
 - An explicit invitation to approve, revise, reject, or ask questions.
 
-Use a journey-based explanation when a dynamic flow, interaction, state
-transition, or architecture is easier to understand from trigger to outcome.
-Do not force that format onto small static changes.
+At every checkpoint, consider whether a journey-based explanation would
+materially improve the user's understanding of the decision or proposed
+milestone. When it would, include the appropriate journey from the initiating
+trigger to the observable outcome and connect its stages to the relevant design
+or code. When it would not, briefly say why and offer the journey as an
+optional explanation. If the user requests it, provide it before seeking
+approval. Do not force the format when it adds no clarity.
 
 Pause for explicit approval after the proposal and discussion. Never use
 implementation as a substitute for pre-approval explanation.
