@@ -2,5 +2,20 @@
   "name": "deliberation",
   "version": "0.1.0-dev.7",
   "description": "Collaborative engineering through shared decisions and bounded milestones.",
+  "author": {
+    "name": "Filip Piechowski",
+    "url": "https://github.com/fpiechowski"
+  },
+  "interface": {
+    "displayName": "Deliberation",
+    "shortDescription": "Collaborative engineering with shared decisions",
+    "longDescription": "A conversation-wide engineering mode with bounded milestones, inspectable checkpoints, explicit approval, and verified walkthroughs.",
+    "developerName": "Filip Piechowski",
+    "category": "Productivity",
+    "capabilities": ["Interactive"],
+    "defaultPrompt": [
+      "Use $deliberation to work through this engineering task collaboratively."
+    ]
+  },
   "skills": "./skills/"
 }
