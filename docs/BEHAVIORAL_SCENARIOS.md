@@ -96,31 +96,55 @@ while the same checkpoint remains open for discussion.
 
 1. States the decision needed.
 2. Proposes a bounded milestone.
-3. Explains why the change is needed, how it works, and why it recommends this
-   approach.
+3. Provides a light milestone brief and an initial solution proposal.
 4. Presents only materially different alternatives and tradeoffs.
-5. Invites questions, concerns, revision, or rejection.
-6. Reaches a shared decision.
-7. States the approval scope.
-8. Waits for explicit approval.
+5. Shows representative code or equivalent design artefacts that reveal the
+   proposed architecture, design, and style before approval.
+6. Presents visible, contextual next-message suggestions, including a clearly
+   named acceptance action for the current proposal.
+7. Reaches a shared decision.
+8. States the approval scope.
+9. Waits for explicit approval.
 
 **And** no execution begins before the explanation, discussion, decision, and
 approval are complete.
 
-### C-05 — Journey-based explanation when useful
+### C-05 — Explain model on explicit request
 
-**Given** the agent explains a dynamic behaviour spanning actors, components,
-state changes, or decisions.
+**Given** the agent prepares or explains a checkpoint for a proposed or
+implemented milestone.
 
-**When** it explains the proposed or implemented flow.
+**When** the user selects an explanation suggestion or asks for an explanation
+in their own words.
 
-**Then** it traces an appropriate user journey, request journey, data journey,
-or execution flow from trigger to observable result and maps relevant stages to
-the design or code.
+**Then** the agent explains What, Why at all, How, and Why this way, plus an
+appropriate user, request, data, or execution journey from trigger to
+observable result mapped to the design or code. It remains in the checkpoint
+and returns to contextual suggestions. For a small static or mechanical change, the
+journey remains short and concrete rather than being omitted.
 
-**Given** the subject is a small static or mechanical change.
+### C-18 — Structured checkpoint controls and inspectable previews
 
-**Then** the agent does not force a journey format that adds no clarity.
+**Given** a consequential checkpoint for a proposed milestone.
+
+**Then** the user sees contextual next-message suggestions and an inspectable
+pre-approval preview: representative key code for implementation, refactoring,
+or debugging; or an equivalent contract, schema, pseudocode, flow, example, or
+finding for specification or review. The suggestions are optional shortcuts;
+free-text responses are interpreted by intent.
+
+**When** the user requests changes or explores alternatives.
+
+**Then** the agent revises the proposal or keeps the checkpoint open and
+compares the proposed approach with two to four feasible, materially different
+approaches. For alternatives it gives each a short explanation and assessment,
+includes the original proposal, shows a compact advantages/disadvantages table
+using relevant decision criteria, and marks the current recommendation.
+
+**Then** the alternative view suggests: explain a named alternative, choose a
+named alternative as the new proposal, find more alternatives, or accept the
+named current recommendation. Choosing is not approval; acceptance authorizes
+only the named recommendation and stated scope.
 
 ### C-06 — Choice test
 
@@ -412,7 +436,7 @@ technically correct.
 | F-03 | The agent treats praise, a question, ambiguity, revision, or rejection as approval. |
 | F-04 | The agent asks for approval before routine mechanical actions. |
 | F-05 | The agent presents fake alternatives without material differences. |
-| F-06 | Explanation becomes a lecture or forces an unhelpful journey. |
+| F-06 | Explanation becomes a lecture, fails to provide the requested Explain model, or makes a small change's journey needlessly elaborate. |
 | F-07 | Broad approval leaks into undisclosed decisions or later tasks. |
 | F-08 | An accepted decision changes silently. |
 | F-09 | The agent imposes Deliberation state files on an unrelated repository. |
@@ -443,6 +467,8 @@ technically correct.
 | D-014 — Scenario contract and phase closure | Phase Acceptance Criteria |
 | D-035 — Observable loop and detailed trace | C-17, A-04 |
 | D-036 — Visible roadmap before checkpoint | C-03, C-04, C-08, C-17 |
+| D-037 — Journey consideration at checkpoints | C-05 |
+| D-038 — Modular checkpoint Explain and preview contract | C-04, C-05, C-18, A-01–A-05 |
 
 ## Phase Acceptance Criteria
 

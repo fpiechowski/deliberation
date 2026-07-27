@@ -1,13 +1,12 @@
 # Current State
 
-**Last updated:** 2026-07-20
+**Last updated:** 2026-07-25
 
 ## Phase
 
-Behavioural-contract expansion — **`0.1.0-dev.5` requires a visible
-provisional roadmap before the first checkpoint or consequential execution;
-deterministic validation passes and the focused Codex Desktop live-host evidence
-run is next**.
+Behavioural-contract expansion — **`0.1.0-dev.9` replaces the rigid A–D menu
+with contextual next-message suggestions and an explicit acceptance invariant;
+deterministic and live-host validation are pending**.
 
 ## Completed
 
@@ -121,6 +120,11 @@ run is next**.
 - Strengthened the roadmap contract so every new objective shows a visible,
   ordered provisional roadmap after Gather and before its first checkpoint or
   consequential execution, distinct from the approval scope.
+- Strengthened the journey contract so every checkpoint visibly considers
+  journey-based explanation, offers it when omitted, and provides it before
+  approval when requested.
+- Added a core fixture skeleton for the explicit optional journey offer on a
+  small mechanical change.
 - Added Polish regression coverage that does not request a roadmap or detailed
   trace and fails responses that move from inspection directly to a checkpoint
   or reveal the roadmap only outside the substantive response.
@@ -130,6 +134,21 @@ run is next**.
   installers with `0.1.0-dev.3`.
 - Passed the live PowerShell Git-marketplace installation and repeated-run
   update fixture without a manual clone or local plugin source.
+- Implemented the approved modular core and `0.1.0-dev.7` checkpoint contract:
+  explicit reference modules, light brief and initial proposal, inspectable
+  pre-approval artefacts, A–D controls, and Explain-on-A validation fixtures.
+- Added a dedicated C — Alternative module that compares the proposed solution
+  with meaningful alternatives using concise assessments and a pros/cons table.
+- Executed the isolated `0.1.0-dev.8` C — Alternative Codex Desktop fixture;
+  the comparison content passed, but the host relabeled the canonical A–D menu
+  and the retained run is a truthful `Fail` against C-04 and C-18.
+- Replaced the fixed A–D contract with contextual suggestions: ordinary
+  proposals offer explanation, changes, alternative exploration, and accepting
+  the named proposal; alternative views offer explaining or choosing a named
+  alternative, further exploration, and accepting the named recommendation.
+- Attempted the isolated `0.1.0-dev.9` contextual-suggestion fixture, but the
+  fresh task reported `$deliberation` unavailable; the retained result is
+  `Blocked` and does not evaluate the new behavior.
 
 ## Current implementation
 
@@ -259,12 +278,36 @@ roadmap into approval; it is revised before a later checkpoint when material
 new information changes it. A phase marker or detailed trace cannot be the
 only roadmap.
 
+The canonical core is now organized as an Agent Skills-compatible `SKILL.md`
+entry point with explicitly linked modules for activation/state, the
+Deliberation Loop, checkpoints, Explain, and execution/results. Generated
+Codex and Claude packages retain the same reference tree; the self-contained
+OpenCode command embeds the entry point and all modules.
+
+At every checkpoint, Deliberation shows a light brief, initial proposal,
+representative code or equivalent design artefacts, and contextual suggestions
+for the next user message. They are optional shortcuts; a user may always reply
+in free text. Only a plainly labeled Accept action or equally unambiguous
+free-text instruction authorizes the exact named proposal and scope.
+
+When alternatives are requested, the `alternative.md` module compares the
+current proposal with two to four meaningful approaches. It requires a short
+explanation and assessment of each, a compact advantages/disadvantages table,
+and a named recommendation with the decisive tradeoff. Its contextual
+suggestions let the user explain or choose a named alternative, find more, or
+accept that recommendation.
+
+The retained live-host run at
+`validation/runs/0.1.0-dev.8/codex/desktop-standalone/core-checkpoint-alternative-comparison/`
+shows that the comparison itself works but that fixed letter meanings are not a
+reliable host-level contract. It motivated the contextual-suggestion model.
+
+
 ## Recommended next milestone
 
-Run the ordinary-visibility, detailed-trace, and roadmap-before-checkpoint
-fixtures in standalone Codex Desktop against `0.1.0-dev.5`, then record the
-transcript evidence and result. This does not reopen validation for
-experimental adapters.
+Restore standalone skill discovery in Codex Desktop, then rerun the structured
+checkpoint and alternative-comparison fixtures against `0.1.0-dev.9`. This does
+not reopen validation for experimental adapters.
 
 ## Open questions
 

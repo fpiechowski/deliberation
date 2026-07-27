@@ -76,10 +76,15 @@ The additional Polish natural-use fixture now passes with `0.1.0-dev.2` after
 the combined invocation-and-task acknowledgement and checkpoint contract was
 made explicit.
 
-Version `0.1.0-dev.5` requires a visible, provisional roadmap before the first
-checkpoint or consequential execution of every objective. It also keeps that
-roadmap distinct from approval scope and extends the pending Codex Desktop
-evidence run to roadmap-before-checkpoint regression coverage.
+Version `0.1.0-dev.9` makes every checkpoint a visible design preview: it
+contains a light milestone brief, an initial proposal, representative code or
+design artefacts before approval, and contextual suggestions for the next user
+message. They are not a rigid letter protocol: users may respond freely, while
+only a clearly named Accept action authorizes work. In the alternative view,
+the suggestions cover explaining or choosing a named alternative, finding more
+alternatives, and accepting the marked current recommendation. The canonical
+skill entry point explicitly loads its modular runtime contract from
+`core/deliberation/references/`.
 
 Codex Desktop is the only live-host-validated and supported environment. CLI,
 IDE, and other Codex clients are out of scope. Claude Code and OpenCode are
@@ -164,6 +169,7 @@ After installation, activate the mode with:
 - [`docs/CURRENT_STATE.md`](docs/CURRENT_STATE.md) — current phase, open
   questions, and the recommended next milestone.
 - [`core/deliberation/SKILL.md`](core/deliberation/SKILL.md) — canonical
-  behavioural source for all environments.
+  behavioural entry point and links to the modular runtime source for all
+  environments.
 - [`tooling/deliberation.py`](tooling/deliberation.py) — deterministic
   assembler, publication synchronizer, and integrity validator.

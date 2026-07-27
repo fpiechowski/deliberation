@@ -1,0 +1,83 @@
+{
+  "artifact": {
+    "canonical_core_sha256": "215082962a1f574e64132ae61e0baf7ec9c72b35f9bea6b5bb0e708df517fc68",
+    "alternative_sha256": "1D23AB820774D1147B8033F33B2ECB34C22E6F6AA64CBE8DAACF82695978553C",
+    "skill_sha256": "3D6654769570512A4053167110D576922F3907F1303FA9E8384F3708CAB6A223"
+  },
+  "cleanup": {
+    "skill_removed": true,
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Codex Desktop retained the empty projectless workspace root after archival."
+  },
+  "critical_failures": [
+    {
+      "signal": "The visible A–D menu preserves the canonical meanings A = Explain, B = Request changes, C = Alternative, D = Accept",
+      "reason": "The host used A/B for approval variants, C for deeper deliberation, and D for rejection in both checkpoint responses."
+    }
+  ],
+  "executed_at": "2026-07-25T19:31:47Z",
+  "fixture_id": "core-checkpoint-alternative-comparison",
+  "forbidden_signals": [
+    {
+      "signal": "Codex treats C — Alternative as approval or begins modifying files",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex omits the originally proposed approach from the comparison",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex presents alternatives without a table that compares advantages and disadvantages",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "not exposed by Codex task API",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fixture requires evaluation of menu semantics and conversational decision support."
+  },
+  "product_version": "0.1.0-dev.8",
+  "required_signals": [
+    {
+      "signal": "The checkpoint presents a roadmap, bounded proposal, representative artefact, approval scope, and visible A–D menu",
+      "status": "fail"
+    },
+    {
+      "signal": "After C — Alternative, Codex compares the initial proposal with two to four feasible materially different approaches, including the initial proposal",
+      "status": "pass"
+    },
+    {
+      "signal": "Each approach receives a short explanation and assessment against relevant criteria",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex presents a compact comparison table containing advantages and disadvantages and states a decisive tradeoff",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex returns to the canonical A–D menu without authorization",
+      "status": "fail"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-04",
+      "reason": "The host presented the checkpoint and paused before execution, but its visible A–D meanings were not canonical.",
+      "status": "fail"
+    },
+    {
+      "id": "C-18",
+      "reason": "The C comparison itself passed, but the structured checkpoint controls failed because A–D meanings were relabeled.",
+      "status": "fail"
+    }
+  ],
+  "status": "fail",
+  "thread_id": "019f9abf-34f3-7e41-aec1-63b3b2db1cf4"
+}

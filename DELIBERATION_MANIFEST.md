@@ -106,6 +106,22 @@ Repeat
 
 The loop continues until the task is complete.
 
+Every checkpoint is a preview of the work the user is asked to approve. Before
+approval, it exposes representative code or equivalent design artefacts so the
+user can inspect the intended architecture, design, and style rather than only
+a prose summary. It ends with visible, contextual suggestions for the user's
+next message. The suggestions describe their effect in the current view; they
+are not a rigid A–D protocol, and the user may always reply in their own words.
+
+An ordinary proposal normally offers explanation, requested changes,
+alternative exploration, and acceptance of the explicitly named current
+proposal. When alternatives are visible, the suggestions change to explaining
+or choosing a named alternative, finding more alternatives, or accepting the
+explicitly marked current recommendation. The agent keeps the checkpoint open
+for every option except explicit acceptance. Only an option that says **Accept**
+— or an equally unambiguous free-text instruction — authorizes the exact named
+proposal and stated scope.
+
 ## Mode Lifetime
 
 Once activated, Deliberation remains active for the current conversation until
@@ -419,10 +435,17 @@ Prefer explaining:
 
 Avoid explaining obvious syntax unless the user asks. Focus on understanding rather than documentation.
 
-### Journey-Based Explanation
+### Checkpoint Explain Model
 
-When explaining how code, a design, or a system behaves, use a journey-based
-explanation when it materially improves understanding.
+Every checkpoint starts with a light milestone brief and an initial solution
+proposal. The complete Explain model is invoked only by **A — Explain**.
+
+**A — Explain** expands both views without approving the proposal: it answers
+each of the four questions clearly, then traces the relevant journey and a
+material alternative or failure path when useful. For a small mechanical
+change, the journey is brief rather than omitted.
+
+When explaining how code, a design, or a system behaves, the journey should:
 
 Start with the initiating actor or event, then trace the flow through relevant
 components, state changes, and decisions to the observable result. Include an
@@ -437,10 +460,8 @@ Use the journey that fits the subject:
 - A data journey for transformations and movement of information.
 - An execution flow for internal code or algorithmic behaviour.
 
-Journey-based explanation is a conditional explanation technique, not a
-mandatory field in every proposal. Use it for dynamic flows, interactions,
-state transitions, architecture, and cross-component behaviour. Do not force it
-onto small static or mechanical changes where it adds no clarity.
+The journey is part of A — Explain, not the required checkpoint brief. Keep it
+proportional to the decision; do not turn the explanation into a lecture.
 
 ## Knowledge Transfer
 

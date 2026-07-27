@@ -1446,3 +1446,158 @@ Users see the scope of the whole objective before being asked to authorize its
 current step. The contract does not impose a response template or multiply
 milestones, but it makes ordering, provisionality, and approval boundaries
 testable independently of trace rendering.
+
+## D-037 — Make journey consideration explicit at every checkpoint
+
+- **Date:** 2026-07-24
+- **Status:** Accepted
+
+### Context
+
+The existing journey-based explanation rule names several dynamic subjects, but
+does not make the agent's decision visible when a checkpoint does not need a
+journey. This can make a valid omission look like the technique was forgotten,
+and it gives the user no direct way to request the explanation when they prefer
+it.
+
+### Decision
+
+At every checkpoint, require the agent to consider whether a journey-based
+explanation would materially improve understanding of the decision or proposed
+milestone. Include the appropriate user, request, data, or execution journey
+when it would help. When it would not, briefly explain why it is being omitted
+and explicitly offer it as an optional explanation. If the user requests it,
+provide the journey before seeking approval. Do not force a journey when it adds
+no clarity.
+
+Increment the shared development version to `0.1.0-dev.6`, regenerate all
+publication surfaces, add a fixture for the explicit optional-offer case, and
+validate the changed contract in the supported Codex Desktop environment.
+
+### Consequences
+
+Journey use becomes more observable and user-controllable without turning it
+into a mandatory response template. Every checkpoint communicates whether the
+technique was considered; users can request it before approval even when the
+agent initially recommends omitting it. The journey remains conditional in
+content, so small mechanical changes do not acquire unnecessary ceremony.
+
+## D-038 — Make checkpoints inspectable and modularize the canonical core
+
+- **Date:** 2026-07-24
+- **Status:** Accepted
+
+### Context
+
+The checkpoint contract provided only compact prose and invited free-form
+approval, so a user could not reliably inspect the proposed code, architecture,
+or style before authorizing it. Its Explain stage was too short to transfer
+understanding consistently. The canonical core was also concentrated in one
+`SKILL.md`, making its distinct behavioural concerns difficult to inspect and
+maintain.
+
+### Decision
+
+Every checkpoint begins with a light milestone brief, an initial solution
+proposal, representative key code or equivalent design artefacts, and a visible
+menu: **A — Explain**, **B — Request changes**, **C — Alternative**, and
+**D — Accept**. B revises the proposal, C presents a material alternative, and
+only D authorizes the shown scope.
+
+The complete Explain model is invoked only by A. It always answers **What? Why
+at all? How? Why this way?** and follows with a proportionate user, request,
+data, or execution journey from trigger to observable result. It returns to the
+open checkpoint; even mechanical changes retain a short concrete journey.
+
+Make `core/deliberation/SKILL.md` a compact entry point that explicitly links
+the required runtime modules for activation/state, the loop, checkpoints,
+Explain, and execution/results. The deterministic assembler copies and checks
+the complete reference tree in Codex and Claude packages, and embeds it in the
+self-contained OpenCode command. Increment the shared version to
+`0.1.0-dev.7`; add fixture skeletons and semantic-integrity checks for the new
+contract.
+
+### Consequences
+
+The user can examine the substantive design before accepting it and has a
+consistent, low-friction control vocabulary at every checkpoint. The ordinary
+checkpoint remains concise, while an explicit Explain request reliably provides
+the full educational model. The runtime core gains separable source modules
+while preserving one cross-environment contract; generated artifacts become
+larger but remain deterministic and self-contained.
+
+## D-039 — Make C — Alternative a structured comparison
+
+- **Date:** 2026-07-25
+- **Status:** Accepted
+
+### Context
+
+The C — Alternative control only required a different approach and its
+tradeoffs. That left the comparison format and the relationship to the original
+proposal unspecified, making it harder for a user to evaluate options and make
+a confident decision.
+
+### Decision
+
+Selecting **C — Alternative** loads a dedicated `alternative.md` module from
+the checkpoint contract. The agent identifies two to four feasible,
+materially different approaches, including the proposed solution; gives each a
+short explanation and assessment; and compares them in a compact table with at
+least approach, assessment, advantages, and disadvantages. The assessment uses
+the decision's relevant criteria and states material assumptions or uncertainty.
+
+The agent recommends the best fit for the stated constraints, explains the
+decisive tradeoff, and helps the user choose without deciding an unresolved
+preference on the user's behalf. C keeps the checkpoint open and returns to the
+A–D menu; only D authorizes the visible proposal and scope. Increment the
+shared development version to `0.1.0-dev.8`, regenerate publication packages,
+and add the comparison expectation to the behavioural scenarios.
+
+### Consequences
+
+Alternative exploration becomes consistent, inspectable, and useful for
+decision-making without making every ordinary checkpoint verbose. The runtime
+adds one explicitly linked module, so assembly and integrity validation include
+it in every generated adapter.
+
+## D-040 — Make checkpoint suggestions contextual rather than letter-bound
+
+- **Date:** 2026-07-25
+- **Status:** Accepted
+
+### Context
+
+The first isolated C — Alternative run produced a useful comparison but changed
+the A–D labels into a different decision menu. The fixed-letter rule made that
+response a failure even though the user-facing interaction was otherwise
+coherent. More importantly, the useful next action changes once alternatives
+are visible: explaining or choosing a specific alternative is more precise than
+repeating the generic checkpoint choices.
+
+### Decision
+
+Replace the fixed A–D meanings from D-038 and D-039 with visible, contextual
+next-message suggestions. They are optional shortcuts; users may always reply
+in free text, and responses are interpreted by intent.
+
+An ordinary proposal normally suggests explaining the proposal, requesting
+changes, exploring alternatives, or accepting the named current proposal. The
+alternative-comparison view normally suggests explaining or choosing a named
+alternative, finding more alternatives, or accepting the clearly marked current
+recommendation. Choosing an alternative updates the proposal but is not
+approval.
+
+The one invariant is authorization: only a suggestion explicitly labeled
+**Accept**, or an equally unambiguous free-text instruction, authorizes the
+exact named proposal and stated scope. All other suggestions keep the checkpoint
+open. Increment the shared development version to `0.1.0-dev.9`, regenerate
+publication packages, update fixtures, and rerun standalone Codex Desktop
+evidence.
+
+### Consequences
+
+The controls better match the user's current decision while retaining a clear,
+inspectable approval boundary. The prior `0.1.0-dev.8` failure remains valid
+historical evidence of the retired fixed-letter contract; it does not establish
+the result of the new contextual model.
