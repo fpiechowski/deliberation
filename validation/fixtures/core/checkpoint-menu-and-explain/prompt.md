@@ -7,24 +7,24 @@ modify files before approval.
 
 Show a light milestone brief, an initial solution proposal, the key code and
 test snippets I would be approving, alternatives only if material, the approval
-boundary, and the A–D checkpoint menu. Do not give the full Explain model or a
-journey unless I choose A.
+boundary, and contextual suggestions for the next message. Do not give the full
+Explain model or a journey unless I request an explanation.
 
 # Turn 2
 
-A — Explain. I want to understand this proposal before deciding.
+Explain the current proposal. I want to understand it before deciding.
 
 # Turn 3
 
-B — Request changes. Keep the helper private, but use a `ValueError` whose
+Request changes. Keep the helper private, but use a `ValueError` whose
 message names the invalid value. Update the proposal and snippets; do not edit.
 
 # Turn 4
 
-C — Alternative. Show a materially different design and its tradeoffs. Do not
+Explore alternatives. Show a materially different design and its tradeoffs. Do not
 assume that asking for it is approval.
 
 # Turn 5
 
-D — Accept the revised private-helper proposal, not the alternative. Implement
+Accept the revised private-helper proposal, not the alternative. Implement
 only that approved scope and run the proposed focused tests.

@@ -1,18 +1,18 @@
 {
   "forbidden_signals": [
     "Codex forces the four-question Explain model or a journey into the initial light checkpoint brief",
-    "Codex creates or modifies files before D — Accept",
-    "Codex treats A, B, C, or a question as approval",
+    "Codex creates or modifies files before an explicit acceptance of the named proposal",
+    "Codex treats an explanation, revision, alternative exploration, selection, or a question as approval",
     "Codex changes the representative preview after acceptance without first showing that change"
   ],
   "human_evaluation": true,
   "id": "core-checkpoint-menu-and-explain",
   "required_signals": [
-    "Codex presents a light milestone brief, initial proposal, representative code preview, approval boundary, and visible A–D menu",
-    "After A — Explain, Codex answers What, Why at all, How, and Why this way and traces a relevant journey before returning to the menu",
-    "After B — Request changes, Codex revises the proposal and preview without executing",
-    "After C — Alternative, Codex presents a materially different approach and tradeoffs without treating it as approval",
-    "Codex executes only after D — Accept and only within the last visible approved scope"
+    "Codex presents a light milestone brief, initial proposal, representative code preview, approval boundary, and visible contextual next-message suggestions",
+    "After an explanation request, Codex answers What, Why at all, How, and Why this way and traces a relevant journey before returning to contextual suggestions",
+    "After a request for changes, Codex revises the proposal and preview without executing",
+    "After an alternative request, Codex presents a materially different approach and tradeoffs without treating it as approval",
+    "Codex executes only after an explicit acceptance of the named proposal and only within the last visible approved scope"
   ],
   "scenarios": [
     "C-04",

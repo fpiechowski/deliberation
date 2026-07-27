@@ -76,12 +76,15 @@ The additional Polish natural-use fixture now passes with `0.1.0-dev.2` after
 the combined invocation-and-task acknowledgement and checkpoint contract was
 made explicit.
 
-Version `0.1.0-dev.7` makes every checkpoint a visible design preview: it
+Version `0.1.0-dev.9` makes every checkpoint a visible design preview: it
 contains a light milestone brief, an initial proposal, representative code or
-design artefacts before approval, and an A–D menu for Explain, Request changes,
-Alternative, or Accept. A — Explain supplies the four-question and journey
-explanations. The canonical skill entry point explicitly loads its modular
-runtime contract from `core/deliberation/references/`.
+design artefacts before approval, and contextual suggestions for the next user
+message. They are not a rigid letter protocol: users may respond freely, while
+only a clearly named Accept action authorizes work. In the alternative view,
+the suggestions cover explaining or choosing a named alternative, finding more
+alternatives, and accepting the marked current recommendation. The canonical
+skill entry point explicitly loads its modular runtime contract from
+`core/deliberation/references/`.
 
 Codex Desktop is the only live-host-validated and supported environment. CLI,
 IDE, and other Codex clients are out of scope. Claude Code and OpenCode are

@@ -16,7 +16,7 @@ complementary views:
 Explain is not a lecture. All four questions get their own clear answer, and
 the journey covers the relevant normal path plus a material alternative or
 failure path when needed for understanding. It stays grounded in the proposal
-and its visible artefacts, and ends by returning to the A–D checkpoint menu
+and its visible artefacts, then returns to the contextual checkpoint suggestions
 rather than assuming approval.
 
 Use the journey that fits the work: a user journey for user-visible behaviour,

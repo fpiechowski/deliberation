@@ -1525,3 +1525,79 @@ checkpoint remains concise, while an explicit Explain request reliably provides
 the full educational model. The runtime core gains separable source modules
 while preserving one cross-environment contract; generated artifacts become
 larger but remain deterministic and self-contained.
+
+## D-039 — Make C — Alternative a structured comparison
+
+- **Date:** 2026-07-25
+- **Status:** Accepted
+
+### Context
+
+The C — Alternative control only required a different approach and its
+tradeoffs. That left the comparison format and the relationship to the original
+proposal unspecified, making it harder for a user to evaluate options and make
+a confident decision.
+
+### Decision
+
+Selecting **C — Alternative** loads a dedicated `alternative.md` module from
+the checkpoint contract. The agent identifies two to four feasible,
+materially different approaches, including the proposed solution; gives each a
+short explanation and assessment; and compares them in a compact table with at
+least approach, assessment, advantages, and disadvantages. The assessment uses
+the decision's relevant criteria and states material assumptions or uncertainty.
+
+The agent recommends the best fit for the stated constraints, explains the
+decisive tradeoff, and helps the user choose without deciding an unresolved
+preference on the user's behalf. C keeps the checkpoint open and returns to the
+A–D menu; only D authorizes the visible proposal and scope. Increment the
+shared development version to `0.1.0-dev.8`, regenerate publication packages,
+and add the comparison expectation to the behavioural scenarios.
+
+### Consequences
+
+Alternative exploration becomes consistent, inspectable, and useful for
+decision-making without making every ordinary checkpoint verbose. The runtime
+adds one explicitly linked module, so assembly and integrity validation include
+it in every generated adapter.
+
+## D-040 — Make checkpoint suggestions contextual rather than letter-bound
+
+- **Date:** 2026-07-25
+- **Status:** Accepted
+
+### Context
+
+The first isolated C — Alternative run produced a useful comparison but changed
+the A–D labels into a different decision menu. The fixed-letter rule made that
+response a failure even though the user-facing interaction was otherwise
+coherent. More importantly, the useful next action changes once alternatives
+are visible: explaining or choosing a specific alternative is more precise than
+repeating the generic checkpoint choices.
+
+### Decision
+
+Replace the fixed A–D meanings from D-038 and D-039 with visible, contextual
+next-message suggestions. They are optional shortcuts; users may always reply
+in free text, and responses are interpreted by intent.
+
+An ordinary proposal normally suggests explaining the proposal, requesting
+changes, exploring alternatives, or accepting the named current proposal. The
+alternative-comparison view normally suggests explaining or choosing a named
+alternative, finding more alternatives, or accepting the clearly marked current
+recommendation. Choosing an alternative updates the proposal but is not
+approval.
+
+The one invariant is authorization: only a suggestion explicitly labeled
+**Accept**, or an equally unambiguous free-text instruction, authorizes the
+exact named proposal and stated scope. All other suggestions keep the checkpoint
+open. Increment the shared development version to `0.1.0-dev.9`, regenerate
+publication packages, update fixtures, and rerun standalone Codex Desktop
+evidence.
+
+### Consequences
+
+The controls better match the user's current decision while retaining a clear,
+inspectable approval boundary. The prior `0.1.0-dev.8` failure remains valid
+historical evidence of the retired fixed-letter contract; it does not establish
+the result of the new contextual model.

@@ -109,8 +109,18 @@ The loop continues until the task is complete.
 Every checkpoint is a preview of the work the user is asked to approve. Before
 approval, it exposes representative code or equivalent design artefacts so the
 user can inspect the intended architecture, design, and style rather than only
-a prose summary. It ends with a visible menu: **A — Explain**, **B — Request
-changes**, **C — Alternative**, or **D — Accept**.
+a prose summary. It ends with visible, contextual suggestions for the user's
+next message. The suggestions describe their effect in the current view; they
+are not a rigid A–D protocol, and the user may always reply in their own words.
+
+An ordinary proposal normally offers explanation, requested changes,
+alternative exploration, and acceptance of the explicitly named current
+proposal. When alternatives are visible, the suggestions change to explaining
+or choosing a named alternative, finding more alternatives, or accepting the
+explicitly marked current recommendation. The agent keeps the checkpoint open
+for every option except explicit acceptance. Only an option that says **Accept**
+— or an equally unambiguous free-text instruction — authorizes the exact named
+proposal and stated scope.
 
 ## Mode Lifetime
 

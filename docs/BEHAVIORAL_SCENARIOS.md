@@ -100,8 +100,8 @@ while the same checkpoint remains open for discussion.
 4. Presents only materially different alternatives and tradeoffs.
 5. Shows representative code or equivalent design artefacts that reveal the
    proposed architecture, design, and style before approval.
-6. Presents the visible A–D menu: Explain, Request changes, Alternative, and
-   Accept.
+6. Presents visible, contextual next-message suggestions, including a clearly
+   named acceptance action for the current proposal.
 7. Reaches a shared decision.
 8. States the approval scope.
 9. Waits for explicit approval.
@@ -114,31 +114,37 @@ approval are complete.
 **Given** the agent prepares or explains a checkpoint for a proposed or
 implemented milestone.
 
-**When** the user selects A — Explain.
+**When** the user selects an explanation suggestion or asks for an explanation
+in their own words.
 
 **Then** the agent explains What, Why at all, How, and Why this way, plus an
 appropriate user, request, data, or execution journey from trigger to
 observable result mapped to the design or code. It remains in the checkpoint
-and returns to the A–D menu. For a small static or mechanical change, the
+and returns to contextual suggestions. For a small static or mechanical change, the
 journey remains short and concrete rather than being omitted.
 
 ### C-18 — Structured checkpoint controls and inspectable previews
 
 **Given** a consequential checkpoint for a proposed milestone.
 
-**Then** the user sees the A–D control menu and an inspectable pre-approval
-preview: representative key code for implementation, refactoring, or debugging;
-or an equivalent contract, schema, pseudocode, flow, example, or finding for
-specification or review.
+**Then** the user sees contextual next-message suggestions and an inspectable
+pre-approval preview: representative key code for implementation, refactoring,
+or debugging; or an equivalent contract, schema, pseudocode, flow, example, or
+finding for specification or review. The suggestions are optional shortcuts;
+free-text responses are interpreted by intent.
 
-**When** the user selects B or C.
+**When** the user requests changes or explores alternatives.
 
-**Then** the agent revises the proposal or presents a material alternative and
-does not treat either response as approval.
+**Then** the agent revises the proposal or keeps the checkpoint open and
+compares the proposed approach with two to four feasible, materially different
+approaches. For alternatives it gives each a short explanation and assessment,
+includes the original proposal, shows a compact advantages/disadvantages table
+using relevant decision criteria, and marks the current recommendation.
 
-**When** the user selects D.
-
-**Then** it authorizes only the shown proposal and stated scope.
+**Then** the alternative view suggests: explain a named alternative, choose a
+named alternative as the new proposal, find more alternatives, or accept the
+named current recommendation. Choosing is not approval; acceptance authorizes
+only the named recommendation and stated scope.
 
 ### C-06 — Choice test
 

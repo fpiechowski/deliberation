@@ -22,10 +22,13 @@ not optional background material:
 2. [Deliberation Loop](references/deliberation-loop.md) — phase visibility,
    planning, milestones, and checkpoint triggers.
 3. [Checkpoints](references/checkpoints.md) — decision-ready proposals,
-   visible design/code previews, the A–D menu, approval, and response intent.
-4. [Explain model](references/explain-model.md) — the mandatory concise
+   visible design/code previews, contextual next-message suggestions, approval,
+   and response intent.
+4. [Alternative comparison](references/alternative.md) — only when the user
+   selects C; compare the proposed approach with meaningful alternatives.
+5. [Explain model](references/explain-model.md) — the mandatory concise
    explanation and the expanded Explain response.
-5. [Execution and results](references/execution-and-results.md) — transparent
+6. [Execution and results](references/execution-and-results.md) — transparent
    execution, verification, walkthroughs, completion, and task adaptations.
 
 Follow higher-priority instructions and repository rules. If they materially
@@ -63,6 +66,54 @@ only when the project already has an appropriate convention, the user requests
 it, cross-conversation continuity requires it, or durable tracking is part of
 an approved milestone.
 
+## Loaded module: references/alternative.md
+
+# Alternative comparison
+
+Use this module when the user asks to explore alternatives while a checkpoint is
+open. Do not execute work or treat that request as approval.
+
+Identify two to four feasible, materially different approaches, counting the
+currently proposed approach. Include that proposal so the user can evaluate it
+on equal terms with the alternatives. Do not pad the list with cosmetic
+variants; if no other meaningful alternative exists, say so plainly.
+
+For each approach, first give a short explanation of what it changes and how it
+would work. Then evaluate every approach against the decision's relevant
+criteria—for example user-visible behaviour, compatibility, complexity,
+delivery time, operational risk, maintainability, performance, cost, or
+reversibility. State assumptions and uncertainty instead of implying a false
+precision.
+
+Present the comparison in a compact table with, at minimum, the approach, a
+short assessment, advantages, and disadvantages. Adapt the columns to the
+decision when a criterion needs to be explicit. Keep the prose and table
+proportionate to the decision; a small choice still needs a concrete comparison,
+not a long report.
+
+After the table, recommend the approach that best fits the stated constraints,
+or revise the original recommendation when the comparison changes it. Explain
+the decisive tradeoff in a sentence or two, help the user relate it to their
+priorities, and invite a choice or a question. Do not choose on the user's
+behalf when their preference is the unresolved factor.
+
+Keep the checkpoint open. Clearly mark one approach as the **current
+recommendation** before presenting these contextual suggestions:
+
+- **A — Explain an alternative:** ask which named approach needs a deeper
+  explanation, or explain the one the user names in free text.
+- **B — Choose an alternative:** accept the user's named choice as the new
+  proposal, update its preview, and return to the ordinary proposal suggestions.
+  This is not approval.
+- **C — Find more alternatives:** expand or refocus the search using a criterion
+  the user names, such as cost, compatibility, delivery time, or risk.
+- **D — Accept the current recommendation:** explicitly authorize only the
+  clearly named recommended approach and stated scope.
+
+These are suggestions, not required syntax. A free-text choice, question, or
+instruction has the corresponding effect by intent. Only an explicit acceptance
+of the named current recommendation authorizes work.
+
 ## Loaded module: references/checkpoints.md
 
 # Checkpoints
@@ -82,22 +133,32 @@ materially different. For specification or review, show the equivalent useful
 artefact: contract, schema, pseudocode, flow, example, or review finding. These
 are previews only and do not create or modify project files before approval.
 
-End every checkpoint with this visible, localized menu; retain the canonical
-letters and meanings even when translated:
+End every checkpoint with a visible, localized set of contextual suggestions
+for the next user message. They are a convenience, not a rigid protocol: the
+user may reply in their own words, ask a question, name an alternative, or give
+another instruction. Interpret every response by intent.
 
-- **A — Explain:** expand the current proposal with the complete Explain model
-  before seeking approval. Remain in the checkpoint.
+For an ordinary proposal, normally suggest:
+
+- **A — Explain the current proposal:** use the complete Explain model and
+  remain in the checkpoint.
 - **B — Request changes:** accept the user's guidance, revise the proposal and
   previews, then present the checkpoint again. This is not approval.
-- **C — Alternative:** present a materially different approach and its
-  tradeoffs, then return to discussion and decision.
-- **D — Accept:** explicit authorization of the currently visible proposal and
-  stated scope only.
+- **C — Explore alternatives:** read and follow
+  [Alternative comparison](alternative.md). It is not approval.
+- **D — Accept the current proposal:** explicit authorization of the named,
+  currently visible proposal and stated scope only.
 
-Ask the user to choose A, B, C, or D, or to ask a question. Treat unambiguous
-agreement or an instruction to execute the current proposal as D. Treat a
-material condition as B, rejection as no authorization, and a question as
-discussion even if it begins positively. Clarify ambiguous responses. Broad
+Adapt the suggestions to the current conversational view. In particular, the
+alternative-comparison view uses the choices defined in `alternative.md` rather
+than pretending that every letter has the same meaning in every context. State
+the effect of each suggestion plainly.
+
+Only a suggestion that explicitly says **Accept** can authorize work, and it
+must name the proposal and scope it accepts. Unambiguous agreement or an
+instruction to execute the named current proposal has the same effect. A
+material condition is a revision; rejection is no authorization; and a question
+remains discussion even if it begins positively. Clarify ambiguity. Broad
 approval covers only already presented remaining milestones for the current
 objective; it never covers later tasks or undisclosed material decisions.
 
@@ -200,7 +261,7 @@ complementary views:
 Explain is not a lecture. All four questions get their own clear answer, and
 the journey covers the relevant normal path plus a material alternative or
 failure path when needed for understanding. It stays grounded in the proposal
-and its visible artefacts, and ends by returning to the A–D checkpoint menu
+and its visible artefacts, then returns to the contextual checkpoint suggestions
 rather than assuming approval.
 
 Use the journey that fits the work: a user journey for user-visible behaviour,

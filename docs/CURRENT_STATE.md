@@ -1,12 +1,12 @@
 # Current State
 
-**Last updated:** 2026-07-24
+**Last updated:** 2026-07-25
 
 ## Phase
 
-Behavioural-contract expansion — **`0.1.0-dev.7` introduces modular,
-explicitly loaded core instructions plus a checkpoint menu and inspectable
-pre-approval design previews; deterministic validation is pending**.
+Behavioural-contract expansion — **`0.1.0-dev.9` replaces the rigid A–D menu
+with contextual next-message suggestions and an explicit acceptance invariant;
+deterministic and live-host validation are pending**.
 
 ## Completed
 
@@ -137,6 +137,18 @@ pre-approval design previews; deterministic validation is pending**.
 - Implemented the approved modular core and `0.1.0-dev.7` checkpoint contract:
   explicit reference modules, light brief and initial proposal, inspectable
   pre-approval artefacts, A–D controls, and Explain-on-A validation fixtures.
+- Added a dedicated C — Alternative module that compares the proposed solution
+  with meaningful alternatives using concise assessments and a pros/cons table.
+- Executed the isolated `0.1.0-dev.8` C — Alternative Codex Desktop fixture;
+  the comparison content passed, but the host relabeled the canonical A–D menu
+  and the retained run is a truthful `Fail` against C-04 and C-18.
+- Replaced the fixed A–D contract with contextual suggestions: ordinary
+  proposals offer explanation, changes, alternative exploration, and accepting
+  the named proposal; alternative views offer explaining or choosing a named
+  alternative, further exploration, and accepting the named recommendation.
+- Attempted the isolated `0.1.0-dev.9` contextual-suggestion fixture, but the
+  fresh task reported `$deliberation` unavailable; the retained result is
+  `Blocked` and does not evaluate the new behavior.
 
 ## Current implementation
 
@@ -273,15 +285,28 @@ Codex and Claude packages retain the same reference tree; the self-contained
 OpenCode command embeds the entry point and all modules.
 
 At every checkpoint, Deliberation shows a light brief, initial proposal,
-representative code or equivalent design artefacts, and the visible A–D menu.
-A expands the four-question and journey Explain model; B revises; C offers a
-material alternative; and D alone authorizes the shown scope.
+representative code or equivalent design artefacts, and contextual suggestions
+for the next user message. They are optional shortcuts; a user may always reply
+in free text. Only a plainly labeled Accept action or equally unambiguous
+free-text instruction authorizes the exact named proposal and scope.
+
+When alternatives are requested, the `alternative.md` module compares the
+current proposal with two to four meaningful approaches. It requires a short
+explanation and assessment of each, a compact advantages/disadvantages table,
+and a named recommendation with the decisive tradeoff. Its contextual
+suggestions let the user explain or choose a named alternative, find more, or
+accept that recommendation.
+
+The retained live-host run at
+`validation/runs/0.1.0-dev.8/codex/desktop-standalone/core-checkpoint-alternative-comparison/`
+shows that the comparison itself works but that fixed letter meanings are not a
+reliable host-level contract. It motivated the contextual-suggestion model.
 
 
 ## Recommended next milestone
 
-Run the structured-checkpoint and Explain fixtures in standalone Codex Desktop
-against `0.1.0-dev.7`, then record transcript evidence and result. This does
+Restore standalone skill discovery in Codex Desktop, then rerun the structured
+checkpoint and alternative-comparison fixtures against `0.1.0-dev.9`. This does
 not reopen validation for experimental adapters.
 
 ## Open questions

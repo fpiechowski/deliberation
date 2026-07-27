@@ -21,10 +21,13 @@ not optional background material:
 2. [Deliberation Loop](references/deliberation-loop.md) — phase visibility,
    planning, milestones, and checkpoint triggers.
 3. [Checkpoints](references/checkpoints.md) — decision-ready proposals,
-   visible design/code previews, the A–D menu, approval, and response intent.
-4. [Explain model](references/explain-model.md) — the mandatory concise
+   visible design/code previews, contextual next-message suggestions, approval,
+   and response intent.
+4. [Alternative comparison](references/alternative.md) — only when the user
+   selects C; compare the proposed approach with meaningful alternatives.
+5. [Explain model](references/explain-model.md) — the mandatory concise
    explanation and the expanded Explain response.
-5. [Execution and results](references/execution-and-results.md) — transparent
+6. [Execution and results](references/execution-and-results.md) — transparent
    execution, verification, walkthroughs, completion, and task adaptations.
 
 Follow higher-priority instructions and repository rules. If they materially

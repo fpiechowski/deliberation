@@ -15,22 +15,32 @@ materially different. For specification or review, show the equivalent useful
 artefact: contract, schema, pseudocode, flow, example, or review finding. These
 are previews only and do not create or modify project files before approval.
 
-End every checkpoint with this visible, localized menu; retain the canonical
-letters and meanings even when translated:
+End every checkpoint with a visible, localized set of contextual suggestions
+for the next user message. They are a convenience, not a rigid protocol: the
+user may reply in their own words, ask a question, name an alternative, or give
+another instruction. Interpret every response by intent.
 
-- **A — Explain:** expand the current proposal with the complete Explain model
-  before seeking approval. Remain in the checkpoint.
+For an ordinary proposal, normally suggest:
+
+- **A — Explain the current proposal:** use the complete Explain model and
+  remain in the checkpoint.
 - **B — Request changes:** accept the user's guidance, revise the proposal and
   previews, then present the checkpoint again. This is not approval.
-- **C — Alternative:** present a materially different approach and its
-  tradeoffs, then return to discussion and decision.
-- **D — Accept:** explicit authorization of the currently visible proposal and
-  stated scope only.
+- **C — Explore alternatives:** read and follow
+  [Alternative comparison](alternative.md). It is not approval.
+- **D — Accept the current proposal:** explicit authorization of the named,
+  currently visible proposal and stated scope only.
 
-Ask the user to choose A, B, C, or D, or to ask a question. Treat unambiguous
-agreement or an instruction to execute the current proposal as D. Treat a
-material condition as B, rejection as no authorization, and a question as
-discussion even if it begins positively. Clarify ambiguous responses. Broad
+Adapt the suggestions to the current conversational view. In particular, the
+alternative-comparison view uses the choices defined in `alternative.md` rather
+than pretending that every letter has the same meaning in every context. State
+the effect of each suggestion plainly.
+
+Only a suggestion that explicitly says **Accept** can authorize work, and it
+must name the proposal and scope it accepts. Unambiguous agreement or an
+instruction to execute the named current proposal has the same effect. A
+material condition is a revision; rejection is no authorization; and a question
+remains discussion even if it begins positively. Clarify ambiguity. Broad
 approval covers only already presented remaining milestones for the current
 objective; it never covers later tasks or undisclosed material decisions.
 
