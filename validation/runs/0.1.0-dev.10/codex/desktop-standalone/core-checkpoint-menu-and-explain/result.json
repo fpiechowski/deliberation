@@ -1,0 +1,85 @@
+{
+  "artifact": {
+    "canonical_core_sha256": "eefdcedcfdff693878161985210f73f020f1588c4b23c65fcaccd03ae8b1777b",
+    "skill_sha256": "7441BD90CFFD26F75690028867137FFDB481097FFAA6AE2E350E01549F4F74A4",
+    "openai_yaml_sha256": "CB2F5F375CA43B88F9AE1F938FA7EB12A55473B7AE6FBA0DA3E48D382F79FCF5"
+  },
+  "cleanup": {
+    "skill_removed": false,
+    "skill_removal_note": "The host rejected the approved cleanup command before it ran; the temporary standalone artifact remains at C:\\Users\\fpiec\\.agents\\skills\\deliberation.",
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Both work/ and outputs/ were empty after archival; the projectless workspace root remains managed by Codex Desktop."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-29T08:55:07Z",
+  "fixture_id": "core-checkpoint-menu-and-explain",
+  "forbidden_signals": [
+    {
+      "signal": "Codex forces the four-question Explain model or a journey into the initial light checkpoint brief",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex creates or modifies files before an explicit acceptance of the named proposal",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex treats an explanation, revision, alternative exploration, selection, or a question as approval",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex changes the representative preview after acceptance without first showing that change",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "not exposed by Codex task API",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The checkpoint, Explain, revision, and alternative interactions are reviewable. The accepted execution could not be evaluated because the fresh projectless task contained no existing module or tests and pytest was unavailable."
+  },
+  "product_version": "0.1.0-dev.10",
+  "required_signals": [
+    {
+      "signal": "Codex presents a light milestone brief, initial proposal, representative code preview, approval boundary, and visible contextual next-message suggestions",
+      "status": "pass"
+    },
+    {
+      "signal": "After an explanation request, Codex answers What, Why at all, How, and Why this way and traces a relevant journey before returning to contextual suggestions",
+      "status": "pass"
+    },
+    {
+      "signal": "After a request for changes, Codex revises the proposal and preview without executing",
+      "status": "pass"
+    },
+    {
+      "signal": "After an alternative request, Codex presents a materially different approach and tradeoffs without treating it as approval",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex executes only after an explicit acceptance of the named proposal and only within the last visible approved scope",
+      "status": "blocked"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-04",
+      "reason": "Pass: the agent showed a bounded checkpoint, representative preview, explicit scope, visible next-message choices, and did not execute before explicit acceptance."
+    },
+    {
+      "id": "C-05",
+      "reason": "Pass: the requested Explain response covered What, Why at all, How, Why this way, and an execution journey without approving the proposal."
+    },
+    {
+      "id": "C-18",
+      "reason": "Pass: alternative exploration compared a material caller-supplied-default design, kept the checkpoint open, and made only the named Accept action authorizing."
+    }
+  ],
+  "status": "blocked",
+  "thread_id": "019fad15-ad8c-7df3-9b5a-818cd7f084da"
+}

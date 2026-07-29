@@ -160,6 +160,18 @@ activation and experimental adapter status**.
   `install-opencode.sh`, that download the published `v0.1.0-dev.10` zip from
   GitHub Releases, extract it temporarily, delegate to the bundled installer,
   and clean up.
+- Restored the checked `0.1.0-dev.10` standalone Codex artifact in the user
+  skill scope and confirmed `$deliberation` discovery in fresh projectless
+  Codex Desktop tasks.
+- Reran the contextual alternative-comparison fixture successfully against
+  C-18: it compares four material approaches in a table, identifies a named
+  recommendation and decisive uncertainty, and preserves the explicit
+  acceptance boundary.
+- Reran the structured checkpoint, Explain, revision, and alternative fixture.
+  Its checkpoint interactions pass C-04, C-05, and C-18, but its accepted
+  execution assertion is retained as `Blocked`: the fresh task provided no
+  existing configuration module or tests, and `pytest` was unavailable. The
+  agent did not create a replacement target or exceed the approved scope.
 
 ## Current implementation
 
@@ -322,12 +334,22 @@ The retained live-host run at
 shows that the comparison itself works but that fixed letter meanings are not a
 reliable host-level contract. It motivated the contextual-suggestion model.
 
+The `0.1.0-dev.10` rerun at
+`validation/runs/0.1.0-dev.10/codex/desktop-standalone/`
+restores direct discovery evidence and passes the contextual alternative view.
+The parallel structured-checkpoint run validates the decision interaction but
+does not establish post-acceptance execution because the fixture environment
+lacked the existing target and test runner it described. Its `Blocked` result
+is retained rather than inferred as a pass.
+
 
 ## Recommended next milestone
 
-Restore standalone skill discovery in Codex Desktop, then rerun the structured
-checkpoint and alternative-comparison fixtures against `0.1.0-dev.10`. This does
-not reopen validation for experimental adapters.
+Prepare an explicitly approved fixture precondition for the blocked
+post-acceptance execution check: an existing configuration module, focused
+tests, and an available runner in the fresh projectless task. Then rerun only
+that structured fixture. This does not reopen the product contract, adapters,
+or experimental-adapter validation.
 
 ## Open questions
 

@@ -1,0 +1,73 @@
+{
+  "artifact": {
+    "canonical_core_sha256": "eefdcedcfdff693878161985210f73f020f1588c4b23c65fcaccd03ae8b1777b",
+    "skill_sha256": "7441BD90CFFD26F75690028867137FFDB481097FFAA6AE2E350E01549F4F74A4",
+    "alternative_sha256": "B38C501C06D4E6A3D3A2B871477D0D30E15F0D16AFC29CB84F0C38AEAB484D8E"
+  },
+  "cleanup": {
+    "skill_removed": false,
+    "skill_removal_note": "The host rejected the approved cleanup command before it ran; the temporary standalone artifact remains at C:\\Users\\fpiec\\.agents\\skills\\deliberation.",
+    "task_archived": true,
+    "workspace_contents_removed": true,
+    "workspace_root_removed": false,
+    "workspace_root_note": "Both work/ and outputs/ were empty after archival; the projectless workspace root remains managed by Codex Desktop."
+  },
+  "critical_failures": [],
+  "executed_at": "2026-07-29T09:00:10Z",
+  "fixture_id": "core-checkpoint-alternative-comparison",
+  "forbidden_signals": [
+    {
+      "signal": "Codex treats alternative exploration or choosing an alternative as approval or begins modifying files",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex omits the originally proposed approach from the comparison",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex presents alternatives without a table that compares advantages and disadvantages",
+      "status": "pass"
+    }
+  ],
+  "host": {
+    "app_package_version": "not exposed by Codex task API",
+    "environment": "codex",
+    "operating_system": "Windows",
+    "surface": "desktop-standalone"
+  },
+  "human_evaluation": {
+    "performed": true,
+    "reason": "The fresh Desktop task activated $deliberation and produced an inspectable contextual alternative-comparison checkpoint."
+  },
+  "product_version": "0.1.0-dev.10",
+  "required_signals": [
+    {
+      "signal": "The explicit $deliberation invocation activates the installed standalone skill",
+      "status": "pass"
+    },
+    {
+      "signal": "After the user requests alternative exploration, Codex compares the initial proposal with two to four feasible materially different approaches, including the initial proposal",
+      "status": "pass"
+    },
+    {
+      "signal": "Each approach receives a short explanation and assessment against relevant criteria, with material uncertainty stated where applicable",
+      "status": "pass"
+    },
+    {
+      "signal": "Codex presents a compact comparison table containing advantages and disadvantages, marks a current recommendation with its decisive tradeoff, and returns to contextual suggestions without authorization",
+      "status": "pass"
+    },
+    {
+      "signal": "The alternative-view suggestions offer explanation or selection of a named alternative, further exploration, and acceptance only of the named current recommendation",
+      "status": "pass"
+    }
+  ],
+  "scenario_results": [
+    {
+      "id": "C-18",
+      "reason": "Pass: the agent compared four feasible approaches in a table, included the original proposal, stated the non-blocking-runtime uncertainty, recommended Deferred Bounded Backoff v1, and kept the checkpoint open with contextual suggestions."
+    }
+  ],
+  "status": "pass",
+  "thread_id": "019fad1a-4ea4-7652-a3f3-80b4b29755d5"
+}
