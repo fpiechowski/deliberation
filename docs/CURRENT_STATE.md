@@ -1,12 +1,12 @@
 # Current State
 
-**Last updated:** 2026-07-25
+**Last updated:** 2026-07-29
 
 ## Phase
 
-Behavioural-contract expansion — **`0.1.0-dev.9` replaces the rigid A–D menu
-with contextual next-message suggestions and an explicit acceptance invariant;
-deterministic and live-host validation are pending**.
+OpenCode distribution packaging — **`0.1.0-dev.10` adds an installable
+OpenCode command-and-plugin bundle while preserving explicit `/deliberation`
+activation and experimental adapter status**.
 
 ## Completed
 
@@ -149,6 +149,13 @@ deterministic and live-host validation are pending**.
 - Attempted the isolated `0.1.0-dev.9` contextual-suggestion fixture, but the
   fresh task reported `$deliberation` unavailable; the retained result is
   `Blocked` and does not evaluate the new behavior.
+- Added an installable OpenCode distribution bundle at
+  `opencode-bundles/deliberation` with `.opencode/commands/deliberation.md`,
+  `.opencode/plugins/deliberation.js`, `package.json`, `README.md`, and
+  PowerShell/POSIX installers for global or project installation.
+- Verified the OpenCode bundle against the local `opencode` CLI by resolving a
+  temporary config directory: `/deliberation` is discovered as a command and the
+  local plugin file is resolved by the host configuration.
 
 ## Current implementation
 
@@ -263,6 +270,12 @@ Release automation is not included. The Claude Code marketplace has been
 confirmed working externally, but no retained live-host transcript is required
 under the experimental-adapter policy.
 
+The generated OpenCode bundle is now installable as a local command-and-plugin
+package. Its command remains the only activation surface and embeds the full
+canonical contract. Its plugin is a minimal local OpenCode plugin marker rather
+than an npm-published runtime extension. OpenCode remains experimental: the
+local CLI discovery check proves packaging, not behavioural scenario support.
+
 The shared core now also has an observable-loop contract. Ordinary
 Deliberation signals main phase boundaries without constraining response
 format. A user can request a detailed trace for the conversation, which makes
@@ -306,7 +319,7 @@ reliable host-level contract. It motivated the contextual-suggestion model.
 ## Recommended next milestone
 
 Restore standalone skill discovery in Codex Desktop, then rerun the structured
-checkpoint and alternative-comparison fixtures against `0.1.0-dev.9`. This does
+checkpoint and alternative-comparison fixtures against `0.1.0-dev.10`. This does
 not reopen validation for experimental adapters.
 
 ## Open questions

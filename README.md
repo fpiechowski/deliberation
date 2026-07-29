@@ -76,7 +76,7 @@ The additional Polish natural-use fixture now passes with `0.1.0-dev.2` after
 the combined invocation-and-task acknowledgement and checkpoint contract was
 made explicit.
 
-Version `0.1.0-dev.9` makes every checkpoint a visible design preview: it
+Version `0.1.0-dev.10` makes every checkpoint a visible design preview: it
 contains a light milestone brief, an initial proposal, representative code or
 design artefacts before approval, and contextual suggestions for the next user
 message. They are not a rigid letter protocol: users may respond freely, while
@@ -84,7 +84,8 @@ only a clearly named Accept action authorizes work. In the alternative view,
 the suggestions cover explaining or choosing a named alternative, finding more
 alternatives, and accepting the marked current recommendation. The canonical
 skill entry point explicitly loads its modular runtime contract from
-`core/deliberation/references/`.
+`core/deliberation/references/`. The OpenCode adapter now includes an
+installable local command-and-plugin bundle under `opencode-bundles/`.
 
 Codex Desktop is the only live-host-validated and supported environment. CLI,
 IDE, and other Codex clients are out of scope. Claude Code and OpenCode are
@@ -151,6 +152,41 @@ After installation, activate the mode with:
 
 ```text
 /deliberation:deliberation
+```
+
+## Experimental OpenCode installation
+
+OpenCode is an experimental adapter and is not live-host behaviour validated.
+The ready dist is generated under `opencode-bundles/deliberation`.
+
+Install globally from that directory:
+
+```powershell
+.\install.ps1
+```
+
+or:
+
+```sh
+sh ./install.sh
+```
+
+Install into one project:
+
+```powershell
+.\install.ps1 -Scope Project -ProjectPath C:\path\to\project
+```
+
+or:
+
+```sh
+sh ./install.sh project /path/to/project
+```
+
+After installation, activate the mode with:
+
+```text
+/deliberation
 ```
 
 ## Repository guide

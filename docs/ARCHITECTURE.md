@@ -24,8 +24,9 @@ It must also prevent implicit activation in the explicit-only first release.
    can install them directly from the repository.
 6. Deterministic validation detects semantic drift between the core and every
    generated adapter.
-7. The first version introduces no runtime service, hook, MCP server, or
-   third-party build dependency.
+7. The first version introduces no runtime service, MCP server, or third-party
+   build dependency. The OpenCode local plugin marker is allowed only as
+   installable distribution plumbing and does not change product semantics.
 
 ## Repository topology
 
@@ -49,7 +50,7 @@ claude-plugins/
 └── deliberation/                    # generated Claude Code plugin
 
 opencode-bundles/
-└── deliberation/                    # generated OpenCode distribution bundle
+└── deliberation/                    # generated OpenCode command-and-plugin bundle
 
 validation/
 ├── fixtures/
@@ -206,9 +207,26 @@ and portability, but stores it outside OpenCode's discovered skill paths. The
 runtime command is self-contained so that both project and global installation
 work without fragile absolute or project-relative file references.
 
-An OpenCode JavaScript or TypeScript plugin is outside the first-release
-architecture. It may be reconsidered only if it later provides material
-runtime or installation value.
+The generated distribution bundle also includes:
+
+```text
+.opencode/plugins/deliberation.js
+package.json
+README.md
+install.ps1
+install.sh
+```
+
+The local plugin is a minimal OpenCode plugin marker. It confirms that the
+bundle is loadable as an OpenCode plugin distribution and points users to the
+explicit `/deliberation` command, but it does not add hooks, tools, implicit
+activation, persistent state, or behavioural semantics. The PowerShell and
+POSIX installers copy the command and plugin into either the global OpenCode
+config directory or one project's `.opencode` directory.
+
+An npm-published OpenCode plugin remains outside the first-release
+architecture. It may be reconsidered only if it later provides material runtime
+or installation value beyond the local command-and-plugin bundle.
 
 ## Assembly and publication
 
@@ -261,7 +279,7 @@ are not release-gating:
 2. Codex plugin through a local repository marketplace.
 3. Claude Code standalone skill and plugin through a local or Git-hosted
    marketplace.
-4. OpenCode project command and global command bundle.
+4. OpenCode project or global command-and-plugin bundle.
 
 Experimental public distribution does not make a live-host support claim.
 
@@ -350,8 +368,9 @@ adding silent repository state or weakening the product contract.
 
 - Separate behavioural cores per environment.
 - Implicit activation.
-- Runtime hooks, MCP servers, connectors, or background services.
-- An OpenCode npm plugin.
+- Runtime hooks with product semantics, MCP servers, connectors, or background
+  services.
+- An npm-published OpenCode plugin.
 - Automatic persistent state files in user repositories.
 - A third-party build or test framework.
 - Publishing experimental adapters before their cross-environment scenario
@@ -365,7 +384,8 @@ The architecture is implemented correctly when:
 2. All published packages are self-contained.
 3. Git-hosted Codex and Claude Code marketplaces can install their committed
    generated packages.
-4. OpenCode activates only through its explicit command.
+4. OpenCode activates only through its explicit command, even when installed
+   through the local plugin bundle.
 5. Integrity validation detects any semantic adapter drift.
 6. Shared fixtures are available for execution and comparison across all three
    environments; only Codex Desktop evidence is required for release
@@ -381,3 +401,4 @@ The architecture is implemented correctly when:
 - [Claude Code marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
 - [OpenCode skills](https://opencode.ai/docs/skills)
 - [OpenCode commands](https://opencode.ai/docs/commands)
+- [OpenCode plugins](https://opencode.ai/docs/plugins)

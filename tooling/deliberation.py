@@ -219,6 +219,26 @@ def assemble(output: Path) -> None:
         "adapters/opencode/deliberation.md.tmpl",
         CORE_BODY=opencode_contract(core_body, references),
     )
+    opencode_plugin = render_template(
+        "adapters/opencode/deliberation.js.tmpl",
+        VERSION=version,
+    )
+    opencode_package = render_template(
+        "adapters/opencode/package.json.tmpl",
+        VERSION=version,
+    )
+    opencode_readme = render_template(
+        "adapters/opencode/README.md.tmpl",
+        VERSION=version,
+    )
+    opencode_install_ps1 = render_template(
+        "adapters/opencode/install.ps1.tmpl",
+        VERSION=version,
+    )
+    opencode_install_sh = render_template(
+        "adapters/opencode/install.sh.tmpl",
+        VERSION=version,
+    )
 
     prepare_output(output)
 
@@ -266,7 +286,15 @@ def assemble(output: Path) -> None:
         opencode_bundle / ".opencode/commands/deliberation.md",
         opencode_command,
     )
+    write_text(
+        opencode_bundle / ".opencode/plugins/deliberation.js",
+        opencode_plugin,
+    )
     write_core(opencode_bundle / "core/deliberation", canonical_skill, references)
+    write_text(opencode_bundle / "package.json", opencode_package)
+    write_text(opencode_bundle / "README.md", opencode_readme)
+    write_text(opencode_bundle / "install.ps1", opencode_install_ps1)
+    write_text(opencode_bundle / "install.sh", opencode_install_sh)
     write_text(opencode_bundle / "VERSION", version)
 
     write_json(
@@ -500,6 +528,71 @@ def validate_assembly(output: Path) -> None:
         != version
     ):
         raise ValidationError("OpenCode bundle version differs from VERSION")
+
+    opencode_plugin_path = (
+        output
+        / "publication/opencode-bundles/deliberation/.opencode/plugins/deliberation.js"
+    )
+    opencode_plugin = read_text(opencode_plugin_path)
+    for fragment in (
+        "export const DeliberationPlugin",
+        "export default DeliberationPlugin",
+        version,
+        "/deliberation",
+    ):
+        if fragment not in opencode_plugin:
+            raise ValidationError(
+                f"{opencode_plugin_path}: missing plugin contract {fragment!r}"
+            )
+
+    opencode_package_path = (
+        output / "publication/opencode-bundles/deliberation/package.json"
+    )
+    opencode_package = require_json(opencode_package_path)
+    if opencode_package.get("name") != "opencode-deliberation":
+        raise ValidationError(f"{opencode_package_path}: invalid package name")
+    if opencode_package.get("version") != version:
+        raise ValidationError(f"{opencode_package_path}: version differs from VERSION")
+    if opencode_package.get("exports") != "./.opencode/plugins/deliberation.js":
+        raise ValidationError(f"{opencode_package_path}: invalid plugin export")
+    expected_files = [
+        ".opencode/commands/deliberation.md",
+        ".opencode/plugins/deliberation.js",
+        "core/deliberation",
+        "install.ps1",
+        "install.sh",
+        "README.md",
+        "VERSION",
+    ]
+    if opencode_package.get("files") != expected_files:
+        raise ValidationError(f"{opencode_package_path}: invalid packaged files")
+
+    for relative, fragments in {
+        "README.md": (version, "/deliberation", ".opencode/plugins/deliberation.js"),
+        "install.ps1": (
+            version,
+            ".config\\opencode",
+            ".opencode",
+            "Copy-Item",
+            "deliberation.md",
+            "deliberation.js",
+        ),
+        "install.sh": (
+            version,
+            ".config/opencode",
+            ".opencode",
+            "cp ",
+            "deliberation.md",
+            "deliberation.js",
+        ),
+    }.items():
+        path = output / "publication/opencode-bundles/deliberation" / relative
+        content = read_text(path)
+        for fragment in fragments:
+            if fragment not in content:
+                raise ValidationError(
+                    f"{path}: missing OpenCode installer contract {fragment!r}"
+                )
 
     publication_root = output / "publication"
     for path in publication_root.rglob("*"):

@@ -1601,3 +1601,51 @@ The controls better match the user's current decision while retaining a clear,
 inspectable approval boundary. The prior `0.1.0-dev.8` failure remains valid
 historical evidence of the retired fixed-letter contract; it does not establish
 the result of the new contextual model.
+
+## D-041 — Provide an installable OpenCode command-and-plugin bundle
+
+- **Date:** 2026-07-29
+- **Status:** Accepted
+
+### Context
+
+The generated OpenCode command bundle is structurally valid and self-contained,
+but a user explicitly needs an installable OpenCode plugin distribution rather
+than only a checked-in command directory. Current OpenCode documentation
+supports local plugins under `.opencode/plugins/`, global plugins under
+`~/.config/opencode/plugins/`, and custom command files under
+`.opencode/commands/` or `~/.config/opencode/commands/`.
+
+### Decision
+
+Extend the generated OpenCode publication package to an installable local
+command-and-plugin bundle at `opencode-bundles/deliberation`.
+
+The bundle includes:
+
+- `.opencode/commands/deliberation.md`, the self-contained explicit
+  `/deliberation` activation command with the full canonical behavioural
+  contract embedded.
+- `.opencode/plugins/deliberation.js`, a minimal OpenCode plugin marker that
+  logs successful plugin loading and points users to `/deliberation`.
+- `package.json`, `README.md`, `install.ps1`, and `install.sh` for project or
+  global installation.
+- `core/deliberation/` as an audit copy outside OpenCode skill discovery.
+
+Increment the shared version to `0.1.0-dev.10`, regenerate all publication
+surfaces, and validate deterministic assembly plus OpenCode host discovery of
+both the command and local plugin file.
+
+This supersedes only the “no JavaScript or TypeScript OpenCode plugin in the
+first version” boundary from D-013 and D-015. It does not change the product
+semantics, does not install Deliberation as an implicitly discoverable OpenCode
+skill, does not add an npm-published plugin, and does not make OpenCode a
+live-host-supported environment.
+
+### Consequences
+
+OpenCode early adopters now have a ready dist they can install globally or into
+one project. The runtime activation surface remains `/deliberation`, preserving
+explicit activation and one shared core. The plugin file is intentionally
+minimal until a future decision proves that OpenCode hooks or npm distribution
+provide material runtime value.
