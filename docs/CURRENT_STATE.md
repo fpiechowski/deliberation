@@ -172,6 +172,13 @@ activation and experimental adapter status**.
   execution assertion is retained as `Blocked`: the fresh task provided no
   existing configuration module or tests, and `pytest` was unavailable. The
   agent did not create a replacement target or exceed the approved scope.
+- Added the missing preconditions to the structured checkpoint fixture: an
+  existing timeout configuration module, focused tests, and an explicit
+  standard-library `unittest` runner that does not depend on `pytest`.
+- Reran the preconditioned structured checkpoint fixture in a fresh Codex
+  Desktop task. C-04, C-05, and C-18 pass, and the accepted post-checkpoint
+  execution now passes all four focused tests within the approved two-file
+  scope.
 
 ## Current implementation
 
@@ -342,14 +349,22 @@ does not establish post-acceptance execution because the fixture environment
 lacked the existing target and test runner it described. Its `Blocked` result
 is retained rather than inferred as a pass.
 
+The structured checkpoint fixture now supplies the existing target and focused
+tests under `validation/fixtures/core/checkpoint-menu-and-explain/seed/` and
+requires `python -m unittest discover -s work -p "test_*.py"`. The seed tests
+and repository integrity check pass locally. Its fresh Codex Desktop rerun at
+`validation/runs/0.1.0-dev.10/codex/desktop-standalone/core-checkpoint-menu-and-explain-rerun/`
+passes the previously blocked post-acceptance execution with four focused
+tests. The original `Blocked` run remains retained as historical evidence.
+
 
 ## Recommended next milestone
 
-Prepare an explicitly approved fixture precondition for the blocked
-post-acceptance execution check: an existing configuration module, focused
-tests, and an available runner in the fresh projectless task. Then rerun only
-that structured fixture. This does not reopen the product contract, adapters,
-or experimental-adapter validation.
+No immediate release-gating validation milestone remains in the approved
+desktop-only scope. The next optional decision is whether to open a separate
+release-readiness milestone for release automation and a stable tag-based
+installation channel; neither is currently approved or required for the
+supported slice.
 
 ## Open questions
 
