@@ -1,6 +1,6 @@
 # Deliberation for OpenCode
 
-Version: `0.1.0-dev.10`
+Version: `0.1.0-dev.11`
 
 This is the experimental OpenCode distribution of Deliberation.
 

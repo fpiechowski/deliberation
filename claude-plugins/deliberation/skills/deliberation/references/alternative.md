@@ -28,13 +28,17 @@ priorities, and invite a choice or a question. Do not choose on the user's
 behalf when their preference is the unresolved factor.
 
 Keep the checkpoint open. Clearly mark one approach as the **current
-recommendation** before presenting these contextual suggestions:
+recommendation**. Then use the same visible, localized heading equivalent to
+**Suggested next step** and state: **You can choose a suggestion or reply in
+your own words.** Localize both statements before presenting these contextual
+suggestions:
 
 - **A — Explain an alternative:** ask which named approach needs a deeper
   explanation, or explain the one the user names in free text.
-- **B — Choose an alternative:** accept the user's named choice as the new
-  proposal, update its preview, and return to the ordinary proposal suggestions.
-  This is not approval.
+- **B — Choose an alternative or propose another next step:** accept the
+  user's named choice as the new proposal, or follow another in-scope
+  instruction, update the preview as needed, and return to the ordinary
+  proposal suggestions. This is not approval.
 - **C — Find more alternatives:** expand or refocus the search using a criterion
   the user names, such as cost, compatibility, delivery time, or risk.
 - **D — Accept the current recommendation:** explicitly authorize only the

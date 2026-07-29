@@ -8,11 +8,11 @@
   "human_evaluation": true,
   "id": "core-checkpoint-menu-and-explain",
   "required_signals": [
-    "Codex presents a light milestone brief, initial proposal, representative code preview, approval boundary, and visible contextual next-message suggestions",
-    "After an explanation request, Codex answers What, Why at all, How, and Why this way and traces a relevant journey before returning to contextual suggestions",
-    "After a request for changes, Codex revises the proposal and preview without executing",
+    "Codex presents a light milestone brief, initial proposal, representative code preview, approval boundary, and a visible localized 'Suggested next step' heading that says the user may choose a suggestion or reply in their own words",
+    "After an explanation request, Codex answers What, Why at all, How, and Why this way and traces a relevant journey before returning to the same heading, invitation, and contextual suggestions",
+    "After a free-form request to change the proposal or take another next step, Codex revises the proposal and preview without executing",
     "After an alternative request, Codex presents a materially different approach and tradeoffs without treating it as approval",
-    "Codex executes only after an explicit acceptance of the named proposal and only within the last visible approved scope"
+    "The heading, invitation, and intent-based boundary remain visible after alternative exploration; Codex executes only after an explicit acceptance of the named proposal and only within the last visible approved scope"
   ],
   "scenarios": [
     "C-04",

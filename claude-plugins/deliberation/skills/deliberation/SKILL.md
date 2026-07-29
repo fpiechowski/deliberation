@@ -23,8 +23,9 @@ not optional background material:
 3. [Checkpoints](references/checkpoints.md) — decision-ready proposals,
    visible design/code previews, contextual next-message suggestions, approval,
    and response intent.
-4. [Alternative comparison](references/alternative.md) — only when the user
-   selects C; compare the proposed approach with meaningful alternatives.
+4. [Alternative comparison](references/alternative.md) — when the user asks to
+   explore alternatives; compare the proposed approach with meaningful
+   alternatives.
 5. [Explain model](references/explain-model.md) — the mandatory concise
    explanation and the expanded Explain response.
 6. [Execution and results](references/execution-and-results.md) — transparent

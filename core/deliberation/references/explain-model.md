@@ -1,8 +1,8 @@
 # Explain model
 
 The light checkpoint brief is not the Explain model. Use the complete Explain
-model only when the user chooses **A — Explain**. It always uses both of these
-complementary views:
+model when the user asks to explain the current proposal or a named
+alternative. It always uses both of these complementary views:
 
 1. **Four questions:** **What?** What is being proposed; **Why at all?** what
    problem or decision makes it necessary; **How?** the essential mechanism;

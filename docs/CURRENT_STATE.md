@@ -4,9 +4,9 @@
 
 ## Phase
 
-OpenCode distribution packaging — **`0.1.0-dev.10` adds an installable
-OpenCode command-and-plugin bundle while preserving explicit `/deliberation`
-activation and experimental adapter status**.
+Checkpoint suggestion framing — **`0.1.0-dev.11` makes A–D optional proposed
+next steps under an explicit localized free-text invitation while preserving
+the named-acceptance authorization boundary**.
 
 ## Completed
 
@@ -179,6 +179,12 @@ activation and experimental adapter status**.
   Desktop task. C-04, C-05, and C-18 pass, and the accepted post-checkpoint
   execution now passes all four focused tests within the approved two-file
   scope.
+- Reframed checkpoint controls as optional proposed next steps with a localized
+  heading and an explicit invitation to reply freely; broadened B to cover a
+  requested change or another next step; applied the same contract after
+  Explain and in alternative comparisons; added fixture expectations and
+  semantic-integrity checks; regenerated all publication packages at
+  `0.1.0-dev.11`.
 
 ## Current implementation
 
@@ -325,16 +331,18 @@ OpenCode command embeds the entry point and all modules.
 
 At every checkpoint, Deliberation shows a light brief, initial proposal,
 representative code or equivalent design artefacts, and contextual suggestions
-for the next user message. They are optional shortcuts; a user may always reply
-in free text. Only a plainly labeled Accept action or equally unambiguous
-free-text instruction authorizes the exact named proposal and scope.
+under a localized heading meaning “Suggested next step”. The block explicitly
+invites a suggestion or free-text reply. A–D are optional shortcuts; B also
+covers another next step. Only a plainly labeled Accept action or equally
+unambiguous free-text instruction authorizes the exact named proposal and
+scope.
 
 When alternatives are requested, the `alternative.md` module compares the
 current proposal with two to four meaningful approaches. It requires a short
 explanation and assessment of each, a compact advantages/disadvantages table,
-and a named recommendation with the decisive tradeoff. Its contextual
-suggestions let the user explain or choose a named alternative, find more, or
-accept that recommendation.
+and a named recommendation with the decisive tradeoff. Its same contextual
+framing lets the user explain or choose a named alternative, propose another
+next step, find more, or accept that recommendation.
 
 The retained live-host run at
 `validation/runs/0.1.0-dev.8/codex/desktop-standalone/core-checkpoint-alternative-comparison/`

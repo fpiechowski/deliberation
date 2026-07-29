@@ -109,18 +109,20 @@ The loop continues until the task is complete.
 Every checkpoint is a preview of the work the user is asked to approve. Before
 approval, it exposes representative code or equivalent design artefacts so the
 user can inspect the intended architecture, design, and style rather than only
-a prose summary. It ends with visible, contextual suggestions for the user's
-next message. The suggestions describe their effect in the current view; they
-are not a rigid A–D protocol, and the user may always reply in their own words.
+a prose summary. It ends with a visible, localized heading equivalent to
+**Suggested next step** and contextual suggestions for the user's next message.
+The block explicitly says that the user may choose a suggestion or reply in
+their own words. The suggestions describe their effect in the current view;
+they are not a rigid A–D protocol.
 
-An ordinary proposal normally offers explanation, requested changes,
-alternative exploration, and acceptance of the explicitly named current
-proposal. When alternatives are visible, the suggestions change to explaining
-or choosing a named alternative, finding more alternatives, or accepting the
-explicitly marked current recommendation. The agent keeps the checkpoint open
-for every option except explicit acceptance. Only an option that says **Accept**
-— or an equally unambiguous free-text instruction — authorizes the exact named
-proposal and stated scope.
+An ordinary proposal normally offers explanation, a change request or another
+next step, alternative exploration, and acceptance of the explicitly named
+current proposal. When alternatives are visible, the same framing offers
+explaining or choosing a named alternative, another next step, finding more
+alternatives, or accepting the explicitly marked current recommendation. The
+agent keeps the checkpoint open for every option except explicit acceptance.
+Only an option that says **Accept** — or an equally unambiguous free-text
+instruction — authorizes the exact named proposal and stated scope.
 
 ## Mode Lifetime
 
@@ -438,9 +440,10 @@ Avoid explaining obvious syntax unless the user asks. Focus on understanding rat
 ### Checkpoint Explain Model
 
 Every checkpoint starts with a light milestone brief and an initial solution
-proposal. The complete Explain model is invoked only by **A — Explain**.
+proposal. The complete Explain model is invoked when the user asks to explain
+the current proposal or a named alternative.
 
-**A — Explain** expands both views without approving the proposal: it answers
+The Explain suggestion expands both views without approving the proposal: it answers
 each of the four questions clearly, then traces the relevant journey and a
 material alternative or failure path when useful. For a small mechanical
 change, the journey is brief rather than omitted.

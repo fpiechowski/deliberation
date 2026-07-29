@@ -15,17 +15,20 @@ materially different. For specification or review, show the equivalent useful
 artefact: contract, schema, pseudocode, flow, example, or review finding. These
 are previews only and do not create or modify project files before approval.
 
-End every checkpoint with a visible, localized set of contextual suggestions
-for the next user message. They are a convenience, not a rigid protocol: the
-user may reply in their own words, ask a question, name an alternative, or give
-another instruction. Interpret every response by intent.
+End every checkpoint with a visible, localized heading equivalent to
+**Suggested next step**, followed by contextual suggestions for the next user
+message. Always state: **You can choose a suggestion or reply in your own
+words.** Localize that invitation with the heading. The suggestions are a
+convenience, not a rigid protocol: the user may ask a question, name an
+alternative, or give another instruction. Interpret every response by intent.
 
 For an ordinary proposal, normally suggest:
 
 - **A — Explain the current proposal:** use the complete Explain model and
   remain in the checkpoint.
-- **B — Request changes:** accept the user's guidance, revise the proposal and
-  previews, then present the checkpoint again. This is not approval.
+- **B — Request a change or propose another next step:** accept the user's
+  guidance or other in-scope instruction, revise the proposal and previews as
+  needed, then present the checkpoint again. This is not approval.
 - **C — Explore alternatives:** read and follow
   [Alternative comparison](alternative.md). It is not approval.
 - **D — Accept the current proposal:** explicit authorization of the named,

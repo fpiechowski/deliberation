@@ -1678,3 +1678,43 @@ existing release asset.
 Users can install the experimental OpenCode adapter with a single PowerShell or
 POSIX shell command, without manually downloading the release zip. The wrapper
 still follows mutable `master`, so README documents that trust boundary.
+
+## D-043 — Present checkpoint shortcuts as proposed next steps
+
+- **Date:** 2026-07-29
+- **Status:** Accepted
+
+### Context
+
+D-040 made checkpoint suggestions contextual and intent-based, but their
+presentation could still look like a required A–D response menu. That obscures
+the existing free-text interaction model and makes a general instruction such
+as “I want to do something else” appear outside the supported flow.
+
+### Decision
+
+Every ordinary checkpoint and alternative-comparison view uses a visible,
+localized heading equivalent to **Suggested next step** and explicitly says the
+user may choose a suggestion or reply in their own words. A–D remain optional,
+contextual shortcuts rather than a response protocol.
+
+For an ordinary proposal, B means **Request a change or propose another next
+step**. In the alternative view, B likewise supports choosing a named
+alternative or proposing another next step. Intent, rather than a letter,
+controls Explain, revision, alternative exploration, and selection. Only an
+explicit Accept suggestion, or equally unambiguous free-text acceptance of the
+exact named proposal and stated scope, authorizes execution.
+
+Increment the canonical packages to `0.1.0-dev.11`, deterministically
+regenerate every adapter, and add fixture and semantic-integrity coverage. Keep
+the public OpenCode release installers pinned to the existing
+`0.1.0-dev.10` release asset until a separately approved release-automation
+milestone.
+
+### Consequences
+
+Checkpoint interaction better communicates user agency without weakening the
+approval boundary. Free-form questions, revisions, alternative exploration,
+and other instructions keep the checkpoint open. Publication artifacts carry
+the new canonical contract, while the OpenCode root installers intentionally
+continue to download the last published release.

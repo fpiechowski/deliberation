@@ -24,8 +24,9 @@ not optional background material:
 3. [Checkpoints](references/checkpoints.md) — decision-ready proposals,
    visible design/code previews, contextual next-message suggestions, approval,
    and response intent.
-4. [Alternative comparison](references/alternative.md) — only when the user
-   selects C; compare the proposed approach with meaningful alternatives.
+4. [Alternative comparison](references/alternative.md) — when the user asks to
+   explore alternatives; compare the proposed approach with meaningful
+   alternatives.
 5. [Explain model](references/explain-model.md) — the mandatory concise
    explanation and the expanded Explain response.
 6. [Execution and results](references/execution-and-results.md) — transparent
@@ -98,13 +99,17 @@ priorities, and invite a choice or a question. Do not choose on the user's
 behalf when their preference is the unresolved factor.
 
 Keep the checkpoint open. Clearly mark one approach as the **current
-recommendation** before presenting these contextual suggestions:
+recommendation**. Then use the same visible, localized heading equivalent to
+**Suggested next step** and state: **You can choose a suggestion or reply in
+your own words.** Localize both statements before presenting these contextual
+suggestions:
 
 - **A — Explain an alternative:** ask which named approach needs a deeper
   explanation, or explain the one the user names in free text.
-- **B — Choose an alternative:** accept the user's named choice as the new
-  proposal, update its preview, and return to the ordinary proposal suggestions.
-  This is not approval.
+- **B — Choose an alternative or propose another next step:** accept the
+  user's named choice as the new proposal, or follow another in-scope
+  instruction, update the preview as needed, and return to the ordinary
+  proposal suggestions. This is not approval.
 - **C — Find more alternatives:** expand or refocus the search using a criterion
   the user names, such as cost, compatibility, delivery time, or risk.
 - **D — Accept the current recommendation:** explicitly authorize only the
@@ -133,17 +138,20 @@ materially different. For specification or review, show the equivalent useful
 artefact: contract, schema, pseudocode, flow, example, or review finding. These
 are previews only and do not create or modify project files before approval.
 
-End every checkpoint with a visible, localized set of contextual suggestions
-for the next user message. They are a convenience, not a rigid protocol: the
-user may reply in their own words, ask a question, name an alternative, or give
-another instruction. Interpret every response by intent.
+End every checkpoint with a visible, localized heading equivalent to
+**Suggested next step**, followed by contextual suggestions for the next user
+message. Always state: **You can choose a suggestion or reply in your own
+words.** Localize that invitation with the heading. The suggestions are a
+convenience, not a rigid protocol: the user may ask a question, name an
+alternative, or give another instruction. Interpret every response by intent.
 
 For an ordinary proposal, normally suggest:
 
 - **A — Explain the current proposal:** use the complete Explain model and
   remain in the checkpoint.
-- **B — Request changes:** accept the user's guidance, revise the proposal and
-  previews, then present the checkpoint again. This is not approval.
+- **B — Request a change or propose another next step:** accept the user's
+  guidance or other in-scope instruction, revise the proposal and previews as
+  needed, then present the checkpoint again. This is not approval.
 - **C — Explore alternatives:** read and follow
   [Alternative comparison](alternative.md). It is not approval.
 - **D — Accept the current proposal:** explicit authorization of the named,
@@ -246,8 +254,8 @@ explaining behavior, risks, and actionable feedback.
 # Explain model
 
 The light checkpoint brief is not the Explain model. Use the complete Explain
-model only when the user chooses **A — Explain**. It always uses both of these
-complementary views:
+model when the user asks to explain the current proposal or a named
+alternative. It always uses both of these complementary views:
 
 1. **Four questions:** **What?** What is being proposed; **Why at all?** what
    problem or decision makes it necessary; **How?** the essential mechanism;

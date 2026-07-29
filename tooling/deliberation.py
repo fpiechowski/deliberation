@@ -136,6 +136,33 @@ def canonical_core_digest(canonical_skill: str, references: dict[str, str]) -> s
     return sha256(payload)
 
 
+def validate_checkpoint_semantics(references: dict[str, str]) -> None:
+    """Protect the accepted intent-based checkpoint interaction contract."""
+    checkpoints = references.get("references/checkpoints.md", "")
+    alternative = references.get("references/alternative.md", "")
+    required_fragments = {
+        "references/checkpoints.md": (
+            "localized heading equivalent to\n**Suggested next step**",
+            "**You can choose a suggestion or reply in your own\nwords.**",
+            "Request a change or propose another next step",
+            "Only a suggestion that explicitly says **Accept** can authorize work",
+        ),
+        "references/alternative.md": (
+            "same visible, localized heading equivalent to\n**Suggested next step**",
+            "**You can choose a suggestion or reply in\nyour own words.**",
+            "Choose an alternative or propose another next step",
+            "Only an explicit acceptance\nof the named current recommendation authorizes work",
+        ),
+    }
+    for relative, fragments in required_fragments.items():
+        content = checkpoints if relative.endswith("checkpoints.md") else alternative
+        for fragment in fragments:
+            if fragment not in content:
+                raise ValidationError(
+                    f"{relative}: missing checkpoint interaction contract {fragment!r}"
+                )
+
+
 def write_core(
     destination: Path,
     canonical_skill: str,
@@ -401,6 +428,7 @@ def validate_fixtures() -> None:
 def validate_assembly(output: Path) -> None:
     version = product_version()
     canonical_skill, _, core_body, references = canonical()
+    validate_checkpoint_semantics(references)
 
     validate_skill(
         output / "standalone/codex/deliberation/SKILL.md", core_body

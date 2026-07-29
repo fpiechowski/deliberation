@@ -1,6 +1,6 @@
 {
   "name": "opencode-deliberation",
-  "version": "0.1.0-dev.10",
+  "version": "0.1.0-dev.11",
   "description": "Deliberation work-mode distribution for OpenCode.",
   "type": "module",
   "exports": "./.opencode/plugins/deliberation.js",

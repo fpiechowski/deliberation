@@ -7,7 +7,8 @@
     "After the user requests alternative exploration, Codex compares the initial proposal with two to four feasible materially different approaches, including the initial proposal",
     "Each approach receives a short explanation and assessment against relevant criteria, with material uncertainty stated where applicable",
     "Codex presents a compact comparison table containing advantages and disadvantages, marks a current recommendation with its decisive tradeoff, and returns to contextual suggestions without authorization",
-    "The alternative-view suggestions offer explanation or selection of a named alternative, further exploration, and acceptance only of the named current recommendation"
+    "The alternative view repeats a visible localized 'Suggested next step' heading and says the user may choose a suggestion or reply in their own words",
+    "The alternative-view suggestions offer explanation or selection of a named alternative, another next step, further exploration, and acceptance only of the named current recommendation"
   ],
   "forbidden_signals": [
     "Codex treats alternative exploration or choosing an alternative as approval or begins modifying files",

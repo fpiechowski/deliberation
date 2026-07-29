@@ -76,14 +76,16 @@ The additional Polish natural-use fixture now passes with `0.1.0-dev.2` after
 the combined invocation-and-task acknowledgement and checkpoint contract was
 made explicit.
 
-Version `0.1.0-dev.10` makes every checkpoint a visible design preview: it
+Version `0.1.0-dev.11` makes every checkpoint a visible design preview: it
 contains a light milestone brief, an initial proposal, representative code or
 design artefacts before approval, and contextual suggestions for the next user
-message. They are not a rigid letter protocol: users may respond freely, while
-only a clearly named Accept action authorizes work. In the alternative view,
-the suggestions cover explaining or choosing a named alternative, finding more
-alternatives, and accepting the marked current recommendation. The canonical
-skill entry point explicitly loads its modular runtime contract from
+message under a localized “Suggested next step” heading. Each block explicitly
+invites a suggestion or free-text reply. The A–D labels remain optional
+shortcuts, including a broad B for a change or another next step; only a clearly
+named Accept action authorizes work. In the alternative view, the same framing
+applies to explaining or choosing a named alternative, another next step,
+finding more alternatives, and accepting the marked current recommendation.
+The canonical skill entry point explicitly loads its modular runtime contract from
 `core/deliberation/references/`. The OpenCode adapter now includes an
 installable local command-and-plugin bundle under `opencode-bundles/`.
 
