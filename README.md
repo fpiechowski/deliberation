@@ -159,6 +159,35 @@ After installation, activate the mode with:
 OpenCode is an experimental adapter and is not live-host behaviour validated.
 The ready dist is generated under `opencode-bundles/deliberation`.
 
+PowerShell one-line install from the current release asset:
+
+```powershell
+irm https://raw.githubusercontent.com/fpiechowski/deliberation/master/install-opencode.ps1 | iex
+```
+
+POSIX shell one-line install from the current release asset:
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/master/install-opencode.sh)"
+```
+
+For one project instead of global OpenCode config:
+
+```powershell
+iex "& { $(irm https://raw.githubusercontent.com/fpiechowski/deliberation/master/install-opencode.ps1) } -Scope Project -ProjectPath 'C:\path\to\project'"
+```
+
+or:
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/master/install-opencode.sh)" sh project /path/to/project
+```
+
+Both commands execute the current wrapper script from `master`. The wrapper
+downloads the published `v0.1.0-dev.10` OpenCode zip from GitHub Releases,
+extracts it to a temporary directory, runs the bundled installer, and removes
+the temporary files.
+
 Install globally from that directory:
 
 ```powershell

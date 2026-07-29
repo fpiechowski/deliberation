@@ -1649,3 +1649,32 @@ one project. The runtime activation surface remains `/deliberation`, preserving
 explicit activation and one shared core. The plugin file is intentionally
 minimal until a future decision proves that OpenCode hooks or npm distribution
 provide material runtime value.
+
+## D-042 — Add release-asset one-line installers for OpenCode
+
+- **Date:** 2026-07-29
+- **Status:** Accepted
+
+### Context
+
+The `v0.1.0-dev.10` release includes a ready OpenCode zip asset, but installing
+it still requires a user to download, unpack, and run the bundled installer.
+The Codex distribution already has root scripts that support a one-command
+install from GitHub raw content.
+
+### Decision
+
+Add root `install-opencode.ps1` and `install-opencode.sh` wrappers. They fetch
+the published `opencode-deliberation-0.1.0-dev.10.zip` asset from GitHub
+Releases, extract it to a temporary directory, run the bundled OpenCode
+installer with either global or project scope, and remove the temporary files.
+
+Keep the product version at `0.1.0-dev.10` because the OpenCode payload is
+unchanged; this milestone exposes a better installation entrypoint for the
+existing release asset.
+
+### Consequences
+
+Users can install the experimental OpenCode adapter with a single PowerShell or
+POSIX shell command, without manually downloading the release zip. The wrapper
+still follows mutable `master`, so README documents that trust boundary.

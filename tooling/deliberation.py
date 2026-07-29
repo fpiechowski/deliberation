@@ -640,6 +640,22 @@ def validate_installers() -> None:
             "plugin remove",
             "plugin add",
         ),
+        ROOT / "install-opencode.ps1": (
+            "v0.1.0-dev.10",
+            "opencode-deliberation-0.1.0-dev.10.zip",
+            "Invoke-WebRequest",
+            "Expand-Archive",
+            "install.ps1",
+            "System.IO.Directory",
+        ),
+        ROOT / "install-opencode.sh": (
+            "#!/usr/bin/env sh",
+            "v0.1.0-dev.10",
+            "opencode-deliberation-0.1.0-dev.10.zip",
+            "curl",
+            "unzip",
+            "install.sh",
+        ),
     }
     for path, fragments in required_fragments.items():
         content = read_text(path)

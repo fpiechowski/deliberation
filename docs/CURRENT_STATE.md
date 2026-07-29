@@ -156,6 +156,10 @@ activation and experimental adapter status**.
 - Verified the OpenCode bundle against the local `opencode` CLI by resolving a
   temporary config directory: `/deliberation` is discovered as a command and the
   local plugin file is resolved by the host configuration.
+- Added root OpenCode release installers, `install-opencode.ps1` and
+  `install-opencode.sh`, that download the published `v0.1.0-dev.10` zip from
+  GitHub Releases, extract it temporarily, delegate to the bundled installer,
+  and clean up.
 
 ## Current implementation
 
@@ -275,6 +279,9 @@ package. Its command remains the only activation surface and embeds the full
 canonical contract. Its plugin is a minimal local OpenCode plugin marker rather
 than an npm-published runtime extension. OpenCode remains experimental: the
 local CLI discovery check proves packaging, not behavioural scenario support.
+Root `install-opencode.ps1` and `install-opencode.sh` provide a one-command
+install path from the GitHub release asset without requiring users to download
+and unpack the zip manually.
 
 The shared core now also has an observable-loop contract. Ordinary
 Deliberation signals main phase boundaries without constraining response
