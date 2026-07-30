@@ -29,9 +29,14 @@ Copy-Item `
   -Force
 
 Copy-Item `
+  -LiteralPath (Join-Path $sourceRoot ".opencode\commands\explain.md") `
+  -Destination (Join-Path $commandsRoot "explain.md") `
+  -Force
+
+Copy-Item `
   -LiteralPath (Join-Path $sourceRoot ".opencode\plugins\deliberation.js") `
   -Destination (Join-Path $pluginsRoot "deliberation.js") `
   -Force
 
-Write-Host "Installed Deliberation 0.1.0-dev.11 for OpenCode at $configRoot"
-Write-Host "Start OpenCode and invoke /deliberation."
+Write-Host "Installed Deliberation 0.1.0-dev.13 for OpenCode at $configRoot"
+Write-Host "Start OpenCode and invoke /deliberation or /explain."

@@ -1,6 +1,6 @@
 # Deliberation for OpenCode
 
-Version: `0.1.0-dev.11`
+Version: `0.1.0-dev.13`
 
 This is the experimental OpenCode distribution of Deliberation.
 
@@ -8,10 +8,14 @@ It installs:
 
 - `.opencode/commands/deliberation.md` — the self-contained `/deliberation`
   command with the complete shared behavioural contract embedded.
+- `.opencode/commands/explain.md` — the self-contained `/explain` command for
+  a one-off explanation of a technical topic.
 - `.opencode/plugins/deliberation.js` — a minimal OpenCode plugin marker that
   confirms the Deliberation distribution has been loaded.
 - `core/deliberation/` — the canonical Agent Skills-compatible source for
   audit and parity checks; it is intentionally outside OpenCode skill discovery.
+- `core/explain/` — the canonical source for the independent `explain` skill,
+  also outside OpenCode skill discovery.
 
 ## Install globally
 
@@ -47,6 +51,12 @@ Then start OpenCode and invoke:
 
 ```text
 /deliberation
+```
+
+For a standalone explanation, invoke:
+
+```text
+/explain <topic>
 ```
 
 OpenCode remains an experimental adapter for this release. The command and

@@ -34,9 +34,14 @@ The intended source and publication layout is:
 
 ```text
 core/
-└── deliberation/
+├── shared/
+│   └── explain-model.md          # shared Explain source
+├── deliberation/
     ├── SKILL.md                   # entry point and explicit module links
     └── references/                # hand-authored runtime modules
+└── explain/
+    ├── SKILL.md                   # standalone explanation entry point
+    └── references/                # hand-authored explanation model
 
 adapters/
 ├── codex/
@@ -100,6 +105,19 @@ remain outside the runtime skill.
 The first core is instruction-only. It has no scripts, assets, external tools,
 or runtime dependencies.
 
+`core/explain/SKILL.md` is a second, independent Agent Skills-compatible core
+named `explain`. It provides the Explain step for a named topic without
+activating Deliberation or its conversation-wide state, checkpoint, approval,
+or execution semantics. It uses the same four-question and conditional-journey
+teaching model from `core/shared/explain-model.md`, but it is not a delegation
+target for an open Deliberation checkpoint: that checkpoint must retain its own
+state and approval boundary.
+
+Both skills link the shared source as `references/explain-model.md`. The
+assembler materializes that one source into each self-contained package, so
+published adapters contain no external path while source maintenance has no
+duplicated Explain contract.
+
 ## Adapter contracts
 
 ### Codex
@@ -123,6 +141,11 @@ plugins/deliberation/
 │   └── plugin.json
 └── skills/
     └── deliberation/
+        ├── SKILL.md
+        ├── references/
+        └── agents/
+            └── openai.yaml
+    └── explain/
         ├── SKILL.md
         ├── references/
         └── agents/
@@ -158,6 +181,9 @@ claude-plugins/deliberation/
 │   └── plugin.json
     └── skills/
         └── deliberation/
+            ├── SKILL.md
+            └── references/
+        └── explain/
             ├── SKILL.md
             └── references/
 ```
@@ -202,6 +228,11 @@ contract into the current conversation.
 Ordinary engineering prompts do not expose Deliberation as an automatically
 loadable OpenCode skill.
 
+The same bundle also includes `.opencode/commands/explain.md`. Invoking
+`/explain` injects the self-contained standalone explanation contract; it does
+not activate Deliberation. Both canonical audit copies remain outside OpenCode
+skill discovery paths.
+
 The generated distribution bundle includes the canonical `SKILL.md` for audit
 and portability, but stores it outside OpenCode's discovered skill paths. The
 runtime command is self-contained so that both project and global installation
@@ -235,8 +266,8 @@ canonical core and adapter templates.
 
 The assembler:
 
-1. Reads `VERSION`, the canonical `SKILL.md`, and every explicitly linked
-   reference module.
+1. Reads `VERSION`, both canonical skill entry points, and every explicitly
+   linked reference module.
 2. Applies only the declared host overlay.
 3. Writes standalone validation artifacts and self-contained publication
    packages.

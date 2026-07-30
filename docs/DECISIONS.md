@@ -1718,3 +1718,73 @@ approval boundary. Free-form questions, revisions, alternative exploration,
 and other instructions keep the checkpoint open. Publication artifacts carry
 the new canonical contract, while the OpenCode root installers intentionally
 continue to download the last published release.
+
+## D-044 — Add a standalone Explain companion skill
+
+- **Date:** 2026-07-30
+- **Status:** Accepted
+
+### Context
+
+The existing Explain model is a checkpoint stage: it explains the currently
+visible Deliberation proposal or alternative, then returns to the open approval
+boundary. A user also needs a direct way to understand a named technical topic
+without activating a conversation-wide work mode or entering a decision flow.
+
+### Decision
+
+Add `explain` as a second, explicitly invoked Agent Skills-compatible core.
+It answers only the Explain step for a named engineering, code, design, or
+system topic. It uses the four questions — What, Why at all, How, and Why this
+way — plus a proportionate journey for dynamic subjects.
+
+It is independent from Deliberation: it does not activate the mode, persist for
+the conversation, open checkpoints, seek approval, create state, or modify
+files unless separately instructed. It does not replace Explain inside an open
+Deliberation checkpoint, which must preserve its own state and approval
+boundary.
+
+Generate the skill alongside Deliberation in the existing Codex and Claude Code
+plugin packages and as `/explain` in the existing OpenCode bundle. Add
+deterministic semantic-integrity validation and core plus adapter fixture
+skeletons. Increment the shared version to `0.1.0-dev.12`. Live-host validation
+of the new skill remains a separately selected milestone.
+
+### Consequences
+
+Users receive one installation surface with two explicit skills: `$deliberation`
+for the conversation-wide collaboration mode and `$explain` for a one-off
+ explanation. The canonical skill entry points remain separate to keep their state and
+authorization semantics unambiguous, while the assembler proves parity across
+all generated adapters.
+
+## D-045 — Share one canonical Explain model
+
+- **Date:** 2026-07-31
+- **Status:** Accepted
+
+### Context
+
+The first standalone `explain` implementation copied the Explain guidance into
+`core/explain/references/explanation-model.md` while Deliberation retained
+`core/deliberation/references/explain-model.md`. The two texts were
+conceptually aligned but could drift, contradicting the shared behavioural
+core principle.
+
+### Decision
+
+Store the single hand-authored Explain contract at
+`core/shared/explain-model.md`. Both canonical skills link it as
+`references/explain-model.md`. The assembler copies that shared source into
+each self-contained Codex, Claude Code, and OpenCode artifact, and validation
+rejects a local duplicate or missing shared source.
+
+Increment the shared version to `0.1.0-dev.13`. Keep the standalone skill's
+activation and state semantics separate from Deliberation; sharing the
+explanation model does not share checkpoint state or approval behavior.
+
+### Consequences
+
+Future Explain changes are made once and appear consistently in the checkpoint
+Explain step and the standalone skill. Published packages remain self-contained
+and the source tree makes the shared ownership explicit.

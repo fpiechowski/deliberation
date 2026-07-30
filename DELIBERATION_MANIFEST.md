@@ -147,6 +147,11 @@ checkpoints are constitutive of the mode. Acknowledge the transition clearly.
 Use **Deliberation** as the product name and `deliberation` as the primary skill
 name.
 
+Provide `explain` as a separate, explicitly invoked companion skill for a
+standalone explanation of a named engineering, code, design, or system topic.
+It does not activate Deliberation, persist for the conversation, seek approval,
+or authorize execution.
+
 Activation is explicit in the first version because the mode changes behaviour
 for the entire conversation. Do not activate it implicitly for an ordinary
 request to explain, plan, implement, debug, or review. Use the host's native

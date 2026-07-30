@@ -1,0 +1,6 @@
+interface:
+  display_name: "Explain"
+  short_description: "Explain a technical topic clearly"
+  default_prompt: "Use $explain to explain this technical topic clearly."
+policy:
+  allow_implicit_invocation: false

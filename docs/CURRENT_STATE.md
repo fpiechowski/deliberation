@@ -1,12 +1,11 @@
 # Current State
 
-**Last updated:** 2026-07-29
+**Last updated:** 2026-07-30
 
 ## Phase
 
-Checkpoint suggestion framing — **`0.1.0-dev.11` makes A–D optional proposed
-next steps under an explicit localized free-text invitation while preserving
-the named-acceptance authorization boundary**.
+Shared Explain model — **`0.1.0-dev.13` makes the Explain contract a single
+canonical source shared by Deliberation and the standalone `explain` skill**.
 
 ## Completed
 
@@ -185,6 +184,13 @@ the named-acceptance authorization boundary**.
   Explain and in alternative comparisons; added fixture expectations and
   semantic-integrity checks; regenerated all publication packages at
   `0.1.0-dev.11`.
+- Added the separate explicit `explain` skill with its own canonical core and
+  four-question, conditional-journey explanation model. Generated it for
+  Codex, Claude Code, and OpenCode; added semantic-integrity validation and
+  one core plus three adapter fixture skeletons at `0.1.0-dev.12`.
+- Moved the Explain contract to `core/shared/explain-model.md`. Both skills
+  link that source, while the assembler materializes it into each
+  self-contained adapter package and rejects local duplicates at `0.1.0-dev.13`.
 
 ## Current implementation
 
@@ -198,6 +204,13 @@ repository publication packages with freshly validated assembly.
 deterministic output, validates host structure and explicit-only activation,
 compares every normalized runtime payload with the canonical core, and fails
 when any committed generated file is missing, extra, or changed.
+
+The same package now contains two explicit skills. `deliberation` remains the
+conversation-wide collaborative mode; `explain` is a standalone, read-only
+explanation step with no checkpoint, approval, or persistence semantics. The
+assembler copies both canonical cores into Codex and Claude Code packages and
+embeds both commands in OpenCode, then validates each independent runtime
+payload against its source.
 
 Retained live-host evidence under `validation/runs/` includes the
 `0.1.0-dev.0` failure and the corrective `0.1.0-dev.1` pass for the standalone
@@ -369,7 +382,8 @@ tests. The original `Blocked` run remains retained as historical evidence.
 ## Recommended next milestone
 
 No immediate release-gating validation milestone remains in the approved
-desktop-only scope. The next optional decision is whether to open a separate
+desktop-only scope. The next optional decision is whether to validate the new
+explicit `$explain` skill in a standalone Codex Desktop run, or instead open a
 release-readiness milestone for release automation and a stable tag-based
 installation channel; neither is currently approved or required for the
 supported slice.

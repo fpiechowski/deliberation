@@ -2,7 +2,8 @@
 
 ## Purpose
 
-This document is the acceptance contract for Deliberation behaviour.
+This document is the acceptance contract for Deliberation and its explicit
+standalone `explain` companion skill.
 
 The scenarios are transcript-based and implementation-neutral. They define
 observable behaviour that must remain consistent across Codex, Claude Code, and
@@ -122,6 +123,23 @@ appropriate user, request, data, or execution journey from trigger to
 observable result mapped to the design or code. It remains in the checkpoint
 and returns to contextual suggestions. For a small static or mechanical change, the
 journey remains short and concrete rather than being omitted.
+
+### C-19 — Standalone Explain
+
+**Given** the explicit `explain` skill is installed and Deliberation is
+inactive.
+
+**When** the user invokes `explain` through the host's explicit mechanism with
+a named technical topic.
+
+**Then** it answers What, Why at all, How, and Why this way. For dynamic
+subjects, it adds the appropriate concise user, request, data, or execution
+journey from trigger to observable result, including a material failure or
+alternative path only when useful.
+
+**And** it remains a standalone explanation: it does not activate
+Deliberation, open a checkpoint, request approval, create state, or modify
+files unless separately asked.
 
 ### C-18 — Structured checkpoint controls and inspectable previews
 
@@ -424,6 +442,18 @@ layout, installation, progress presentation, and required continuity mechanics.
 **And** milestone, checkpoint, approval, exit, and completion semantics remain
 equivalent.
 
+### A-06 — Standalone Explain invocation
+
+**Applies to:** Codex, Claude Code, and OpenCode.
+
+**Given** the generated package is installed.
+
+**When** the user invokes `$explain` in Codex, the standalone or namespaced
+`/explain` skill in Claude Code, or `/explain` in OpenCode.
+
+**Then** the equivalent C-19 contract loads with model-driven invocation
+disabled where the host supports that control.
+
 ## Critical Failure Cases
 
 Any occurrence below is a failure even when the final code or answer is
@@ -469,6 +499,7 @@ technically correct.
 | D-036 — Visible roadmap before checkpoint | C-03, C-04, C-08, C-17 |
 | D-037 — Journey consideration at checkpoints | C-05 |
 | D-038 — Modular checkpoint Explain and preview contract | C-04, C-05, C-18, A-01–A-05 |
+| D-044 — Standalone Explain companion skill | C-19, A-06 |
 
 ## Phase Acceptance Criteria
 

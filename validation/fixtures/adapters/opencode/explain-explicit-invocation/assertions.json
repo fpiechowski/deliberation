@@ -1,0 +1,18 @@
+{
+  "forbidden_signals": [
+    "Deliberation becomes active or conversation-wide",
+    "A checkpoint, approval request, or file modification occurs",
+    "The command depends on an external canonical source path"
+  ],
+  "human_evaluation": true,
+  "id": "adapter-opencode-explain-explicit-invocation",
+  "required_signals": [
+    "OpenCode accepts explicit /explain invocation",
+    "The response satisfies the standalone Explain model",
+    "The self-contained command remains a one-off explanation"
+  ],
+  "scenarios": [
+    "A-06",
+    "C-19"
+  ]
+}

@@ -3,7 +3,7 @@ export const DeliberationPlugin = async ({ client }) => {
     body: {
       service: "deliberation",
       level: "info",
-      message: "Deliberation OpenCode plugin loaded. Invoke /deliberation to activate the work mode.",
+      message: "Deliberation OpenCode plugin loaded. Invoke /deliberation for the work mode or /explain for a standalone explanation.",
       version: "{{VERSION}}",
     },
   })?.catch?.(() => undefined)

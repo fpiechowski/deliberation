@@ -1,0 +1,18 @@
+{
+  "forbidden_signals": [
+    "Deliberation is activated or made conversation-wide",
+    "A checkpoint or approval request is presented",
+    "Project files or durable state are created or modified"
+  ],
+  "human_evaluation": true,
+  "id": "core-standalone-explain",
+  "required_signals": [
+    "The response separately answers What, Why at all, How, and Why this way for retry backoff with jitter",
+    "The response traces a concise request or execution journey from overload through retries to an observable outcome",
+    "The response distinguishes the normal protection path from a material failure or limit without becoming a lecture",
+    "The response ends as a standalone explanation rather than a decision workflow"
+  ],
+  "scenarios": [
+    "C-19"
+  ]
+}

@@ -1,13 +1,15 @@
 {
   "name": "opencode-deliberation",
-  "version": "0.1.0-dev.11",
+  "version": "0.1.0-dev.13",
   "description": "Deliberation work-mode distribution for OpenCode.",
   "type": "module",
   "exports": "./.opencode/plugins/deliberation.js",
   "files": [
     ".opencode/commands/deliberation.md",
+    ".opencode/commands/explain.md",
     ".opencode/plugins/deliberation.js",
     "core/deliberation",
+    "core/explain",
     "install.ps1",
     "install.sh",
     "README.md",

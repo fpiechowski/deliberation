@@ -89,6 +89,13 @@ The canonical skill entry point explicitly loads its modular runtime contract fr
 `core/deliberation/references/`. The OpenCode adapter now includes an
 installable local command-and-plugin bundle under `opencode-bundles/`.
 
+Version `0.1.0-dev.13` adds `explain`, a separate explicit skill for explaining
+a technical topic without activating Deliberation, creating files, or opening a
+checkpoint. It uses the same concise four-question model and an appropriate
+journey for dynamic subjects. Its cross-environment fixture skeletons and
+deterministic package validation are included; live-host validation is a later
+optional milestone.
+
 Codex Desktop is the only live-host-validated and supported environment. CLI,
 IDE, and other Codex clients are out of scope. Claude Code and OpenCode are
 experimental adapters and are not release-gating.
@@ -134,6 +141,7 @@ Both commands execute the current scripts from `master`. Review the linked
 scripts before running them if you do not want to trust mutable remote code.
 After installation or update, start a new Codex conversation or restart Codex
 Desktop, then activate the mode with `$deliberation`.
+For a standalone explanation, invoke `$explain <topic>`.
 
 The PowerShell path was verified against the GitHub marketplace with
 `0.1.0-dev.3`, including a repeated-run update.
@@ -155,6 +163,8 @@ After installation, activate the mode with:
 ```text
 /deliberation:deliberation
 ```
+
+For a standalone explanation, invoke the corresponding `/explain` skill.
 
 ## Experimental OpenCode installation
 
@@ -220,6 +230,8 @@ After installation, activate the mode with:
 /deliberation
 ```
 
+For a standalone explanation, invoke `/explain <topic>`.
+
 ## Repository guide
 
 - [`AGENTS.md`](AGENTS.md) — instructions for Codex sessions working on this
@@ -238,5 +250,7 @@ After installation, activate the mode with:
 - [`core/deliberation/SKILL.md`](core/deliberation/SKILL.md) — canonical
   behavioural entry point and links to the modular runtime source for all
   environments.
+- [`core/explain/SKILL.md`](core/explain/SKILL.md) — canonical standalone
+  explanation skill for all environments.
 - [`tooling/deliberation.py`](tooling/deliberation.py) — deterministic
   assembler, publication synchronizer, and integrity validator.

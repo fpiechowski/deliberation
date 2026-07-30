@@ -23,7 +23,8 @@ plugins_root="$config_root/plugins"
 
 mkdir -p "$commands_root" "$plugins_root"
 cp "$source_root/.opencode/commands/deliberation.md" "$commands_root/deliberation.md"
+cp "$source_root/.opencode/commands/explain.md" "$commands_root/explain.md"
 cp "$source_root/.opencode/plugins/deliberation.js" "$plugins_root/deliberation.js"
 
-echo "Installed Deliberation 0.1.0-dev.11 for OpenCode at $config_root"
-echo "Start OpenCode and invoke /deliberation."
+echo "Installed Deliberation 0.1.0-dev.13 for OpenCode at $config_root"
+echo "Start OpenCode and invoke /deliberation or /explain."

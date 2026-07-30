@@ -1,0 +1,18 @@
+{
+  "forbidden_signals": [
+    "The explain skill is model-invoked without an explicit command",
+    "Deliberation becomes active or conversation-wide",
+    "A checkpoint, approval request, or file modification occurs"
+  ],
+  "human_evaluation": true,
+  "id": "adapter-claude-code-explain-explicit-invocation",
+  "required_signals": [
+    "Claude Code accepts the explicit standalone or namespaced explain invocation",
+    "The response satisfies the standalone Explain model",
+    "The response remains a one-off explanation"
+  ],
+  "scenarios": [
+    "A-06",
+    "C-19"
+  ]
+}
