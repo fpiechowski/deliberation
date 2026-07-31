@@ -266,6 +266,11 @@ def assemble(output: Path) -> None:
 
     codex_plugin = output / "publication/plugins/deliberation"
     write_text(codex_plugin / ".codex-plugin/plugin.json", codex_manifest)
+    codex_icon = ROOT / "adapters/codex/assets/deliberation-icon.svg"
+    if not codex_icon.is_file():
+        raise ValidationError(f"{codex_icon}: Codex plugin icon is missing")
+    (codex_plugin / "assets").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(codex_icon, codex_plugin / "assets/deliberation-icon.svg")
     write_core(codex_plugin / "skills/deliberation", canonical_skill, references)
     write_text(
         codex_plugin / "skills/deliberation/agents/openai.yaml",
@@ -452,6 +457,10 @@ def validate_assembly(output: Path) -> None:
             raise ValidationError(f"{path}: version differs from VERSION")
         if manifest_type == "codex" and manifest.get("skills") != "./skills/":
             raise ValidationError(f"{path}: invalid Codex skills path")
+
+    codex_icon_path = output / "publication/plugins/deliberation/assets/deliberation-icon.svg"
+    if not codex_icon_path.is_file():
+        raise ValidationError(f"{codex_icon_path}: generated Codex icon is missing")
 
     codex_marketplace_path = output / "publication/.agents/plugins/marketplace.json"
     codex_marketplace = require_json(codex_marketplace_path)

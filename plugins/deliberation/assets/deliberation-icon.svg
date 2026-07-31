@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Deliberation</title>
+  <desc id="desc">Two overlapping conversation shapes around a D monogram.</desc>
+  <rect width="512" height="512" rx="112" fill="#0f172a"/>
+  <path d="M94 286c0-91 74-164 165-164h19c91 0 165 73 165 164v12c0 91-74 164-165 164h-19c-91 0-165-73-165-164z" fill="#2dd4bf"/>
+  <path d="M242 340c0-76 61-138 137-138h8c76 0 137 62 137 138v8c0 76-61 138-137 138h-8c-76 0-137-62-137-138z" fill="#fb7185"/>
+  <path d="M115 342 76 428l99-64" fill="#2dd4bf"/>
+  <path d="m378 421 74 47-38-91" fill="#fb7185"/>
+  <path d="M208 182h71c69 0 111 38 111 101s-42 101-111 101h-71zm58 51v100h14c33 0 52-17 52-50s-19-50-52-50z" fill="#fff"/>
+</svg>
