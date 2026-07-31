@@ -91,7 +91,8 @@ execution/results. Together they contain:
 
 - Portable `name` and `description` frontmatter.
 - The complete operational behaviour required on every activation.
-- The Deliberation loop and conversation-wide lifetime.
+- The Deliberation loop, task-scoped default lifetime, and explicit
+  conversation-wide opt-in.
 - Milestone and checkpoint semantics.
 - Choice, Consequence, and Drift tests.
 - Approval and response-intent handling.
@@ -299,6 +300,13 @@ product version.
 
 A release regenerates the publication surfaces, validates them, records the
 scenario results, commits the generated artifacts, and tags the repository.
+
+The release-readiness workflow at `.github/workflows/release.yml` runs for
+`v<SemVer>` tags. It verifies that the tag matches `VERSION`, runs the full
+repository check, builds the deterministic OpenCode ZIP and SHA-256 checksum,
+and creates a draft GitHub Release. Publishing the draft remains a human
+controlled step. The root installers use the same immutable release tag rather
+than the mutable default branch.
 
 ## Installation paths
 

@@ -6,7 +6,7 @@
   "human_evaluation": true,
   "id": "adapter-claude-code-explicit-activation",
   "required_signals": [
-    "Claude Code acknowledges that Deliberation is active for the conversation",
+    "Claude Code acknowledges that Deliberation is active for the invoked task by default",
     "The standalone skill supports /deliberation",
     "The plugin variant preserves explicit-only invocation and semantic parity"
   ],

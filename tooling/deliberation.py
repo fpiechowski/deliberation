@@ -10,6 +10,7 @@ import re
 import shutil
 import sys
 import tempfile
+import zipfile
 from pathlib import Path
 from typing import Any
 
@@ -28,8 +29,9 @@ SKILL_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 REFERENCE_LINK = re.compile(r"\]\((references/[a-z0-9-]+\.md)\)")
 OPEN_CODE_PREFIXES = {
     "deliberation": (
-        "Activate Deliberation for the current conversation. Acknowledge activation,\n"
-        "then follow this behavioural contract:\n\n"
+        "Activate Deliberation for the task in this request by default; use the current\n"
+        "conversation only when the user explicitly requests that broader scope.\n"
+        "Acknowledge the scope, then follow this behavioural contract:\n\n"
     ),
     "explain": (
         "Explain the user's named topic as a standalone answer. Do not activate "
@@ -268,6 +270,57 @@ def claude_skill(canonical_skill: str) -> str:
 
 def sha256(content: str) -> str:
     return hashlib.sha256(content.encode("utf-8")).hexdigest()
+
+
+def sha256_bytes(content: bytes) -> str:
+    return hashlib.sha256(content).hexdigest()
+
+
+def release_tag(version: str) -> str:
+    return f"v{version}"
+
+
+def release_asset_name(version: str) -> str:
+    return f"opencode-deliberation-{version}.zip"
+
+
+def write_release_archive(source: Path, archive_path: Path) -> None:
+    files = sorted(path for path in source.rglob("*") if path.is_file())
+    if not files:
+        raise ValidationError(f"{source}: cannot package an empty release bundle")
+
+    with zipfile.ZipFile(
+        archive_path,
+        mode="w",
+        compression=zipfile.ZIP_DEFLATED,
+        compresslevel=9,
+    ) as archive:
+        for path in files:
+            relative = path.relative_to(source).as_posix()
+            info = zipfile.ZipInfo(relative, date_time=(1980, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.create_system = 3
+            info.external_attr = (0o755 if path.suffix == ".sh" else 0o644) << 16
+            archive.writestr(info, path.read_bytes())
+
+
+def package_release(output: Path) -> tuple[Path, Path]:
+    version = product_version()
+    with tempfile.TemporaryDirectory(prefix="deliberation-release-") as temporary:
+        assembled = Path(temporary)
+        assemble(assembled)
+        validate_assembly(assembled)
+        validate_committed_publication(assembled)
+
+        bundle = assembled / "publication/opencode-bundles/deliberation"
+        prepare_output(output)
+        archive_path = output / release_asset_name(version)
+        write_release_archive(bundle, archive_path)
+        checksum_path = output / f"{archive_path.name}.sha256"
+        checksum = sha256_bytes(archive_path.read_bytes())
+        write_text(checksum_path, f"{checksum}  {archive_path.name}")
+
+    return archive_path, checksum_path
 
 
 def prepare_output(output: Path) -> None:
@@ -831,10 +884,13 @@ def validate_assembly(output: Path) -> None:
 
 
 def validate_installers() -> None:
+    version = product_version()
+    tag = release_tag(version)
+    asset_name = release_asset_name(version)
     required_fragments = {
         ROOT / "install.ps1": (
             "fpiechowski/deliberation",
-            '"master"',
+            f'"{tag}"',
             '"plugin", "marketplace", "upgrade"',
             '"plugin", "marketplace", "add"',
             '"plugin", "remove"',
@@ -844,15 +900,15 @@ def validate_installers() -> None:
         ROOT / "install.sh": (
             "#!/usr/bin/env sh",
             "fpiechowski/deliberation",
-            'marketplace_ref="master"',
+            f'marketplace_ref="{tag}"',
             "plugin marketplace upgrade",
             "plugin marketplace add",
             "plugin remove",
             "plugin add",
         ),
         ROOT / "install-opencode.ps1": (
-            "v0.1.0-dev.10",
-            "opencode-deliberation-0.1.0-dev.10.zip",
+            tag,
+            asset_name,
             "Invoke-WebRequest",
             "Expand-Archive",
             "install.ps1",
@@ -860,8 +916,8 @@ def validate_installers() -> None:
         ),
         ROOT / "install-opencode.sh": (
             "#!/usr/bin/env sh",
-            "v0.1.0-dev.10",
-            "opencode-deliberation-0.1.0-dev.10.zip",
+            tag,
+            asset_name,
             "curl",
             "unzip",
             "install.sh",
@@ -968,6 +1024,15 @@ def command_sync_publication(_: argparse.Namespace) -> None:
     print("Synchronized and validated committed publication surfaces")
 
 
+def command_package_release(args: argparse.Namespace) -> None:
+    output = checked_output(args.output)
+    archive_path, checksum_path = package_release(output)
+    print(
+        "Packaged release assets: "
+        f"{archive_path.relative_to(ROOT)}, {checksum_path.relative_to(ROOT)}"
+    )
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(
         description="Assemble and validate Deliberation host artifacts."
@@ -995,6 +1060,17 @@ def parser() -> argparse.ArgumentParser:
         help="regenerate committed publication surfaces",
     )
     sync_parser.set_defaults(handler=command_sync_publication)
+
+    package_parser = subcommands.add_parser(
+        "package-release",
+        help="build deterministic release assets from the validated OpenCode bundle",
+    )
+    package_parser.add_argument(
+        "--output",
+        default="dist",
+        help="repository-relative asset directory (default: dist)",
+    )
+    package_parser.set_defaults(handler=command_package_release)
     return result
 
 

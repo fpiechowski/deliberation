@@ -3,8 +3,8 @@ set -eu
 
 scope="${1:-global}"
 project_path="${2:-$(pwd)}"
-release_tag="v0.1.0-dev.10"
-asset_name="opencode-deliberation-0.1.0-dev.10.zip"
+release_tag="v0.1.0-dev.14"
+asset_name="opencode-deliberation-0.1.0-dev.14.zip"
 download_url="https://github.com/fpiechowski/deliberation/releases/download/$release_tag/$asset_name"
 
 if command -v mktemp >/dev/null 2>&1; then

@@ -2,8 +2,9 @@
 description: "Activate Deliberation for collaborative engineering with shared decisions"
 ---
 
-Activate Deliberation for the current conversation. Acknowledge activation,
-then follow this behavioural contract:
+Activate Deliberation for the task in this request by default; use the current
+conversation only when the user explicitly requests that broader scope.
+Acknowledge the scope, then follow this behavioural contract:
 
 # Deliberation
 
@@ -48,24 +49,36 @@ a lecture or pressuring the user to approve.
 
 # Activation and state
 
-On activation, state explicitly that Deliberation is active for the current
-conversation until the user disables it and that work uses bounded milestones,
-visible design previews, and decision-ready checkpoints. When invocation and an
-engineering request share the first message, acknowledge both in that response.
-If a checkpoint is needed before action, make it fully decision-ready there.
+By default, activation applies only to the engineering objective included in
+the invocation message. State explicitly that Deliberation is active for that
+task and that work uses bounded milestones, visible design previews, and
+decision-ready checkpoints. A clarification, correction, or follow-up that
+advances the same stated objective remains in the task; a new independent
+objective does not. End task-scoped Deliberation when that objective is
+achieved, blocked, or cancelled, and do not apply its checkpoint contract to a
+later task without a new explicit invocation.
+
+The user may explicitly request conversation-wide activation, for example by
+asking to activate Deliberation “for this conversation” or “until disabled”.
+State that broader scope explicitly; it remains active until the user disables
+it. If the invocation names no task and does not explicitly request
+conversation-wide activation, ask which task to apply Deliberation to instead
+of activating a persistent mode. When invocation and an engineering request
+share the first message, acknowledge both in that response. If a checkpoint is
+needed before action, make it fully decision-ready there.
 
 Do not infer activation from an ordinary request to explain, plan, implement,
 debug, refactor, or review. An unambiguous request to stop checkpoints or
 approval requests for the rest of the conversation explicitly exits
 Deliberation; acknowledge the exit.
 
-Maintain lightweight conversational state: current objective and provisional
-roadmap; current milestone and approved scope; accepted or changed decisions;
-open questions and the next checkpoint; and whether detailed loop trace is
-enabled. Do not create project state files by default. Record state durably
-only when the project already has an appropriate convention, the user requests
-it, cross-conversation continuity requires it, or durable tracking is part of
-an approved milestone.
+Maintain lightweight conversational state: activation scope; current objective
+and provisional roadmap; current milestone and approved scope; accepted or
+changed decisions; open questions and the next checkpoint; and whether detailed
+loop trace is enabled. Do not create project state files by default. Record
+state durably only when the project already has an appropriate convention, the
+user requests it, cross-conversation continuity requires it, or durable
+tracking is part of an approved milestone.
 
 ## Loaded module: references/alternative.md
 
@@ -240,8 +253,9 @@ the approved proposal, roadmap impact, and the next milestone or completion.
 At completion, state whether the objective was achieved, what was produced,
 important accepted decisions, verification performed, remaining risks or
 questions, and explicitly whether nothing remains. If unmet, report the exact
-blocker and what is needed to continue. Completing a task does not disable
-Deliberation.
+blocker and what is needed to continue. Completing, blocking, or cancelling a
+task ends task-scoped Deliberation. Deliberation remains active after task
+completion only when the user explicitly requested conversation-wide activation.
 
 Adapt the same loop to every work type: specifications discover requirements
 and build incrementally; implementation and refactoring propose and verify the

@@ -6,7 +6,7 @@
   "human_evaluation": true,
   "id": "adapter-opencode-explicit-activation",
   "required_signals": [
-    "OpenCode acknowledges that Deliberation is active for the conversation",
+    "OpenCode acknowledges that Deliberation is active for the invoked task by default",
     "The /deliberation command embeds the complete normalized behavioural core",
     "The bundled audit copy remains outside OpenCode skill discovery paths"
   ],

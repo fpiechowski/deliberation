@@ -10,7 +10,7 @@
     "Codex explains the dynamic order flow as a journey from request through state changes to observable outcome",
     "Codex maintains decisions and progress conversationally without creating files before durable tracking is authorized",
     "After explicit authorization, Codex records the accepted decision in docs/DECISIONS.md without changing its substance",
-    "After the same conversation is resumed, Deliberation remains active and Codex preserves the accepted decision, roadmap, and pending approval boundary"
+    "After the same explicitly conversation-wide conversation is resumed, Deliberation remains active and Codex preserves its scope, the accepted decision, roadmap, and pending approval boundary"
   ],
   "scenarios": [
     "C-05",

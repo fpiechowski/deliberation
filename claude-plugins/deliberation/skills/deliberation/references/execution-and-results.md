@@ -13,8 +13,9 @@ the approved proposal, roadmap impact, and the next milestone or completion.
 At completion, state whether the objective was achieved, what was produced,
 important accepted decisions, verification performed, remaining risks or
 questions, and explicitly whether nothing remains. If unmet, report the exact
-blocker and what is needed to continue. Completing a task does not disable
-Deliberation.
+blocker and what is needed to continue. Completing, blocking, or cancelling a
+task ends task-scoped Deliberation. Deliberation remains active after task
+completion only when the user explicitly requested conversation-wide activation.
 
 Adapt the same loop to every work type: specifications discover requirements
 and build incrementally; implementation and refactoring propose and verify the

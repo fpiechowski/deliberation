@@ -1788,3 +1788,82 @@ explanation model does not share checkpoint state or approval behavior.
 Future Explain changes are made once and appear consistently in the checkpoint
 Explain step and the standalone skill. Published packages remain self-contained
 and the source tree makes the shared ownership explicit.
+
+## D-046 — Automate tag-validated draft releases
+
+- **Date:** 2026-07-29
+- **Status:** Accepted
+
+### Context
+
+The repository had deterministic assembly and committed publication surfaces,
+but no repeatable path from a reviewed repository tag to a GitHub Release. The
+Codex installer followed mutable `master`, and the OpenCode wrapper still
+targeted the older `v0.1.0-dev.10` asset.
+
+### Decision
+
+Add `.github/workflows/release.yml`, triggered by `v<SemVer>` tags. The workflow
+must:
+
+1. verify that the tag is exactly `v` plus the content of `VERSION`;
+2. run `python tooling/deliberation.py check`;
+3. build `opencode-deliberation-<VERSION>.zip` and its SHA-256 checksum through
+   repository-local standard-library tooling; and
+4. create a draft GitHub Release for the existing tag with generated notes and
+   both assets.
+
+Add `python tooling/deliberation.py package-release` for the same deterministic
+local asset build. Point the root Codex and OpenCode installers, and the README
+examples, at the immutable `v0.1.0-dev.11` tag. Keep version bumping, tag
+creation, final Release publication, and live-host validation outside the
+workflow.
+
+### Consequences
+
+Release preparation is repeatable and fails before publication when the tag,
+canonical source, generated packages, or release bundle are inconsistent. The
+draft boundary preserves explicit human review. Versioned installation URLs and
+release assets are reproducible, while future releases require updating the
+installer references as part of the next versioned release change.
+
+## D-047 — Default to task-scoped activation with explicit persistent opt-in
+
+- **Date:** 2026-07-31
+- **Status:** Accepted
+
+### Context
+
+D-006 made activation persist for a whole conversation so the agent would not
+need to infer task boundaries. In ordinary use, however, the invocation prompt
+already identifies the task and automatic persistence makes a later unrelated
+request unexpectedly inherit the Deliberation interaction model. Requiring the
+user to remember to exit reverses the natural default.
+
+### Decision
+
+Supersede D-006. By default, explicit activation applies only to the objective
+named in the same prompt. It ends when that objective is achieved, blocked, or
+cancelled. Clarifications, corrections, and follow-ups that advance the same
+stated objective stay in scope; a new independent objective requires a new
+explicit invocation.
+
+Keep conversation-wide activation as an explicit, natural-language opt-in,
+such as “for this conversation” or “until disabled”. It remains active until
+an explicit natural-language exit. The acknowledgement must state whether the
+scope is the named task or the conversation. An invocation without a task or
+explicit persistent scope asks which task to apply Deliberation to rather than
+creating a persistent mode.
+
+Increment the shared development version to `0.1.0-dev.14`, regenerate every
+adapter and publication package, revise the lifetime fixtures and semantic
+scenarios, and validate the new contract in the supported Codex Desktop host.
+
+### Consequences
+
+The ordinary path now has a clear, prompt-local boundary, while users who want
+the previous continuous workflow can request it directly without a separate
+command. Prior conversation-wide lifetime transcripts remain honest historical
+evidence for D-006, but do not validate the superseding behaviour. Activation,
+completion, resumption, trace lifetime, and adapter parity tests must now
+observe activation scope explicitly.

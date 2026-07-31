@@ -1,12 +1,15 @@
 {
   "forbidden_signals": [
-    "Deliberation requires another explicit invocation for the different task in the same conversation",
+    "Deliberation applies its checkpoint contract to Conversation A Turn 2 without a new invocation",
+    "Deliberation ends after the different task in Conversation B despite the explicit conversation-wide activation",
     "Deliberation remains active after the explicit exit request or starts active in the fresh conversation"
   ],
   "human_evaluation": true,
   "id": "core-conversation-lifetime-and-exit",
   "required_signals": [
-    "Deliberation remains active for the different task in the same conversation without another invocation",
+    "Deliberation acknowledges the task-scoped activation in Conversation A and ends it after the health-check explanation",
+    "Conversation A's unrelated rate-limiting request receives a direct non-Deliberation response without another invocation",
+    "Deliberation acknowledges the explicit conversation-wide scope in Conversation B and remains active for its cache task",
     "Codex acknowledges the natural-language exit request and stops applying the checkpoint contract",
     "The fresh conversation begins without Deliberation active"
   ],

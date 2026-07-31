@@ -3,7 +3,7 @@ set -eu
 
 marketplace_name="deliberation"
 marketplace_source="fpiechowski/deliberation"
-marketplace_ref="master"
+marketplace_ref="v0.1.0-dev.14"
 plugin_id="deliberation@deliberation"
 
 if ! command -v codex >/dev/null 2>&1; then

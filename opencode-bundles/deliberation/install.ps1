@@ -38,5 +38,5 @@ Copy-Item `
   -Destination (Join-Path $pluginsRoot "deliberation.js") `
   -Force
 
-Write-Host "Installed Deliberation 0.1.0-dev.13 for OpenCode at $configRoot"
+Write-Host "Installed Deliberation 0.1.0-dev.14 for OpenCode at $configRoot"
 Write-Host "Start OpenCode and invoke /deliberation or /explain."

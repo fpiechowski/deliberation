@@ -26,5 +26,5 @@ cp "$source_root/.opencode/commands/deliberation.md" "$commands_root/deliberatio
 cp "$source_root/.opencode/commands/explain.md" "$commands_root/explain.md"
 cp "$source_root/.opencode/plugins/deliberation.js" "$plugins_root/deliberation.js"
 
-echo "Installed Deliberation 0.1.0-dev.13 for OpenCode at $config_root"
+echo "Installed Deliberation 0.1.0-dev.14 for OpenCode at $config_root"
 echo "Start OpenCode and invoke /deliberation or /explain."

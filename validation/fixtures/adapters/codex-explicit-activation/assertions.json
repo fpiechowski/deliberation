@@ -6,7 +6,7 @@
   "human_evaluation": true,
   "id": "adapter-codex-explicit-activation",
   "required_signals": [
-    "Codex acknowledges that Deliberation is active for the conversation",
+    "Codex acknowledges that Deliberation is active for the invoked task by default",
     "Codex gathers context and prepares a bounded first milestone",
     "The skill remains explicitly invocable as $deliberation"
   ],

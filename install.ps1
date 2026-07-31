@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $marketplaceName = "deliberation"
 $marketplaceSource = "fpiechowski/deliberation"
-$marketplaceRef = "master"
+$marketplaceRef = "v0.1.0-dev.14"
 $pluginId = "deliberation@deliberation"
 
 function Invoke-CodexCommand {

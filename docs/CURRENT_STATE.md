@@ -1,11 +1,14 @@
 # Current State
 
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 ## Phase
 
-Shared Explain model — **`0.1.0-dev.13` makes the Explain contract a single
-canonical source shared by Deliberation and the standalone `explain` skill**.
+Task-scoped activation correction — **D-047 changes the default lifetime to
+the invoked task, with conversation-wide lifetime available only by explicit
+request; `0.1.0-dev.14` combines it with the shared Explain model and release
+automation, and is checked locally, pending
+supported-host validation**.
 
 ## Completed
 
@@ -17,8 +20,8 @@ canonical source shared by Deliberation and the standalone `explain` skill**.
 - Distilled the original design conversation into durable project context and
   decisions.
 - Prepared the repository for continuity across Codex sessions.
-- Defined the mode lifetime: activation applies to the current conversation
-  until the user explicitly disables it.
+- Replaced the prior conversation-wide default with task-scoped activation;
+  conversation-wide lifetime now requires an explicit request.
 - Added journey-based explanation as a conditional technique for explaining
   dynamic code, design, and system behaviour.
 - Defined milestones as bounded units of verifiable progress and checkpoints as
@@ -191,6 +194,18 @@ canonical source shared by Deliberation and the standalone `explain` skill**.
 - Moved the Explain contract to `core/shared/explain-model.md`. Both skills
   link that source, while the assembler materializes it into each
   self-contained adapter package and rejects local duplicates at `0.1.0-dev.13`.
+- Added deterministic `package-release` tooling for the OpenCode ZIP and
+  SHA-256 checksum.
+- Added a GitHub Actions tag workflow that verifies `v<SemVer>` against
+  `VERSION`, runs the repository check, and creates a draft Release.
+- Switched the root Codex and OpenCode installers and documented commands from
+  mutable `master` or the old OpenCode asset to the immutable
+  `v0.1.0-dev.11` channel.
+- Accepted D-047: default activation applies only to the task in the invocation
+  prompt; explicit conversation-wide activation remains available on request.
+- Regenerated every publication package at `0.1.0-dev.14` and passed
+  deterministic assembly, semantic-integrity, fixture, and stale-output checks
+  for D-047; no fresh Codex Desktop transcript has yet been recorded.
 
 ## Current implementation
 
@@ -308,9 +323,13 @@ The repository now also contains a generated Codex marketplace catalog at
 scripts. The retained `0.1.0-dev.3` PowerShell run proves that the public raw
 GitHub installer adds the Git marketplace, installs the plugin without a manual
 clone or local source path, and updates it successfully on a repeated run.
-Release automation is not included. The Claude Code marketplace has been
-confirmed working externally, but no retained live-host transcript is required
-under the experimental-adapter policy.
+The release workflow is present under `.github/workflows/release.yml`. It is
+tag-triggered, validates the exact repository state, packages
+`opencode-deliberation-<VERSION>.zip` with a `.sha256` companion, and opens a
+draft Release using GitHub CLI. It does not push tags, bump versions, or publish
+the draft automatically. The Claude Code marketplace has been confirmed
+working externally, but no retained live-host transcript is required under the
+experimental-adapter policy.
 
 The generated OpenCode bundle is now installable as a local command-and-plugin
 package. Its command remains the only activation surface and embeds the full
@@ -318,8 +337,8 @@ canonical contract. Its plugin is a minimal local OpenCode plugin marker rather
 than an npm-published runtime extension. OpenCode remains experimental: the
 local CLI discovery check proves packaging, not behavioural scenario support.
 Root `install-opencode.ps1` and `install-opencode.sh` provide a one-command
-install path from the GitHub release asset without requiring users to download
-and unpack the zip manually.
+install path from the immutable `v0.1.0-dev.11` GitHub release asset without
+requiring users to download and unpack the zip manually.
 
 The shared core now also has an observable-loop contract. Ordinary
 Deliberation signals main phase boundaries without constraining response
@@ -381,19 +400,16 @@ tests. The original `Blocked` run remains retained as historical evidence.
 
 ## Recommended next milestone
 
-No immediate release-gating validation milestone remains in the approved
-desktop-only scope. The next optional decision is whether to validate the new
-explicit `$explain` skill in a standalone Codex Desktop run, or instead open a
-release-readiness milestone for release automation and a stable tag-based
-installation channel; neither is currently approved or required for the
-supported slice.
+Validate the new default and explicit persistent opt-in in Codex Desktop. Do
+not treat the existing conversation-wide lifetime evidence as evidence for
+D-047. Also validate the standalone `$explain` skill before preparing a new
+tag-based draft release.
 
 ## Open questions
 
 No unresolved product-contract or architecture questions are currently known.
-
-Release automation and a stable tag-based installation channel remain later
-decisions.
+The D-047 implementation and supported-host evidence are pending. The first
+remote draft Release remains a later human-controlled step.
 
 ## Repository hygiene
 

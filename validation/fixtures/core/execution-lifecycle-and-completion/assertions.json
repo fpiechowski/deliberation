@@ -8,7 +8,7 @@
   "required_signals": [
     "During approved execution Codex provides concise informational updates at meaningful boundaries without asking for approval",
     "The successful result walkthrough covers the outcome, useful execution flow, verification, deviations, roadmap effect, and task completion",
-    "Codex reports accepted decisions, remaining risks or questions, that nothing remains, and that Deliberation stays active",
+    "Codex reports accepted decisions, remaining risks or questions, that nothing remains, and that the explicitly conversation-wide Deliberation scope remains active",
     "For the unmet follow-up Codex reports the exact missing files, established facts, and the input needed to continue without claiming completion"
   ],
   "scenarios": [

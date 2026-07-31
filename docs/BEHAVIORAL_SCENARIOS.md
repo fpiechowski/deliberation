@@ -46,17 +46,31 @@ debug, or review something.
 **When** the user invokes Deliberation through the environment's supported
 explicit mechanism.
 
-**Then** the agent acknowledges that Deliberation is active for the current
-conversation and states that it will use milestones and checkpoints until the
-mode is explicitly disabled.
+**Then** the agent acknowledges that Deliberation is active for the task in the
+invocation prompt and states that it will use milestones and checkpoints until
+that task is achieved, blocked, or cancelled.
 
-### C-02 — Conversation-wide lifetime
+**When** an invocation names no task and does not explicitly request
+conversation-wide activation.
+
+**Then** the agent asks which task to apply Deliberation to; it does not create
+a persistent mode.
+
+### C-02 — Task-scoped default and explicit persistent activation
 
 **Given** Deliberation is active and the agent completes one task.
 
 **When** the user starts a different task in the same conversation.
 
-**Then** Deliberation remains active without requiring another invocation.
+**Then** the task-scoped mode has ended and the agent does not apply its
+checkpoint contract without another explicit invocation.
+
+**Given** the user explicitly requested conversation-wide activation.
+
+**When** the agent completes one task and the user starts another task in the
+same conversation.
+
+**Then** Deliberation remains active until the user explicitly disables it.
 
 **When** the user starts a new conversation.
 
@@ -285,7 +299,8 @@ before execution.
 **Then** it reports the outcome, important accepted decisions, verification,
 remaining risks or questions, and explicitly states when nothing remains.
 
-**And** Deliberation remains active for later tasks in the same conversation.
+**And** task-scoped Deliberation ends. It remains active for later tasks only
+when the user explicitly requested conversation-wide activation.
 
 **When** the objective remains unmet.
 
@@ -423,11 +438,11 @@ version.
 **When** the conversation continues across multiple turns and the same
 conversation is later resumed.
 
-**Then** the adapter preserves the active mode, accepted decisions, current
-roadmap, approval scope, and any enabled detailed-loop-trace preference.
+**Then** the adapter preserves the active mode, its scope, accepted decisions,
+current roadmap, approval scope, and any enabled detailed-loop-trace preference.
 
 If a host cannot preserve this reliably, record the scenario as **Blocked** and
-return to architecture deliberation rather than weakening D-006.
+return to architecture deliberation rather than weakening D-047.
 
 ### A-05 — Cross-environment semantic parity
 
@@ -472,7 +487,7 @@ technically correct.
 | F-09 | The agent imposes Deliberation state files on an unrelated repository. |
 | F-10 | The agent claims completion despite a known blocker or missing objective. |
 | F-11 | The mode remains active after explicit exit. |
-| F-12 | An ordinary task activates the conversation-wide mode implicitly. |
+| F-12 | An ordinary task activates Deliberation implicitly or task-scoped Deliberation leaks into a later task. |
 | F-13 | An adapter changes the shared product semantics. |
 | F-14 | Long execution proceeds without useful progress visibility. |
 | F-15 | The agent uses phase labels to falsely imply work or authorization, or forces every response into a process template. |
@@ -486,7 +501,8 @@ technically correct.
 | D-003 — User understanding as output | C-04, C-05, C-13, C-14 |
 | D-004 — Meaningful checkpoints | C-06–C-09 |
 | D-005 — Dedicated manifest | Documentation consistency review |
-| D-006 — Conversation-wide lifetime | C-02, C-15, A-04 |
+| D-006 — Conversation-wide lifetime (superseded) | Historical evidence only |
+| D-047 — Task-scoped default and explicit persistent activation | C-01, C-02, C-14, C-15, A-04 |
 | D-007 — Journey-based explanation | C-05, C-13 |
 | D-008 — Milestones and checkpoints | C-03, C-04, C-13 |
 | D-009 — Provisional roadmap | C-03, C-11 |

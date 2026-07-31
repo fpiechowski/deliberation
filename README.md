@@ -26,6 +26,8 @@ the quality of the completed work.
 Deliberation also makes its main loop boundaries visible. A user can ask in
 natural language to show a detailed stage trace for the current conversation;
 this aids review and validation without imposing a fixed response template.
+By default, invoking Deliberation applies it only to the task in that prompt;
+users can explicitly request that it remain active for the conversation.
 For every new objective, it shows a provisional roadmap in the main
 conversation content after gathering and before a checkpoint or consequential
 execution; the roadmap remains distinct from the scope being approved.
@@ -42,16 +44,18 @@ The assembler writes complete local previews under ignored `build/` output.
 Repository publication surfaces are synchronized explicitly and validated
 against fresh deterministic assembly. A generated Claude Code marketplace
 catalog is present at `.claude-plugin/marketplace.json`; a generated Codex
-marketplace catalog is present at `.agents/plugins/marketplace.json`. Release
-automation is not present yet.
+marketplace catalog is present at `.agents/plugins/marketplace.json`. Tag-based
+release automation validates the repository, builds the OpenCode release asset
+and checksum, and creates a draft GitHub Release.
 
 Standalone Codex desktop activation evidence is recorded under
 `validation/runs/`. The retained `0.1.0-dev.0` failure led to an activation
 acknowledgement clarification; the `0.1.0-dev.1` rerun passes C-01 and A-01.
 The standalone desktop checkpoint fixture also passes C-03, C-04, C-06, and
 C-07.
-The desktop lifetime-and-exit fixture passes C-02 and C-15 across two fresh
-conversations.
+The retained desktop lifetime-and-exit fixture passed the former D-006
+conversation-wide contract. D-047 supersedes it; its task-scoped and explicit
+persistent-scope replacement requires fresh desktop evidence.
 The desktop response-intent and broad-approval fixture passes C-10 and C-11.
 The staged desktop Drift and routine-execution fixture passes C-08 and C-09.
 The real-file desktop execution-lifecycle fixture passes C-12, C-13, and C-14.
@@ -112,6 +116,12 @@ Generate and validate local host artifacts with:
 python tooling/deliberation.py assemble
 ```
 
+Build the release assets locally with:
+
+```text
+python tooling/deliberation.py package-release
+```
+
 Regenerate the repository publication surfaces after changing the canonical
 core, an adapter template, or `VERSION` with:
 
@@ -122,23 +132,24 @@ python tooling/deliberation.py sync-publication
 ## Codex installation
 
 The following commands add or refresh the Deliberation marketplace from the
-current `master` branch, then install or update the plugin. They do not require
-a manual clone or local plugin source; Codex stores its own marketplace snapshot.
+immutable `v0.1.0-dev.14` tag, then install or update the plugin. They do not
+require a manual clone or local plugin source; Codex stores its own marketplace
+snapshot.
 
 PowerShell (Windows):
 
 ```powershell
-irm https://raw.githubusercontent.com/fpiechowski/deliberation/master/install.ps1 | iex
+irm https://raw.githubusercontent.com/fpiechowski/deliberation/v0.1.0-dev.14/install.ps1 | iex
 ```
 
 POSIX shell (macOS, Linux, Git Bash, or WSL):
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/master/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/v0.1.0-dev.14/install.sh)"
 ```
 
-Both commands execute the current scripts from `master`. Review the linked
-scripts before running them if you do not want to trust mutable remote code.
+Both commands execute scripts from the immutable release tag. Review the
+linked scripts before running them if you do not want to trust remote code.
 After installation or update, start a new Codex conversation or restart Codex
 Desktop, then activate the mode with `$deliberation`.
 For a standalone explanation, invoke `$explain <topic>`.
@@ -174,31 +185,31 @@ The ready dist is generated under `opencode-bundles/deliberation`.
 PowerShell one-line install from the current release asset:
 
 ```powershell
-irm https://raw.githubusercontent.com/fpiechowski/deliberation/master/install-opencode.ps1 | iex
+irm https://raw.githubusercontent.com/fpiechowski/deliberation/v0.1.0-dev.14/install-opencode.ps1 | iex
 ```
 
 POSIX shell one-line install from the current release asset:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/master/install-opencode.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/v0.1.0-dev.14/install-opencode.sh)"
 ```
 
 For one project instead of global OpenCode config:
 
 ```powershell
-iex "& { $(irm https://raw.githubusercontent.com/fpiechowski/deliberation/master/install-opencode.ps1) } -Scope Project -ProjectPath 'C:\path\to\project'"
+iex "& { $(irm https://raw.githubusercontent.com/fpiechowski/deliberation/v0.1.0-dev.14/install-opencode.ps1) } -Scope Project -ProjectPath 'C:\path\to\project'"
 ```
 
 or:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/master/install-opencode.sh)" sh project /path/to/project
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/v0.1.0-dev.14/install-opencode.sh)" sh project /path/to/project
 ```
 
-Both commands execute the current wrapper script from `master`. The wrapper
-downloads the published `v0.1.0-dev.10` OpenCode zip from GitHub Releases,
-extracts it to a temporary directory, runs the bundled installer, and removes
-the temporary files.
+Both commands execute the versioned wrapper script. The wrapper downloads the
+published `v0.1.0-dev.14` OpenCode zip from GitHub Releases, extracts it to a
+temporary directory, runs the bundled installer, and removes the temporary
+files. The draft release must be published before this channel is usable.
 
 Install globally from that directory:
 

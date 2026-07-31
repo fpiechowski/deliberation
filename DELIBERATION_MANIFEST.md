@@ -126,17 +126,21 @@ instruction — authorizes the exact named proposal and stated scope.
 
 ## Mode Lifetime
 
-Once activated, Deliberation remains active for the current conversation until
-the user explicitly disables it.
+By default, activation applies only to the task stated in the invocation
+prompt. It ends when that task is achieved, blocked, or cancelled. A
+clarification, correction, or follow-up that advances the same stated
+objective remains within the task; a new independent objective requires a new
+explicit invocation.
 
-Completing one task does not disable the mode. It remains available for later
-tasks, follow-up questions, and changes of direction within the same
-conversation. A new conversation starts without Deliberation unless the user
-activates it again.
+The user may explicitly request conversation-wide activation, for example “for
+this conversation” or “until disabled”. Only that broader scope remains active
+until the user explicitly disables it. If an invocation names neither a task
+nor conversation-wide scope, ask which task to apply Deliberation to rather
+than creating a persistent mode.
 
-Activation and deactivation should be acknowledged clearly so that the user
-knows which interaction model is in effect. No special command is required to
-leave the mode; an unambiguous natural-language request is sufficient.
+Activation, scope, and deactivation should be acknowledged clearly so that the
+user knows which interaction model is in effect. No special command is required
+to leave the mode; an unambiguous natural-language request is sufficient.
 
 If the user asks the agent to stop requesting approval for the rest of the
 conversation, treat that as an explicit request to disable Deliberation because
@@ -152,8 +156,8 @@ standalone explanation of a named engineering, code, design, or system topic.
 It does not activate Deliberation, persist for the conversation, seek approval,
 or authorize execution.
 
-Activation is explicit in the first version because the mode changes behaviour
-for the entire conversation. Do not activate it implicitly for an ordinary
+Activation is explicit in the first version because the mode changes how the
+agent collaborates on a task. Do not activate it implicitly for an ordinary
 request to explain, plan, implement, debug, or review. Use the host's native
 explicit invocation:
 
@@ -372,6 +376,7 @@ the approved scope.
 Maintain a lightweight conversational model of:
 
 - Whether Deliberation is active.
+- Its scope: the current task or the current conversation by explicit request.
 - The current objective and provisional roadmap.
 - The current milestone and its approved scope.
 - Accepted and changed decisions.
@@ -411,8 +416,10 @@ for approval.
 
 The user may ask in natural language to see a detailed loop or stage trace.
 That request enables a conversational preference, not a new activation syntax:
-it remains active until the user asks to hide it, exits Deliberation, or starts
-a new conversation. Hiding the trace does not disable Deliberation.
+it remains active for the active task, or for the conversation when that
+broader scope was explicitly requested, until the user asks to hide it, exits
+Deliberation, or starts a new conversation. Hiding the trace does not disable
+Deliberation.
 
 The detailed trace exposes each actual transition in the canonical loop:
 Understand, Gather necessary information, Plan the next milestone, each
@@ -503,8 +510,8 @@ After executing a milestone, walk through:
 At task completion, report whether the objective was achieved, what was
 produced, the important accepted decisions, the verification performed, and
 any remaining risks or questions. State explicitly when nothing remains.
-Completion of a task does not disable Deliberation for the current
-conversation.
+Completion ends task-scoped Deliberation. It remains active after completion
+only when the user explicitly requested conversation-wide activation.
 
 Do not claim completion when the objective remains unmet. Report the exact
 blocker, the established facts, and the decision or information needed to

@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Validate and stage release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out tagged commit
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Verify tag matches VERSION
+        shell: bash
+        run: |
+          version="$(tr -d '\r\n' < VERSION)"
+          expected_tag="v${version}"
+          if [[ "${GITHUB_REF_NAME}" != "${expected_tag}" ]]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match ${expected_tag}." >&2
+            exit 1
+          fi
+
+      - name: Validate source and publication surfaces
+        run: python tooling/deliberation.py check
+
+      - name: Build release assets
+        run: python tooling/deliberation.py package-release --output dist
+
+      - name: Create draft prerelease
+        if: contains(github.ref_name, '-')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" dist/* \
+            --verify-tag \
+            --draft \
+            --prerelease \
+            --generate-notes \
+            --title "Deliberation ${GITHUB_REF_NAME}"
+
+      - name: Create draft release
+        if: ${{ !contains(github.ref_name, '-') }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" dist/* \
+            --verify-tag \
+            --draft \
+            --generate-notes \
+            --title "Deliberation ${GITHUB_REF_NAME}"

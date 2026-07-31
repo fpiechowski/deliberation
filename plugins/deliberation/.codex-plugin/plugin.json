@@ -1,6 +1,6 @@
 {
   "name": "deliberation",
-  "version": "0.1.0-dev.13",
+  "version": "0.1.0-dev.14",
   "description": "Collaborative engineering through shared decisions and bounded milestones.",
   "author": {
     "name": "Filip Piechowski",
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Deliberation",
     "shortDescription": "Collaborative engineering with shared decisions",
-    "longDescription": "A conversation-wide engineering mode with bounded milestones, inspectable checkpoints, explicit approval, and verified walkthroughs.",
+    "longDescription": "A task-scoped engineering mode with bounded milestones, inspectable checkpoints, explicit approval, and verified walkthroughs.",
     "developerName": "Filip Piechowski",
     "category": "Productivity",
     "capabilities": ["Interactive"],

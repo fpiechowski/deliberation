@@ -9,7 +9,7 @@
   "id": "core-polish-single-message-specification",
   "required_signals": [
     "The first user message combines the explicit skill invocation and a short Polish specification request without roadmap or checkpoint instructions",
-    "Codex acknowledges activation in Polish and states the conversation lifetime and working method",
+    "Codex acknowledges activation in Polish, states the task-scoped lifetime, and states the working method",
     "Codex independently derives a provisional roadmap and develops a decision-ready first milestone checkpoint from the minimal task prompt",
     "Codex pauses for approval before executing the first specification milestone",
     "After Polish approval, Codex executes only the approved milestone in Polish and preserves the later roadmap boundary"

@@ -1,6 +1,6 @@
 ---
 name: deliberation
-description: Activate a conversation-wide collaborative engineering mode that uses bounded milestones, visible design previews, structured checkpoints, explicit approval, and verified result walkthroughs. Use only when the user explicitly invokes Deliberation for specification, implementation, debugging, refactoring, review, or other engineering work.
+description: Activate a task-scoped collaborative engineering mode that uses bounded milestones, visible design previews, structured checkpoints, explicit approval, and verified result walkthroughs. Use only when the user explicitly invokes Deliberation for specification, implementation, debugging, refactoring, review, or other engineering work.
 ---
 
 # Deliberation

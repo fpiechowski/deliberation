@@ -8,8 +8,8 @@ param(
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
-$releaseTag = "v0.1.0-dev.10"
-$assetName = "opencode-deliberation-0.1.0-dev.10.zip"
+$releaseTag = "v0.1.0-dev.14"
+$assetName = "opencode-deliberation-0.1.0-dev.14.zip"
 $downloadUrl = "https://github.com/fpiechowski/deliberation/releases/download/$releaseTag/$assetName"
 $temporaryRoot = Join-Path ([System.IO.Path]::GetTempPath()) "deliberation-opencode-$([System.Guid]::NewGuid().ToString('N'))"
 $zipPath = Join-Path $temporaryRoot $assetName
