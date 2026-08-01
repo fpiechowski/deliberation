@@ -247,17 +247,13 @@ For a standalone explanation, invoke `/explain <topic>`.
 
 - [`AGENTS.md`](AGENTS.md) — instructions for Codex sessions working on this
   repository.
-- [`DELIBERATION_MANIFEST.md`](DELIBERATION_MANIFEST.md) — product vision and
-  behavioural principles.
-- [`docs/PROJECT_CONTEXT.md`](docs/PROJECT_CONTEXT.md) — the reasoning and
-  background that led to the current direction.
-- [`docs/DECISIONS.md`](docs/DECISIONS.md) — durable decision log.
-- [`docs/BEHAVIORAL_SCENARIOS.md`](docs/BEHAVIORAL_SCENARIOS.md) — observable
-  acceptance scenarios and critical failure cases.
+- [`docs/MANIFEST.md`](docs/MANIFEST.md) — product vision, context, and behavioural
+  principles.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — accepted shared-core,
   adapter, distribution, versioning, and validation architecture.
-- [`docs/CURRENT_STATE.md`](docs/CURRENT_STATE.md) — current phase, open
-  questions, and the recommended next milestone.
+- [`docs/ACCEPTANCE.md`](docs/ACCEPTANCE.md) — observable
+  acceptance scenarios and critical failure cases.
+- [`docs/TODO.md`](docs/TODO.md) — current next steps and open questions.
 - [`core/deliberation/SKILL.md`](core/deliberation/SKILL.md) — canonical
   behavioural entry point and links to the modular runtime source for all
   environments.

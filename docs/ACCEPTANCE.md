@@ -1,4 +1,4 @@
-# Behavioural Scenarios
+# Acceptance
 
 ## Purpose
 
