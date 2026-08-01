@@ -53,8 +53,8 @@ Standalone Codex desktop activation evidence is recorded under
 acknowledgement clarification; the `0.1.0-dev.1` rerun passes C-01 and A-01.
 The standalone desktop checkpoint fixture also passes C-03, C-04, C-06, and
 C-07.
-The retained desktop lifetime-and-exit fixture passed the former D-006
-conversation-wide contract. D-047 supersedes it; its task-scoped and explicit
+The retained desktop lifetime-and-exit fixture passed the former
+conversation-wide contract. The current task-scoped and explicit
 persistent-scope replacement requires fresh desktop evidence.
 The desktop response-intent and broad-approval fixture passes C-10 and C-11.
 The staged desktop Drift and routine-execution fixture passes C-08 and C-09.
@@ -261,17 +261,13 @@ For a standalone explanation, invoke `/explain <topic>`.
 
 - [`AGENTS.md`](AGENTS.md) — instructions for Codex sessions working on this
   repository.
-- [`DELIBERATION_MANIFEST.md`](DELIBERATION_MANIFEST.md) — product vision and
-  behavioural principles.
-- [`docs/PROJECT_CONTEXT.md`](docs/PROJECT_CONTEXT.md) — the reasoning and
-  background that led to the current direction.
-- [`docs/DECISIONS.md`](docs/DECISIONS.md) — durable decision log.
-- [`docs/BEHAVIORAL_SCENARIOS.md`](docs/BEHAVIORAL_SCENARIOS.md) — observable
-  acceptance scenarios and critical failure cases.
+- [`docs/MANIFEST.md`](docs/MANIFEST.md) — product vision, context, and behavioural
+  principles.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — accepted shared-core,
   adapter, distribution, versioning, and validation architecture.
-- [`docs/CURRENT_STATE.md`](docs/CURRENT_STATE.md) — current phase, open
-  questions, and the recommended next milestone.
+- [`docs/ACCEPTANCE.md`](docs/ACCEPTANCE.md) — observable
+  acceptance scenarios and critical failure cases.
+- [`docs/TODO.md`](docs/TODO.md) — current next steps and open questions.
 - [`core/deliberation/SKILL.md`](core/deliberation/SKILL.md) — canonical
   behavioural entry point and links to the modular runtime source for all
   environments.

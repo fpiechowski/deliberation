@@ -19,6 +19,36 @@ Instead, every meaningful design and implementation decision should be made toge
 
 Deliberation should transform the agent from an autonomous implementer into a collaborative engineering partner.
 
+## Context and Product Boundary
+
+Deliberation began from dissatisfaction with the default interaction pattern of
+coding agents: the user gives the agent a task, the agent works autonomously
+for a long time, and the user receives a large result containing decisions
+that are difficult to understand and review after the fact.
+
+The intended interaction model is:
+
+```text
+understand → plan → propose → explain → consider alternatives
+           → decide → approve → execute one step → repeat
+```
+
+The same model applies across specification, implementation, debugging,
+refactoring, review, research, planning, and other engineering work. Its core
+qualities are proposal, explanation, deliberation, decision, approval,
+incremental execution, and knowledge transfer.
+
+Deliberation changes **how the agent works**, not **what it works on**. It is
+one cross-cutting work mode rather than separate modes for specification,
+development, or review. Mechanical, low-risk work should remain routine so
+that collaboration does not become bureaucracy.
+
+The name is intentional: “in the loop” emphasizes awareness, “feedback-driven”
+can imply that feedback is mandatory, “guided” and “collaborative” are too
+ambiguous, and “Socratic” emphasizes questions more than proposing,
+explaining, implementing, and reviewing. **Deliberation** best describes
+conscious consideration and shared decisions before action.
+
 ## Core Philosophy
 
 The workflow is based on one fundamental principle:
@@ -585,6 +615,6 @@ If there is a tradeoff between implementation speed and collaborative understand
 Deliberation exists to optimize the quality of the engineering conversation, not merely the speed of code generation.
 
 The observable acceptance contract is defined in
-`docs/BEHAVIORAL_SCENARIOS.md`. The first implemented release must pass the
+`docs/ACCEPTANCE.md`. The first implemented release must pass the
 applicable supported-environment scenarios in Codex Desktop. Claude Code and
 OpenCode scenarios remain available for future experimental-adapter validation.

@@ -394,7 +394,7 @@ host.
 The first version does not add an LLM-as-judge or a test-framework dependency.
 Deterministic checks validate packaging and clear transcript invariants;
 decision quality and conversational meaning use the rubric in
-`docs/BEHAVIORAL_SCENARIOS.md`.
+`docs/ACCEPTANCE.md`.
 
 Release evidence is retained for synthetic fixtures. Local exploratory runs
 may remain untracked.
