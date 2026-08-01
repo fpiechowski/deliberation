@@ -6,8 +6,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import zipfile
@@ -77,6 +79,14 @@ class ValidationError(RuntimeError):
 
 def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8").replace("\r\n", "\n")
+
+
+def shell_path(path: Path) -> str:
+    """Return a path usable by POSIX shells, including WSL on Windows."""
+    normalized = path.as_posix()
+    if os.name == "nt" and re.match(r"^[A-Za-z]:/", normalized):
+        return f"/mnt/{normalized[0].lower()}{normalized[2:]}"
+    return normalized
 
 
 def write_text(path: Path, content: str) -> None:
@@ -959,6 +969,9 @@ def validate_installers() -> None:
             "claude plugin marketplace update",
             "claude plugin marketplace add",
             "claude plugin list --json",
+            "has_user_scope_plugin",
+            '"scope"',
+            "awk",
             "claude plugin update",
             "claude plugin install",
             "--scope user",
@@ -996,6 +1009,67 @@ def validate_installers() -> None:
             if fragment in content:
                 raise ValidationError(
                     f"{path}: Git-marketplace installer contains legacy download marker {fragment!r}"
+                )
+
+    validate_claude_installer_scope_selection()
+
+
+def validate_claude_installer_scope_selection() -> None:
+    """Exercise the Claude installer against each supported plugin scope."""
+    shell = shutil.which("bash") or shutil.which("sh")
+    if shell is None:
+        return
+
+    installer = ROOT / "install-claude-code.sh"
+    with tempfile.TemporaryDirectory(prefix="deliberation-claude-installer-") as temporary:
+        temporary_root = Path(temporary)
+        harness = temporary_root / "claude-harness.sh"
+        log = temporary_root / "calls.log"
+
+        scenarios = {
+            "project": "plugin install --scope user deliberation@deliberation",
+            "local": "plugin install --scope user deliberation@deliberation",
+            "user": "plugin update --scope user deliberation@deliberation",
+        }
+        for scope, expected_call in scenarios.items():
+            log.write_text("", encoding="utf-8", newline="\n")
+            plugins_json = json.dumps(
+                [{"id": "deliberation@deliberation", "scope": scope}], indent=2
+            )
+            write_text(
+                harness,
+                f"""#!/usr/bin/env sh
+set -eu
+claude() {{
+printf '%s\\n' \"$*\" >> '{shell_path(log)}'
+case \"$*\" in
+  \"plugin marketplace list --json\") printf '%s\\n' '[]' ;;
+  \"plugin marketplace add --scope user fpiechowski/deliberation\") ;;
+  \"plugin marketplace update deliberation\") ;;
+  \"plugin list --json\") printf '%s\\n' '{plugins_json}' ;;
+  \"plugin update --scope user deliberation@deliberation\") ;;
+  \"plugin install --scope user deliberation@deliberation\") ;;
+  *) exit 99 ;;
+esac
+}}
+. '{shell_path(installer)}'
+""",
+            )
+            result = subprocess.run(
+                [shell, shell_path(harness)],
+                capture_output=True,
+                check=False,
+                text=True,
+            )
+            if result.returncode != 0:
+                raise ValidationError(
+                    "Claude installer scope fixture failed for "
+                    f"{scope!r}: {result.stderr.strip() or result.stdout.strip()}"
+                )
+            calls = log.read_text(encoding="utf-8").splitlines()
+            if expected_call not in calls:
+                raise ValidationError(
+                    f"Claude installer did not select {expected_call!r} for {scope!r} scope"
                 )
 
 

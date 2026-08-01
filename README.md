@@ -182,6 +182,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/v
 
 The script adds or updates the GitHub marketplace and installs or updates the
 user-scope plugin. It does not download an archive or copy files locally.
+If the plugin exists only at project or local scope, the script installs a
+separate user-scope copy instead of attempting a user-scope update.
 
 After installation, activate the mode with:
 

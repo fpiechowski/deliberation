@@ -221,6 +221,12 @@ root installers do not download archives or copy plugin files. OpenCode is the
 only adapter that retains a download-and-copy installer because its published
 distribution is a release asset rather than a native Git marketplace.
 
+The Claude Code installer matches the plugin's reported installation scope
+before choosing the update path. It updates only an existing user-scope
+`deliberation@deliberation` entry; when the plugin is present only at project or
+local scope, it installs a separate user-scope entry. Deterministic installer
+validation exercises all three scope responses.
+
 ### OpenCode
 
 OpenCode exposes installed skills to the model through its native `skill` tool
