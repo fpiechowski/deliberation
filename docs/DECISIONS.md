@@ -1868,3 +1868,29 @@ command. Prior conversation-wide lifetime transcripts remain honest historical
 evidence for D-006, but do not validate the superseding behaviour. Activation,
 completion, resumption, trace lifetime, and adapter parity tests must now
 observe activation scope explicitly.
+
+## D-048 — Run deterministic checks on pull requests and master updates
+
+- **Date:** 2026-08-01
+- **Status:** Accepted
+
+### Context
+
+The repository had a deterministic local check and a tag-only release
+workflow, but pull requests and commits produced by merges into `master` did
+not automatically run that check in GitHub Actions.
+
+### Decision
+
+Add `.github/workflows/check.yml` for `pull_request` events targeting
+`master` and `push` events on `master`. The workflow checks out the repository,
+sets up Python 3.x, and runs `python tooling/deliberation.py check` with
+read-only contents permission. It must remain a deterministic repository
+validation job and must not invoke an agent, install third-party dependencies,
+or publish artifacts.
+
+### Consequences
+
+Every proposed change to `master` and every resulting merge commit receives
+the same repository validation status. Requiring that status for merges still
+depends on the repository's GitHub branch-protection configuration.

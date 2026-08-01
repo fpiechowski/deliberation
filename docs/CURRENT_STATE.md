@@ -1,6 +1,6 @@
 # Current State
 
-**Last updated:** 2026-07-31
+**Last updated:** 2026-08-01
 
 ## Phase
 
@@ -198,6 +198,9 @@ supported-host validation**.
   SHA-256 checksum.
 - Added a GitHub Actions tag workflow that verifies `v<SemVer>` against
   `VERSION`, runs the repository check, and creates a draft Release.
+- Added a GitHub Actions check workflow that runs deterministic repository
+  validation for pull requests targeting `master` and pushes to `master`,
+  including merge commits.
 - Switched the root Codex and OpenCode installers and documented commands from
   mutable `master` or the old OpenCode asset to the immutable
   `v0.1.0-dev.11` channel.
