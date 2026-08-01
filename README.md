@@ -38,9 +38,10 @@ Product definition, interaction design, and the cross-environment package
 architecture are complete. The canonical skill core, host adapter templates,
 deterministic standard-library assembler, semantic-integrity checks, and
 validation-fixture skeleton are implemented. Generated publication packages
-are present under `plugins/`, `claude-plugins/`, and `opencode-bundles/`.
+are present under `dist/codex/`, `dist/claude-code/`, and `dist/opencode/`.
 
-The assembler writes complete local previews under ignored `build/` output.
+The assembler writes complete local previews under ignored `build/` output;
+release archives and checksums are written under ignored `build/release/`.
 Repository publication surfaces are synchronized explicitly and validated
 against fresh deterministic assembly. A generated Claude Code marketplace
 catalog is present at `.claude-plugin/marketplace.json`; a generated Codex
@@ -91,7 +92,7 @@ applies to explaining or choosing a named alternative, another next step,
 finding more alternatives, and accepting the marked current recommendation.
 The canonical skill entry point explicitly loads its modular runtime contract from
 `core/deliberation/references/`. The OpenCode adapter now includes an
-installable local command-and-plugin bundle under `opencode-bundles/`.
+installable local command-and-plugin bundle under `dist/opencode/`.
 
 Version `0.1.0-dev.13` adds `explain`, a separate explicit skill for explaining
 a technical topic without activating Deliberation, creating files, or opening a
@@ -196,7 +197,7 @@ For a standalone explanation, invoke the corresponding `/explain` skill.
 ## Experimental OpenCode installation
 
 OpenCode is an experimental adapter and is not live-host behaviour validated.
-The ready dist is generated under `opencode-bundles/deliberation`.
+The ready dist is generated under `dist/opencode`.
 
 PowerShell one-line install from the current release asset:
 

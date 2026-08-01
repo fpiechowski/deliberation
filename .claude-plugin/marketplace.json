@@ -10,7 +10,7 @@
     {
       "name": "deliberation",
       "description": "Collaborative engineering through shared decisions and bounded milestones.",
-      "source": "./claude-plugins/deliberation"
+      "source": "./dist/claude-code"
     }
   ]
 }

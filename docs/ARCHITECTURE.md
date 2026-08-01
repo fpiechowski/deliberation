@@ -48,14 +48,10 @@ adapters/
 ├── claude-code/
 └── opencode/
 
-plugins/
-└── deliberation/                    # generated Codex plugin
-
-claude-plugins/
-└── deliberation/                    # generated Claude Code plugin
-
-opencode-bundles/
-└── deliberation/                    # generated OpenCode command-and-plugin bundle
+dist/
+├── codex/                            # generated Codex plugin
+├── claude-code/                      # generated Claude Code plugin
+└── opencode/                         # generated OpenCode command-and-plugin bundle
 
 validation/
 ├── fixtures/
@@ -80,10 +76,10 @@ This is the target topology. The Codex and Claude Code marketplace catalogs and
 production packages are committed generated publication surfaces.
 
 The asymmetric publication paths are intentional. Codex's repository
-marketplace convention uses `plugins/<plugin-name>`, while a Claude Code
-marketplace may reference any in-repository plugin directory through a
-relative `source`. Keeping the packages separate prevents host-specific
-metadata from contaminating the other adapter.
+marketplace convention uses a host-specific directory under `dist/`, while a
+Claude Code marketplace may reference any in-repository plugin directory
+through a relative `source`. Keeping the packages separate prevents
+host-specific metadata from contaminating the other adapter.
 
 ## Shared behavioural core
 
@@ -140,10 +136,10 @@ policy:
 The local validation artifact can be installed as a standalone skill and
 invoked as `$deliberation`.
 
-The published package is generated under `plugins/deliberation/` and contains:
+The published package is generated under `dist/codex/` and contains:
 
 ```text
-plugins/deliberation/
+dist/codex/
 ├── .codex-plugin/
 │   └── plugin.json
 └── skills/
@@ -176,14 +172,14 @@ to the generated copy while leaving the normalized behavioural body unchanged.
 Two artifacts are produced:
 
 1. A standalone skill for early local validation, invoked as `/deliberation`.
-2. A plugin under `claude-plugins/deliberation/`, invoked through the
+2. A plugin under `dist/claude-code/`, invoked through the
    environment's plugin namespace, initially
    `/deliberation:deliberation`.
 
 The published plugin contains:
 
 ```text
-claude-plugins/deliberation/
+dist/claude-code/
 ├── .claude-plugin/
 │   └── plugin.json
     └── skills/
@@ -201,13 +197,13 @@ relative source:
 ```json
 {
   "name": "deliberation",
-  "source": "./claude-plugins/deliberation"
+  "source": "./dist/claude-code"
 }
 ```
 
 The marketplace catalog is named `deliberation`, identifies Filip Piechowski as
 its owner, uses the shared product version, and references the generated plugin
-with `./claude-plugins/deliberation`. It is generated from the Claude adapter
+with `./dist/claude-code`. It is generated from the Claude adapter
 template and validated with the rest of the publication surfaces.
 
 The generated Claude package is committed. This is required for users who add
@@ -298,9 +294,10 @@ implementation. It is not an end-user runtime requirement and introduces no
 third-party package dependency.
 
 Temporary build output remains untracked. The publication surfaces under
-`plugins/`, `claude-plugins/`, and `opencode-bundles/` are generated and
+`dist/codex/`, `dist/claude-code/`, and `dist/opencode/` are generated and
 committed. A validation command fails when regenerating them would produce a
-diff, preventing stale marketplace contents.
+diff, preventing stale marketplace contents. Release archives and checksums
+are built separately under ignored `build/release/` output.
 
 ## Versioning
 

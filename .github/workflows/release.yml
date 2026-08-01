@@ -35,14 +35,14 @@ jobs:
         run: python tooling/deliberation.py check
 
       - name: Build release assets
-        run: python tooling/deliberation.py package-release --output dist
+        run: python tooling/deliberation.py package-release --output build/release
 
       - name: Create draft prerelease
         if: contains(github.ref_name, '-')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" dist/* \
+          gh release create "${GITHUB_REF_NAME}" build/release/* \
             --verify-tag \
             --draft \
             --prerelease \
@@ -54,7 +54,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" dist/* \
+          gh release create "${GITHUB_REF_NAME}" build/release/* \
             --verify-tag \
             --draft \
             --generate-notes \

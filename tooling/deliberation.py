@@ -67,9 +67,9 @@ SKILL_INTERFACE = {
 PUBLICATION_SURFACES = (
     Path(".agents"),
     Path(".claude-plugin"),
-    Path("plugins/deliberation"),
-    Path("claude-plugins/deliberation"),
-    Path("opencode-bundles/deliberation"),
+    Path("dist/codex"),
+    Path("dist/claude-code"),
+    Path("dist/opencode"),
 )
 
 
@@ -348,7 +348,7 @@ def package_release(output: Path) -> tuple[Path, Path]:
         validate_assembly(assembled)
         validate_committed_publication(assembled)
 
-        bundle = assembled / "publication/opencode-bundles/deliberation"
+        bundle = assembled / "publication/dist/opencode"
         prepare_output(output)
         archive_path = output / release_asset_name(version)
         write_release_archive(bundle, archive_path)
@@ -467,7 +467,7 @@ def assemble(output: Path) -> None:
         claude=True,
     )
 
-    codex_plugin = output / "publication/plugins/deliberation"
+    codex_plugin = output / "publication/dist/codex"
     write_text(codex_plugin / ".codex-plugin/plugin.json", codex_manifest)
     codex_icon = ROOT / "adapters/codex/assets/deliberation-icon.svg"
     if not codex_icon.is_file():
@@ -485,7 +485,7 @@ def assemble(output: Path) -> None:
         explain_codex_metadata,
     )
 
-    claude_plugin = output / "publication/claude-plugins/deliberation"
+    claude_plugin = output / "publication/dist/claude-code"
     write_text(claude_plugin / ".claude-plugin/plugin.json", claude_manifest)
     write_core(
         claude_plugin / "skills/deliberation",
@@ -500,7 +500,7 @@ def assemble(output: Path) -> None:
         claude=True,
     )
 
-    opencode_bundle = output / "publication/opencode-bundles/deliberation"
+    opencode_bundle = output / "publication/dist/opencode"
     write_text(
         opencode_bundle / ".opencode/commands/deliberation.md",
         opencode_command,
@@ -655,23 +655,23 @@ def validate_assembly(output: Path) -> None:
 
     for root in (
         output / "standalone/codex/deliberation",
-        output / "publication/plugins/deliberation/skills/deliberation",
+        output / "publication/dist/codex/skills/deliberation",
         output / "standalone/claude-code/deliberation",
-        output / "publication/claude-plugins/deliberation/skills/deliberation",
-        output / "publication/opencode-bundles/deliberation/core/deliberation",
+        output / "publication/dist/claude-code/skills/deliberation",
+        output / "publication/dist/opencode/core/deliberation",
     ):
         validate_core_references(root, references)
     for root in (
         output / "standalone/codex/explain",
-        output / "publication/plugins/deliberation/skills/explain",
+        output / "publication/dist/codex/skills/explain",
         output / "standalone/claude-code/explain",
-        output / "publication/claude-plugins/deliberation/skills/explain",
-        output / "publication/opencode-bundles/deliberation/core/explain",
+        output / "publication/dist/claude-code/skills/explain",
+        output / "publication/dist/opencode/core/explain",
     ):
         validate_core_references(root, explain_references)
     validate_skill(
         output
-        / "publication/plugins/deliberation/skills/deliberation/SKILL.md",
+        / "publication/dist/codex/skills/deliberation/SKILL.md",
         runtime_core_body,
     )
     validate_skill(
@@ -681,12 +681,12 @@ def validate_assembly(output: Path) -> None:
     )
     validate_skill(
         output
-        / "publication/claude-plugins/deliberation/skills/deliberation/SKILL.md",
+        / "publication/dist/claude-code/skills/deliberation/SKILL.md",
         runtime_core_body,
         claude=True,
     )
     validate_skill(
-        output / "publication/plugins/deliberation/skills/explain/SKILL.md",
+        output / "publication/dist/codex/skills/explain/SKILL.md",
         runtime_explain_body,
         skill_name="explain",
     )
@@ -697,7 +697,7 @@ def validate_assembly(output: Path) -> None:
         claude=True,
     )
     validate_skill(
-        output / "publication/claude-plugins/deliberation/skills/explain/SKILL.md",
+        output / "publication/dist/claude-code/skills/explain/SKILL.md",
         runtime_explain_body,
         skill_name="explain",
         claude=True,
@@ -706,9 +706,9 @@ def validate_assembly(output: Path) -> None:
     for path in (
         output / "standalone/codex/deliberation/agents/openai.yaml",
         output
-        / "publication/plugins/deliberation/skills/deliberation/agents/openai.yaml",
+        / "publication/dist/codex/skills/deliberation/agents/openai.yaml",
         output / "standalone/codex/explain/agents/openai.yaml",
-        output / "publication/plugins/deliberation/skills/explain/agents/openai.yaml",
+        output / "publication/dist/codex/skills/explain/agents/openai.yaml",
     ):
         metadata = read_text(path)
         if "allow_implicit_invocation: false" not in metadata:
@@ -717,9 +717,9 @@ def validate_assembly(output: Path) -> None:
             raise ValidationError(f"{path}: implicit invocation is enabled")
 
     for relative, manifest_type in (
-        ("publication/plugins/deliberation/.codex-plugin/plugin.json", "codex"),
+        ("publication/dist/codex/.codex-plugin/plugin.json", "codex"),
         (
-            "publication/claude-plugins/deliberation/.claude-plugin/plugin.json",
+            "publication/dist/claude-code/.claude-plugin/plugin.json",
             "claude",
         ),
     ):
@@ -732,7 +732,7 @@ def validate_assembly(output: Path) -> None:
         if manifest_type == "codex" and manifest.get("skills") != "./skills/":
             raise ValidationError(f"{path}: invalid Codex skills path")
 
-    codex_icon_path = output / "publication/plugins/deliberation/assets/deliberation-icon.svg"
+    codex_icon_path = output / "publication/dist/codex/assets/deliberation-icon.svg"
     if not codex_icon_path.is_file():
         raise ValidationError(f"{codex_icon_path}: generated Codex icon is missing")
 
@@ -744,7 +744,7 @@ def validate_assembly(output: Path) -> None:
         "plugins": [
             {
                 "name": "deliberation",
-                "source": {"source": "local", "path": "./plugins/deliberation"},
+                "source": {"source": "local", "path": "./dist/codex"},
                 "policy": {
                     "installation": "AVAILABLE",
                     "authentication": "ON_INSTALL",
@@ -773,7 +773,7 @@ def validate_assembly(output: Path) -> None:
                     "Collaborative engineering through shared decisions and "
                     "bounded milestones."
                 ),
-                "source": "./claude-plugins/deliberation",
+                "source": "./dist/claude-code",
             }
         ],
     }
@@ -788,7 +788,7 @@ def validate_assembly(output: Path) -> None:
     ):
         opencode_path = (
             output
-            / "publication/opencode-bundles/deliberation/.opencode/commands"
+            / "publication/dist/opencode/.opencode/commands"
             / f"{skill_name}.md"
         )
         command_metadata, command_body = parse_frontmatter(
@@ -810,18 +810,18 @@ def validate_assembly(output: Path) -> None:
 
     audit_copy = (
         output
-        / "publication/opencode-bundles/deliberation/core/deliberation/SKILL.md"
+        / "publication/dist/opencode/core/deliberation/SKILL.md"
     )
     if read_text(audit_copy) != runtime_skill:
         raise ValidationError(f"{audit_copy}: audit copy differs from core")
     explain_audit_copy = (
-        output / "publication/opencode-bundles/deliberation/core/explain/SKILL.md"
+        output / "publication/dist/opencode/core/explain/SKILL.md"
     )
     if read_text(explain_audit_copy) != runtime_explain_skill:
         raise ValidationError(f"{explain_audit_copy}: audit copy differs from core")
     if (
         read_text(
-            output / "publication/opencode-bundles/deliberation/VERSION"
+            output / "publication/dist/opencode/VERSION"
         ).strip()
         != version
     ):
@@ -829,7 +829,7 @@ def validate_assembly(output: Path) -> None:
 
     opencode_plugin_path = (
         output
-        / "publication/opencode-bundles/deliberation/.opencode/plugins/deliberation.js"
+        / "publication/dist/opencode/.opencode/plugins/deliberation.js"
     )
     opencode_plugin = read_text(opencode_plugin_path)
     for fragment in (
@@ -845,7 +845,7 @@ def validate_assembly(output: Path) -> None:
             )
 
     opencode_package_path = (
-        output / "publication/opencode-bundles/deliberation/package.json"
+        output / "publication/dist/opencode/package.json"
     )
     opencode_package = require_json(opencode_package_path)
     if opencode_package.get("name") != "opencode-deliberation":
@@ -894,7 +894,7 @@ def validate_assembly(output: Path) -> None:
             "deliberation.js",
         ),
     }.items():
-        path = output / "publication/opencode-bundles/deliberation" / relative
+        path = output / "publication/dist/opencode" / relative
         content = read_text(path)
         for fragment in fragments:
             if fragment not in content:
@@ -1210,8 +1210,8 @@ def parser() -> argparse.ArgumentParser:
     )
     package_parser.add_argument(
         "--output",
-        default="dist",
-        help="repository-relative asset directory (default: dist)",
+        default="build/release",
+        help="repository-relative asset directory (default: build/release)",
     )
     package_parser.set_defaults(handler=command_package_release)
     return result

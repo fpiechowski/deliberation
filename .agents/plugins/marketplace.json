@@ -8,7 +8,7 @@
       "name": "deliberation",
       "source": {
         "source": "local",
-        "path": "./plugins/deliberation"
+        "path": "./dist/codex"
       },
       "policy": {
         "installation": "AVAILABLE",
