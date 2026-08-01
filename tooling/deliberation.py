@@ -952,6 +952,17 @@ def validate_installers() -> None:
             "plugin remove",
             "plugin add",
         ),
+        ROOT / "install-claude-code.sh": (
+            "#!/usr/bin/env sh",
+            "fpiechowski/deliberation",
+            "claude plugin marketplace list --json",
+            "claude plugin marketplace update",
+            "claude plugin marketplace add",
+            "claude plugin list --json",
+            "claude plugin update",
+            "claude plugin install",
+            "--scope user",
+        ),
         ROOT / "install-opencode.ps1": (
             tag,
             asset_name,
@@ -974,6 +985,18 @@ def validate_installers() -> None:
         for fragment in fragments:
             if fragment not in content:
                 raise ValidationError(f"{path}: missing installer contract {fragment!r}")
+
+    for path in (
+        ROOT / "install.ps1",
+        ROOT / "install.sh",
+        ROOT / "install-claude-code.sh",
+    ):
+        content = read_text(path).lower()
+        for fragment in ("invoke-webrequest", "expand-archive", "curl ", "wget "):
+            if fragment in content:
+                raise ValidationError(
+                    f"{path}: Git-marketplace installer contains legacy download marker {fragment!r}"
+                )
 
 
 def tree_snapshot(root: Path) -> dict[str, bytes]:
