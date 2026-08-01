@@ -114,10 +114,11 @@ teaching model from `core/shared/explain-model.md`, but it is not a delegation
 target for an open Deliberation checkpoint: that checkpoint must retain its own
 state and approval boundary.
 
-Both skills link the shared source as `references/explain-model.md`. The
-assembler materializes that one source into each self-contained package, so
-published adapters contain no external path while source maintenance has no
-duplicated Explain contract.
+The canonical source skills link the shared source as
+`../shared/explain-model.md`. The assembler materializes that one source as
+`references/explain-model.md` in each self-contained package, so published
+adapters contain no external path while source maintenance has no duplicated
+Explain contract.
 
 ## Adapter contracts
 

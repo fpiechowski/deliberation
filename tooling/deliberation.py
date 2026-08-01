@@ -17,7 +17,10 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 SHARED_REFERENCE_SOURCES = {
-    "references/explain-model.md": Path("core/shared/explain-model.md"),
+    "../shared/explain-model.md": Path("core/shared/explain-model.md"),
+}
+MATERIALIZED_REFERENCE_PATHS = {
+    "../shared/explain-model.md": "references/explain-model.md",
 }
 SEMVER = re.compile(
     r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
@@ -26,7 +29,9 @@ SEMVER = re.compile(
 )
 FRONTMATTER_LINE = re.compile(r"^([a-z][a-z0-9-]*):\s*(.+)$")
 SKILL_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-REFERENCE_LINK = re.compile(r"\]\((references/[a-z0-9-]+\.md)\)")
+REFERENCE_LINK = re.compile(
+    r"\]\(((?:references/[a-z0-9-]+|\.\./shared/[a-z0-9-]+)\.md)\)"
+)
 OPEN_CODE_PREFIXES = {
     "deliberation": (
         "Activate Deliberation for the task in this request by default; use the current\n"
@@ -125,8 +130,13 @@ def canonical_references(skill_body: str, skill_path: Path) -> dict[str, str]:
         for path in reference_root.rglob("*.md")
         if path.is_file()
     } if reference_root.is_dir() else set()
+    materialized_paths = {
+        MATERIALIZED_REFERENCE_PATHS.get(relative, relative)
+        for relative in linked_paths
+    }
     for relative, shared_source in SHARED_REFERENCE_SOURCES.items():
-        local_path = skill_path.parent / relative
+        materialized = MATERIALIZED_REFERENCE_PATHS[relative]
+        local_path = skill_path.parent / materialized
         shared_path = ROOT / shared_source
         if relative in linked_paths:
             if local_path.exists():
@@ -137,10 +147,10 @@ def canonical_references(skill_body: str, skill_path: Path) -> dict[str, str]:
                 raise ValidationError(
                     f"{skill_path}: shared reference source is missing: {shared_source}"
                 )
-            actual_paths.add(relative)
-    if linked_paths != actual_paths:
-        missing = sorted(linked_paths - actual_paths)
-        unlinked = sorted(actual_paths - linked_paths)
+            actual_paths.add(materialized)
+    if materialized_paths != actual_paths:
+        missing = sorted(materialized_paths - actual_paths)
+        unlinked = sorted(actual_paths - materialized_paths)
         details = []
         if missing:
             details.append(f"missing linked modules {missing}")
@@ -149,10 +159,18 @@ def canonical_references(skill_body: str, skill_path: Path) -> dict[str, str]:
         raise ValidationError(f"{skill_path}: " + "; ".join(details))
 
     references: dict[str, str] = {}
-    for relative in sorted(linked_paths):
+    for relative in sorted(materialized_paths):
         source = skill_path.parent / relative
-        if not source.is_file() and relative in SHARED_REFERENCE_SOURCES:
-            source = ROOT / SHARED_REFERENCE_SOURCES[relative]
+        shared_link = next(
+            (
+                link
+                for link, materialized in MATERIALIZED_REFERENCE_PATHS.items()
+                if materialized == relative
+            ),
+            None,
+        )
+        if not source.is_file() and shared_link in SHARED_REFERENCE_SOURCES:
+            source = ROOT / SHARED_REFERENCE_SOURCES[shared_link]
         references[relative] = read_text(source).rstrip("\n") + "\n"
     return references
 
@@ -182,6 +200,13 @@ def canonical_core_digest(canonical_skill: str, references: dict[str, str]) -> s
         f"\0{relative}\0{content}" for relative, content in references.items()
     )
     return sha256(payload)
+
+
+def materialize_reference_links(content: str) -> str:
+    """Rewrite source-only shared links to package-local reference links."""
+    for source_link, runtime_link in MATERIALIZED_REFERENCE_PATHS.items():
+        content = content.replace(f"]({source_link})", f"]({runtime_link})")
+    return content
 
 
 def validate_checkpoint_semantics(references: dict[str, str]) -> None:
@@ -218,9 +243,10 @@ def write_core(
     *,
     claude: bool = False,
 ) -> None:
+    runtime_skill = materialize_reference_links(canonical_skill)
     write_text(
         destination / "SKILL.md",
-        claude_skill(canonical_skill) if claude else canonical_skill,
+        claude_skill(runtime_skill) if claude else runtime_skill,
     )
     for relative, content in references.items():
         write_text(destination / relative, content)
@@ -333,6 +359,10 @@ def assemble(output: Path) -> None:
     version = product_version()
     canonical_skill, _, core_body, references = canonical()
     explain_skill, _, explain_body, explain_references = canonical("explain")
+    runtime_skill = materialize_reference_links(canonical_skill)
+    runtime_core_body = materialize_reference_links(core_body)
+    runtime_explain_skill = materialize_reference_links(explain_skill)
+    runtime_explain_body = materialize_reference_links(explain_body)
     codex_metadata = render_template(
         "adapters/codex/openai.yaml.tmpl",
         DISPLAY_NAME=SKILL_INTERFACE["deliberation"]["display_name"],
@@ -359,13 +389,17 @@ def assemble(output: Path) -> None:
         "adapters/opencode/deliberation.md.tmpl",
         COMMAND_DESCRIPTION=SKILL_INTERFACE["deliberation"]["command_description"],
         COMMAND_PREFIX=OPEN_CODE_PREFIXES["deliberation"],
-        CORE_BODY=opencode_contract(core_body, references, "deliberation"),
+        CORE_BODY=opencode_contract(
+            runtime_core_body, references, "deliberation"
+        ),
     )
     opencode_explain_command = render_template(
         "adapters/opencode/deliberation.md.tmpl",
         COMMAND_DESCRIPTION=SKILL_INTERFACE["explain"]["command_description"],
         COMMAND_PREFIX=OPEN_CODE_PREFIXES["explain"],
-        CORE_BODY=opencode_contract(explain_body, explain_references, "explain"),
+        CORE_BODY=opencode_contract(
+            runtime_explain_body, explain_references, "explain"
+        ),
     )
     opencode_plugin = render_template(
         "adapters/opencode/deliberation.js.tmpl",
@@ -480,23 +514,27 @@ def assemble(output: Path) -> None:
     write_json(
         output / "integrity.json",
         {
-            "canonical_core_sha256": canonical_core_digest(canonical_skill, references),
+            "canonical_core_sha256": canonical_core_digest(
+                runtime_skill, references
+            ),
             "canonical_explain_sha256": canonical_core_digest(
-                explain_skill, explain_references
+                runtime_explain_skill, explain_references
             ),
             "product_version": version,
             "runtime_payloads": {
-                "claude-code": canonical_core_digest(canonical_skill, references),
-                "codex": canonical_core_digest(canonical_skill, references),
-                "opencode": canonical_core_digest(canonical_skill, references),
+                "claude-code": canonical_core_digest(runtime_skill, references),
+                "codex": canonical_core_digest(runtime_skill, references),
+                "opencode": canonical_core_digest(runtime_skill, references),
             },
             "explain_runtime_payloads": {
                 "claude-code": canonical_core_digest(
-                    explain_skill, explain_references
+                    runtime_explain_skill, explain_references
                 ),
-                "codex": canonical_core_digest(explain_skill, explain_references),
+                "codex": canonical_core_digest(
+                    runtime_explain_skill, explain_references
+                ),
                 "opencode": canonical_core_digest(
-                    explain_skill, explain_references
+                    runtime_explain_skill, explain_references
                 ),
             },
         },
@@ -590,14 +628,18 @@ def validate_assembly(output: Path) -> None:
     version = product_version()
     canonical_skill, _, core_body, references = canonical()
     explain_skill, _, explain_body, explain_references = canonical("explain")
+    runtime_skill = materialize_reference_links(canonical_skill)
+    runtime_core_body = materialize_reference_links(core_body)
+    runtime_explain_skill = materialize_reference_links(explain_skill)
+    runtime_explain_body = materialize_reference_links(explain_body)
     validate_checkpoint_semantics(references)
 
     validate_skill(
-        output / "standalone/codex/deliberation/SKILL.md", core_body
+        output / "standalone/codex/deliberation/SKILL.md", runtime_core_body
     )
     validate_skill(
         output / "standalone/codex/explain/SKILL.md",
-        explain_body,
+        runtime_explain_body,
         skill_name="explain",
     )
 
@@ -620,33 +662,33 @@ def validate_assembly(output: Path) -> None:
     validate_skill(
         output
         / "publication/plugins/deliberation/skills/deliberation/SKILL.md",
-        core_body,
+        runtime_core_body,
     )
     validate_skill(
         output / "standalone/claude-code/deliberation/SKILL.md",
-        core_body,
+        runtime_core_body,
         claude=True,
     )
     validate_skill(
         output
         / "publication/claude-plugins/deliberation/skills/deliberation/SKILL.md",
-        core_body,
+        runtime_core_body,
         claude=True,
     )
     validate_skill(
         output / "publication/plugins/deliberation/skills/explain/SKILL.md",
-        explain_body,
+        runtime_explain_body,
         skill_name="explain",
     )
     validate_skill(
         output / "standalone/claude-code/explain/SKILL.md",
-        explain_body,
+        runtime_explain_body,
         skill_name="explain",
         claude=True,
     )
     validate_skill(
         output / "publication/claude-plugins/deliberation/skills/explain/SKILL.md",
-        explain_body,
+        runtime_explain_body,
         skill_name="explain",
         claude=True,
     )
@@ -748,7 +790,9 @@ def validate_assembly(output: Path) -> None:
         if not command_body.startswith(prefix):
             raise ValidationError(f"{opencode_path}: invalid command wrapper")
         if command_body[len(prefix) :] != opencode_contract(
-            expected_body, expected_references, skill_name
+            materialize_reference_links(expected_body),
+            expected_references,
+            skill_name,
         ):
             raise ValidationError(
                 f"{opencode_path}: behavioural payload drifted from core"
@@ -758,12 +802,12 @@ def validate_assembly(output: Path) -> None:
         output
         / "publication/opencode-bundles/deliberation/core/deliberation/SKILL.md"
     )
-    if read_text(audit_copy) != canonical_skill:
+    if read_text(audit_copy) != runtime_skill:
         raise ValidationError(f"{audit_copy}: audit copy differs from core")
     explain_audit_copy = (
         output / "publication/opencode-bundles/deliberation/core/explain/SKILL.md"
     )
-    if read_text(explain_audit_copy) != explain_skill:
+    if read_text(explain_audit_copy) != runtime_explain_skill:
         raise ValidationError(f"{explain_audit_copy}: audit copy differs from core")
     if (
         read_text(
@@ -858,8 +902,10 @@ def validate_assembly(output: Path) -> None:
                 )
 
     integrity = require_json(output / "integrity.json")
-    expected_digest = canonical_core_digest(canonical_skill, references)
-    expected_explain_digest = canonical_core_digest(explain_skill, explain_references)
+    expected_digest = canonical_core_digest(runtime_skill, references)
+    expected_explain_digest = canonical_core_digest(
+        runtime_explain_skill, explain_references
+    )
     if integrity.get("product_version") != version:
         raise ValidationError("integrity metadata version differs from VERSION")
     if integrity.get("canonical_core_sha256") != expected_digest:

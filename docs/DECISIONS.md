@@ -1774,10 +1774,11 @@ core principle.
 ### Decision
 
 Store the single hand-authored Explain contract at
-`core/shared/explain-model.md`. Both canonical skills link it as
-`references/explain-model.md`. The assembler copies that shared source into
-each self-contained Codex, Claude Code, and OpenCode artifact, and validation
-rejects a local duplicate or missing shared source.
+`core/shared/explain-model.md`. The canonical source skills link it as
+`../shared/explain-model.md`; the assembler materializes that link as
+`references/explain-model.md` in each self-contained Codex, Claude Code, and
+OpenCode artifact. Validation rejects a local duplicate or missing shared
+source.
 
 Increment the shared version to `0.1.0-dev.13`. Keep the standalone skill's
 activation and state semantics separate from Deliberation; sharing the
