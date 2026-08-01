@@ -157,6 +157,10 @@ For a standalone explanation, invoke `$explain <topic>`.
 The PowerShell path was verified against the GitHub marketplace with
 `0.1.0-dev.3`, including a repeated-run update.
 
+These Codex installers add the repository as a Git marketplace; they do not
+download an archive or copy a local plugin directory. The archive/copy
+installer is retained only for OpenCode below.
+
 ## Experimental Claude Code installation
 
 Claude Code is an experimental adapter and is not live-host validated or
@@ -168,6 +172,16 @@ Add this GitHub repository as a marketplace, then install the plugin:
 /plugin marketplace add fpiechowski/deliberation
 /plugin install deliberation@deliberation
 ```
+
+The same Git-marketplace installation is available as a one-line POSIX shell
+command:
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fpiechowski/deliberation/v0.1.0-dev.14/install-claude-code.sh)"
+```
+
+The script adds or updates the GitHub marketplace and installs or updates the
+user-scope plugin. It does not download an archive or copy files locally.
 
 After installation, activate the mode with:
 
