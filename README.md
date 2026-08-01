@@ -53,8 +53,8 @@ Standalone Codex desktop activation evidence is recorded under
 acknowledgement clarification; the `0.1.0-dev.1` rerun passes C-01 and A-01.
 The standalone desktop checkpoint fixture also passes C-03, C-04, C-06, and
 C-07.
-The retained desktop lifetime-and-exit fixture passed the former D-006
-conversation-wide contract. D-047 supersedes it; its task-scoped and explicit
+The retained desktop lifetime-and-exit fixture passed the former
+conversation-wide contract. The current task-scoped and explicit
 persistent-scope replacement requires fresh desktop evidence.
 The desktop response-intent and broad-approval fixture passes C-10 and C-11.
 The staged desktop Drift and routine-execution fixture passes C-08 and C-09.

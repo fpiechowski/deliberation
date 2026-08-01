@@ -442,7 +442,8 @@ conversation is later resumed.
 current roadmap, approval scope, and any enabled detailed-loop-trace preference.
 
 If a host cannot preserve this reliably, record the scenario as **Blocked** and
-return to architecture deliberation rather than weakening D-047.
+return to architecture deliberation rather than weakening the task-scoped
+activation contract.
 
 ### A-05 — Cross-environment semantic parity
 
@@ -492,43 +493,46 @@ technically correct.
 | F-14 | Long execution proceeds without useful progress visibility. |
 | F-15 | The agent uses phase labels to falsely imply work or authorization, or forces every response into a process template. |
 
-## Decision Traceability
+## Contract Traceability
 
-| Decision | Scenario coverage |
+| Contract area | Scenario coverage |
 |---|---|
-| D-001 — Product name | C-01, A-01–A-03 |
-| D-002 — Cross-cutting work mode | Cross-Task-Type Coverage |
-| D-003 — User understanding as output | C-04, C-05, C-13, C-14 |
-| D-004 — Meaningful checkpoints | C-06–C-09 |
-| D-005 — Dedicated manifest | Documentation consistency review |
-| D-006 — Conversation-wide lifetime (superseded) | Historical evidence only |
-| D-047 — Task-scoped default and explicit persistent activation | C-01, C-02, C-14, C-15, A-04 |
-| D-007 — Journey-based explanation | C-05, C-13 |
-| D-008 — Milestones and checkpoints | C-03, C-04, C-13 |
-| D-009 — Provisional roadmap | C-03, C-11 |
-| D-010 — Choice, Consequence, Drift | C-06–C-09 |
-| D-011 — Checkpoint communication | C-04, C-10, C-11, C-15 |
-| D-012 — State and completion | C-12–C-16 |
-| D-013 — Three supported environments | A-01–A-05 |
-| D-014 — Scenario contract and phase closure | Phase Acceptance Criteria |
-| D-035 — Observable loop and detailed trace | C-17, A-04 |
-| D-036 — Visible roadmap before checkpoint | C-03, C-04, C-08, C-17 |
-| D-037 — Journey consideration at checkpoints | C-05 |
-| D-038 — Modular checkpoint Explain and preview contract | C-04, C-05, C-18, A-01–A-05 |
-| D-044 — Standalone Explain companion skill | C-19, A-06 |
+| Product name | C-01, A-01–A-03 |
+| Cross-cutting work mode | Cross-Task-Type Coverage |
+| User understanding as an output | C-04, C-05, C-13, C-14 |
+| Meaningful checkpoints | C-06–C-09 |
+| Canonical manifest | Documentation consistency review |
+| Former conversation-wide lifetime | Historical evidence only |
+| Task-scoped default and explicit persistent activation | C-01, C-02, C-14, C-15, A-04 |
+| Journey-based explanation | C-05, C-13 |
+| Milestones and checkpoints | C-03, C-04, C-13 |
+| Provisional roadmap | C-03, C-11 |
+| Choice, Consequence, and Drift | C-06–C-09 |
+| Checkpoint communication | C-04, C-10, C-11, C-15 |
+| Conversational state and completion | C-12–C-16 |
+| Cross-environment adapters | A-01–A-05 |
+| Acceptance contract and documentation readiness | Repository Acceptance Criteria |
+| Observable loop and detailed trace | C-17, A-04 |
+| Visible roadmap before checkpoint | C-03, C-04, C-08, C-17 |
+| Journey consideration at checkpoints | C-05 |
+| Modular checkpoint Explain and preview contract | C-04, C-05, C-18, A-01–A-05 |
+| Standalone Explain companion skill | C-19, A-06 |
 
-## Phase Acceptance Criteria
+## Repository Acceptance Criteria
 
-The product-definition and interaction-design phase is complete when:
+The current repository is ready for supported release work when:
 
-- Every accepted decision is represented by a scenario or documentation
-  consistency check.
-- No unresolved product-contract question remains.
-- The manifest, decision log, current state, README, and this scenario suite are
-  internally consistent.
-- The repository identifies cross-environment skill and adapter design as the
-  next phase without prematurely selecting a package architecture.
+- Every applicable core and supported-environment scenario has validation
+  evidence, with failed or blocked scenarios reported honestly.
+- No unresolved product-contract or architecture question is hidden; open
+  questions are recorded in `docs/TODO.md`.
+- `AGENTS.md`, `README.md`, and the canonical documents under `docs/` agree on
+  the current structure, behaviour, support status, and next steps.
+- The shared core, adapters, fixtures, and committed publication surfaces pass
+  deterministic structural and semantic-integrity validation.
+- Experimental adapter boundaries and supported-host claims are stated
+  consistently across the repository.
 
-Passing these documentation criteria closes product definition. Passing the
-runtime scenarios later is the acceptance condition for the first implemented
-release.
+Passing these documentation criteria establishes documentation readiness;
+passing the applicable runtime scenarios is the acceptance condition for a
+supported release.
