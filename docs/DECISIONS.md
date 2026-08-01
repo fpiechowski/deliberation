@@ -1894,3 +1894,39 @@ or publish artifacts.
 Every proposed change to `master` and every resulting merge commit receives
 the same repository validation status. Requiring that status for merges still
 depends on the repository's GitHub branch-protection configuration.
+
+## D-049 — Use Git marketplaces for Codex and Claude Code installers
+
+- **Date:** 2026-08-01
+- **Status:** Accepted
+
+### Context
+
+Codex already supports adding a Git marketplace, but the distribution contract
+must make that path explicit and consistent with Claude Code. Archive download
+and file-copy installation is still needed for the OpenCode release bundle,
+but it is the wrong abstraction for the native Codex and Claude Code plugin
+marketplaces.
+
+### Decision
+
+Keep the root Codex installers as Git-marketplace entrypoints: they add or
+refresh `fpiechowski/deliberation` and install the `deliberation@deliberation`
+plugin through the Codex CLI. Add `install-claude-code.sh` as the matching
+POSIX one-line entrypoint; it adds or updates the GitHub marketplace and then
+installs or updates the user-scope `deliberation@deliberation` plugin through
+the Claude Code CLI.
+
+Do not add archive download or local file-copy logic to either native
+marketplace installer. Keep the existing download-and-copy wrappers only for
+OpenCode. This installer-only change does not alter the shared runtime payload
+or increment the product version.
+
+### Consequences
+
+Codex and Claude Code users can install from the repository's Git marketplace
+without manually cloning it or pointing the host at a local marketplace path.
+Repeated runs refresh the marketplace and update the installed plugin. The
+Claude Code one-line command is POSIX-only in this milestone, matching the
+requested `curl` + `sh` entrypoint; the native CLI remains available for other
+scopes. OpenCode continues to use its release-asset download/copy flow.

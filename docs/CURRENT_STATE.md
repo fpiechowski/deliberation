@@ -209,6 +209,10 @@ supported-host validation**.
 - Regenerated every publication package at `0.1.0-dev.14` and passed
   deterministic assembly, semantic-integrity, fixture, and stale-output checks
   for D-047; no fresh Codex Desktop transcript has yet been recorded.
+- Replaced the remaining native-host installation gap with a Git-marketplace
+  one-line installer for Claude Code and verified that Codex and Claude Code
+  installers contain no archive-download or file-copy path; that legacy flow
+  remains only in the OpenCode wrappers.
 
 ## Current implementation
 

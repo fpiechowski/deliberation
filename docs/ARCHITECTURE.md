@@ -68,6 +68,11 @@ tooling/
 
 .agents/plugins/marketplace.json      # generated Codex marketplace catalog
 .claude-plugin/marketplace.json       # generated Claude Code marketplace catalog
+install.ps1                            # Codex Git-marketplace installer
+install.sh                             # Codex POSIX Git-marketplace installer
+install-claude-code.sh                 # Claude Code POSIX Git-marketplace installer
+install-opencode.ps1                   # OpenCode release-asset wrapper
+install-opencode.sh                    # OpenCode POSIX release-asset wrapper
 VERSION
 ```
 
@@ -209,6 +214,12 @@ The generated Claude package is committed. This is required for users who add
 the repository itself as a Git marketplace because Claude Code resolves
 relative plugin sources against its cloned marketplace checkout. The installed
 plugin is self-contained and never references `../../core`.
+
+Codex and Claude Code are installed by adding this repository as a Git
+marketplace and then installing the named plugin from that marketplace. Their
+root installers do not download archives or copy plugin files. OpenCode is the
+only adapter that retains a download-and-copy installer because its published
+distribution is a release asset rather than a native Git marketplace.
 
 ### OpenCode
 
