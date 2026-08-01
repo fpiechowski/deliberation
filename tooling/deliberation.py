@@ -71,6 +71,11 @@ PUBLICATION_SURFACES = (
     Path("dist/claude-code"),
     Path("dist/opencode"),
 )
+PROTECTED_OUTPUT_ROOTS = (
+    Path(".agents"),
+    Path(".claude-plugin"),
+    Path("dist"),
+)
 
 
 class ValidationError(RuntimeError):
@@ -1126,9 +1131,14 @@ def checked_output(raw_path: str) -> Path:
     try:
         relative = output.relative_to(ROOT)
     except ValueError as exc:
-        raise ValidationError("assembly output must stay inside the repository") from exc
+        raise ValidationError("output path must stay inside the repository") from exc
     if relative == Path("."):
-        raise ValidationError("assembly output cannot be the repository root")
+        raise ValidationError("output path cannot be the repository root")
+    for protected_root in PROTECTED_OUTPUT_ROOTS:
+        if relative == protected_root or protected_root in relative.parents:
+            raise ValidationError(
+                f"output path cannot overlap protected publication root {protected_root}"
+            )
     return output
 
 
