@@ -39,7 +39,6 @@ pnpm-debug.log*
 
 # Build, test, and coverage output
 build/
-dist/
 coverage/
 out/
 tmp/
